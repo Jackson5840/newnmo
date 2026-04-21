@@ -1,0 +1,52 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .blog-post
+                    strong(align="center") Please contact us at 
+                        a(href="mailto:nmadmin@gmu.edu") nmadmin@gmu.edu
+
+
+
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 

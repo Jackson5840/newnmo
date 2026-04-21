@@ -1,0 +1,32 @@
+services:
+  db:
+    image: nmocore-db:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - "/mnt/dev-xvdb/nmocore/pgdata:/var/lib/postgresql/data/pgdata"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      PGDATA: /var/lib/postgresql/data/pgdata
+  nmocore:
+    image: nmocore-nmocore:latest
+    ports:
+      - 8010:8002
+    depends_on:
+      - db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      ROOT_PATH: /nmocore
+  cache:
+    image: redis/redis-stack-server:latest
+    restart: always
+    command: redis-stack-server
+    environment:
+      REDIS_ARGS: "--appendonly yes --protected-mode no --io-threads 12 --io-threads-do-reads yes --maxmemory-policy allkeys-lru --maxmemory 4294967296"
+      REDISEARCH_ARGS: "MAXSEARCHRESULTS -1"

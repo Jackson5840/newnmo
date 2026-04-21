@@ -1,0 +1,70 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .blog-post
+                        strong(align="justify") NeuroMorpho.Org Application Programming Interface How-To
+                        br
+                        br
+                        A As of v7.0 NeuroMorpho.Org provides a programmatic access to the repository data through an Application Programming Interface, usually known as API. Although under development, the system is functional and open to public use.
+                        br
+                        br
+                        A NeuroMorpho.Org API is a Representational state transfer (REST) platform using Hypertext Transfer Protocol (HTTP) as the communication layer. The output data objects are formatted as pairs of attribute–value following JavaScript Object Notation (JSON) open-standard format. Due to the early status of development we kindly ask users to constrain the number of petitions, or include delays to any large programmatic query.
+                        br
+                        br
+                        A The main entry point to the API service is HTTP route /api. The status of the server is available by querying the URL http://neuromorpho.org/api/health
+                        br
+                        br
+                        A There are three major anchors to retrieve data:
+                        ul
+                            li /neuron - Reconstruction specific information.
+                            li /morphometry - Morphological measurements associated to neuron objects.
+                            li /literature - Detailed information of the positevely identified publications.
+                        br
+                        A Each of them include the following queries:
+                        ul
+                            li /fields - Retrieves all the available fields for the correspondent anchor.
+                            li /select - Allows actual queries with pairs of fields and values.
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 

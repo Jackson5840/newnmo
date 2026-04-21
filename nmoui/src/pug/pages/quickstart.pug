@@ -1,0 +1,85 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .pb-3.mb-4.font-italic.border-bottom To browse NeuroMorpho.Org
+                    .blog-post
+                        A Menu>Browse
+                        br
+                        A Data is organized:
+                        ul
+                            li By animal species
+                            li By brain region
+                            li By cell types
+                            li By archive
+                        .card.mb-4.shadow-sm(style={'width':'130px', 'height':'auto', 'margin-top':'-180px', 'float':'right'})
+                            img.img-fluid(src='assets/img/other/Browse.jpg')
+                        br
+                        A Data can be accessed by clicking on the pie chart, tags or the categories in the left-hand column.
+                        br
+                        br
+                        A Thumbnail images of the neurons are displayed in a smaller pop-up window when you move your mouse over the neuron list. This window can be moved and will remain on the screen as you browse through the list.
+                        br
+                        br
+                        A Pic 2 (Will be added later)
+                        br
+                        br
+                        A Data is also organized:
+                        ul
+                            li as Random neurons - which provides a one-click access to a random selection of neurons in the database.
+                            li in Neuron Atlas - which is explained in the User Guide.
+                        hr
+                        A Menu>Search
+                        br
+                        A Data is organized into:
+                        ul
+                            li Metadata - neurons can be searched by specific metadata details
+                            li Morphometry - neurons can be searched by
+                            A morphological measurements
+                            li Keywords - neurons can be searched by using keywords
+                        .card.mb-4.shadow-sm(style={'width':'130px', 'height':'auto','margin-top':'-170px','float':'right'})
+                            img.img-fluid(src='assets/img/other/Search.jpg')
+
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 

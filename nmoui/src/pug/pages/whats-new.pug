@@ -1,0 +1,323 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .btn-group(style={margin:'auto'})
+                    button.btn.btn-secondary.dropdown-toggle(data-toggle="dropdown") 
+                        span(id="selected") Select Version
+                    .dropdown-menu.dropdown-menu-right
+                        button.dropdown-item Select Version
+                        button.dropdown-item 7.9
+                        button.dropdown-item 7.8
+                        button.dropdown-item 7.7
+                        button.dropdown-item 7.6
+                        button.dropdown-item 7.5
+                        button.dropdown-item 7.4
+                        button.dropdown-item 7.3
+                        button.dropdown-item 7.2
+                        button.dropdown-item 7.1
+            
+            .row
+                .table-responsive(style={margin:'auto', width:'auto'})
+                        table.table.table-bordered
+                            tr.table-warning
+                                th Datasets
+                                th Reconstructions
+                            tbody
+                                tr
+                                    td 71
+                                    td 9334
+            
+            .row(id='archiveInfo')
+            
+            .row
+                .col-md-8.blog-main
+                    .blog-post
+                        p(align="justify") The following new Species have been added:
+                        ul
+                            li Semipalmated sandpiper
+                            li Treeshrew
+                    .blog-post
+                        p(align="justify") The following new Strains of species have been added:
+                        ul
+                            li drosophila melanogaster: GDL-GAL4, GH146-GAL4/+; UAS-CD2::HRP/+, HB4-93-GAL4/GH146-QF, NP3056-GAL4/GH146-Q, pJFRC28-10XUAS-IVS-GFP-p1044 x GAL4 SS02344, (VT015785-p65ADZp (attP40); R42F06-ZpGdbd (attP2)), w; ppk-GAL4/+; UAS-dicer2/+, w; ppk-GAL4/+; UAS-dicer2/UAS-Gaq-RNAi, w; ppk-GAL4/+; UAS-dicer2/UAS-NorpA-RNAi
+                            li mouse: ABc (+/+), Afg3l1-/- (L1-/-), APP/PS1, astro-DKO, B6SJL-Tg(SOD-1-G93A)1Gur/J, BAc (+/+), Beta2-/- mutant, C3H/PDX1-cre (hom, het or WT) or C57BL/GAD2-cre (hom, het or WT), C3H/PDX1-cre het or WT and ICR WT, C58/J, cacna1ctm3Hfm x C57BL/6J, CACNG5-cre, ChaT-IRES-Cre:Ai14, ChAT(BAC)-eGFP, Gfap-Cre;Smofl/fl, Split-Cre, TrkB-CreER
+                            li rat: Fischer 344 / NHsd
+                    .blog-post
+                        p(align="justify") The following new Primary Brain Regions have been added:
+                        ul
+                            li fornix
+                            li parasubiculum
+                    .blog-post
+                        p(align="justify") The following new Species have been added:
+                        ul
+                            li amygdala: basomedial amygdalar nucleus
+                            li basal forebrain: dorsolateral septum, lateral septum
+                            li Central nervous system: anterior, left, posterior, right
+                            li cerebellum: arbor vita, copula pyramidis, posterior, vestibular
+                            li corpus callosum: fiber tracts
+                            li entorhinal cortex: lateral
+                            li forebrain: lateral
+                            li fornix: columns of the fornix
+                            li hippocampus: dorsal
+                            li lateral horn: anterior dorsal tract 1, anterior dorsal tract 3, anterior ventral tract 1, anterior ventral tract 2, anterior ventral tract 3, anterior ventral tract 4, anterior ventral tract 5, anterior ventral tract 6, anterior ventral tract 7, posterior dorsal tract 2, posterior dorsal tract 3, posterior dorsal tract 4, posterior ventral tract 1, posterior ventral tract 12, posterior ventral tract 2, posterior ventral tract 4, posterior ventral tract 5, posterior ventral tract 6
+                            li mesencephalon: midbrain tegmentum, reticular formation
+                            li myelencephalon: reticular nucleus, rubrospinal tract
+                            li neocortex: temporo-parietal, dorsal auditory area, internal capsule, piriform
+                            li optic Lobe: left, right
+                            li pallium: Mesopallium
+                            li peripheral nervous system: dorsal, Scarpa's Ganglion, bone marrow, sensory neuropil
+                            li pons: pontine reticular nucleus
+                            li protocerebrum: pars intercerebralis
+                            li retina: left
+                            li spinal cord: L3-L5, L6
+                            li thalamus: external medullary lamina, lateral dorsal nucleus, medial geniculate body, polymodal association thalamus, posterior complex, submedial nucleus, subparafascicular nucleus, ventral posterolateral nucleus
+                            li ventral nerve cord: thoracic
+                    .blog-post
+                        p(align="justify") The following new Tertiary Brain Regions have been added:
+                        ul
+                            li (accessory lobe → lateral): basocentral compartment, left, right
+                            li (amygdala → medial): anterodorsal, anteroventral, posterodorsal, posteroventral
+                            li (antennal lobe → glomerulus D): medial
+                            li (antennal lobe → glomerulus DA1): medial
+                            li (antennal lobe → glomerulus DA3): medial
+                            li (antennal lobe → glomerulus DC1): medial
+                            li (antennal lobe → glomerulus DC2): medial
+                            li (antennal lobe → glomerulus DC3): medial
+                            li (antennal lobe → glomerulus DL1): medial
+                            li (antennal lobe → glomerulus DL3): medial
+                            li (antennal lobe → glomerulus DL5): medial
+                            li (antennal lobe → glomerulus DL6): medial
+                            li (antennal lobe → glomerulus DM1): medial
+                            li (antennal lobe → glomerulus DM2): medial
+                            li (antennal lobe → glomerulus DM3): medial
+                            li (antennal lobe → glomerulus DM5): medial
+                            li (antennal lobe → glomerulus DM6): Left, medial, Right
+                            li (antennal lobe → glomerulus DP1m): medial
+                            li (antennal lobe → glomerulus VA1d): medial
+                            li (antennal lobe → glomerulus VA1lm): medial
+                            li (antennal lobe → glomerulus VA2): medial
+                            li (antennal lobe → glomerulus VA3): medial
+                            li (antennal lobe → glomerulus VA6): medial
+                            li (antennal lobe → glomerulus VA7l): medial
+                            li (antennal lobe → glomerulus VA7m): medial
+                            li (antennal lobe → glomerulus VC2): medial
+                            li (antennal lobe → glomerulus VL2): medial
+                            li (antennal lobe → glomerulus VL2p): medial
+                            li (antennal lobe → glomerulus VL2p+): medial
+                            li (antennal lobe → glomerulus VM1): medial
+                            li (antennal lobe → glomerulus VM2): medial
+                            li (antennal lobe → glomerulus VM3): medial
+                            li (antennal lobe → glomerulus VM7): medial
+                            li (antennal lobe → lateral cell cluster): right
+                            li (basal forebrain → dorsolateral septum): left, right
+                            li (basal forebrain → lateral septum): rostral, rostroventral
+                            li (basal ganglia → globus pallidus): external segment
+                            li (brainstem → epithalamus): stria medullaris
+                            li (brainstem → hindbrain): spinal vestibular nucleus, superior, vestibular utricle
+                            li (brainstem → raphe nuclei): posterior, rostral
+                            li (brainstem → trigeminal nucleus): motor nucleus of trigeminal
+                            li (Central nervous system → anterior): bordering antennal lobe medial cell cluster
+                            li (Central nervous system → posterior): bordering central brain and optic lobe
+                            li (cerebellum → posterior): paraflocculus
+                            li (cerebellum → vermis): central lobule, culmen
+                            li (cerebellum → vermis): folium-tuber, lobule VII, lobule VIIA, lobule VIII, paramedian lobule, simple lobule, uvula
+                            li (cerebellum → vestibular): basal interstitial nucleus, flocculus, white matter
+                            li (forebrain → lateral): bundle system
+                            li (hippocampus → CA2): stratum radiatum
+                            li (hippocampus → CA3): dorsal
+                            li (hippocampus → dorsal): commissure
+                            li (hypothalamus → lateral hypothalamic area): tuberal nucleus
+                            li (hypothalamus → Posterior hypothalamic nucleus): mammilary body, mammillothalamic tract, medial mammillary nucleus
+                            li (main olfactory bulb → glomerular layer): bordering external plexiform layer
+                            li (mesencephalon → midbrain tegmentum): dorsal tegmental decussation, Edinger-Westphal nucleus, periaqueductal gray
+                            li (mesencephalon → reticular formation): caudal, lateral, parvicellular reticular nucleus
+                            li (mesencephalon → tectum): nucleus of the brachium, tectospinal pathway
+                            li (myelencephalon → dorsal motor nucleus of the vagus): left, right
+                            li (myelencephalon → reticular nucleus): dorsal, lateral, paragigantocellular reticular nucleus
+                            li (myelencephalon → solitary nucleus): subnucleus centralis (cNTS)
+                            li (neocortex → anterior cingulate): layer 6a, layer 6b
+                            li (neocortex → dorsal auditory area): layer 5
+                            li (neocortex → frontal): layer 6a, layer 6b
+                            li (neocortex → parietal): Brodmann area 7a, Intraparietal sulcus
+                            li (neocortex → piriform): anterior, layer 2-3
+                            li (neocortex → piriform): piriform-amygdalar area
+                            li (neocortex → prefrontal): layer 6a
+                            li (neocortex → presubiculum): layer 3-4, Layer 5, Layer 6, Layers 2-3
+                            li (neocortex → primary auditory): layer 6
+                            li (neocortex → somatosensory): layer 6a
+                            li (optic Lobe → lobula): anterior
+                            li (pallium → Mesopallium): Caudal
+                            li (peripheral nervous system → abdominal): left, right, segment 4-7
+                            li (peripheral nervous system → bone marrow): neuroblastoma
+                            li (peripheral nervous system → sensory neuropil): left, right
+                            li (peripheral nervous system → thoracic): left
+                            li (peripheral nervous system → thoracic): medial
+                            li (peripheral nervous system → thoracic): right
+                            li (peripheral nervous system → thoracic): segment 1
+                            li (peripheral nervous system → thoracic): segment 2
+                            li (pons → pontine reticular nucleus): caudal
+                            li (protocerebrum → left): dorsoposterior, medial
+                            li (protocerebrum → right): dorsoposterior, medial
+                            li (spinal cord → L3-L5): ventral horn
+                            li (spinal cord → lumbar): lamina II-III, ventral, white matter
+                            li (thalamus → polymodal association thalamus): posterior limiting nucleus
+                            li (thalamus → somatosensory thalamus): parvicellular part
+                            li (thalamus → subparafascicular nucleus): parvicellular
+                            li (ventral nerve cord → thoracic): segment A3-A6
+                    .blog-post
+                        p(align="justify") The following new Secondary Cell Types have been added:
+                        ul
+                            li interneuron: A00c, A00g, A01, A01a, A01b2, A01c1, A01c2, A01d3, A02e, A02f, A02g, A03, A03a4, A03ax, A03g, A06e, A06l, A07c4, A08c, A08e, A08e1, A08e2, A08e3, A08h2, A08s1, A09a, A09b, A09c, A09e, A09g, A09l, A09o, A10f-like, A12b, A12c3, A12g, A12p, A14, A14a, A14b, A18j, A18l, A19l, A23a, A23f2, A26f, A26g, A26x, A27a, A27e, A27e-2, A27j, A27k, A27n, A27p, A31f, anlagen, crescent, Drunken-1, global local, goro-like, Griddle-1, Griddle-2, Handle-A, Handle-B, Ladder-a, Ladder-b, Ladder-c, Ladder-d, Ladder-f, lateral neuron, Neuropeptide F (NPF)-positive, patchy local, pioneer, posterior slope and gnathal ganglion innervating, pre-goro, pre-swallowtail, swallowtail, T01d1, T03a1, T03g, T07u, T08v, T10a, T19v
+                            li principal cell: AF3, AF4, AF5, broad-spiking, catecholaminergic, CCK-8s activated, contralateral, corticotropin hormone (CRH)-releasing, dorsal motor nucleus of the vagus (DMV) projecting, hugin, midline projection, mushroom body feedback, mushroom body-projecting, pancreas-projecting, PD2a1, PD2b1, subesophageal zone (SEZ)-descending, T5a, T5b, T5c, T5d, thoracic-projecting, Tm4, TmY, unpaired, ventral nerve cord (VNC)-descending
+                            li sensory: B1, B2, lateral extrastriolar afferent, lch5 2-4, lesA, medial extrastriolar afferent, nociceptive, striolar afferent, v'td, vchA-B, vesA
+                    .blog-post
+                        p(align="justify") The following new Tertiary Cell Types have been added:
+                        ul
+                            li (Glia → astrocyte): GFAP-positive
+                            li (interneuron → A02m/A02n): Pseudolooper-4
+                            li (interneuron → A02o): Wave-1
+                            li (interneuron → A06e): AAZ3
+                            li (interneuron → A06e): Saaghi-3
+                            li (interneuron → A06l): AAZ1
+                            li (interneuron → A06l): Saaghi-1
+                            li (interneuron → A08e): A08e3
+                            li (interneuron → A08h2): Jupiter
+                            li (interneuron → A09a): Basin-2
+                            li (interneuron → A09b): Basin-1
+                            li (interneuron → A09c): Basin-4
+                            li (interneuron → A09g): Basin-3
+                            li (interneuron → A09l): Down-and-back-1
+                            li (interneuron → A10a): Chair-1
+                            li (interneuron → A12c3): Jaam-3
+                            li (interneuron → A12g): Jaam-2
+                            li (interneuron → A12p): Jaam-1
+                            li (interneuron → A23f2): pre-goro
+                            li (interneuron → amacrine): nNOS-1, nNOS-2
+                            li (interneuron → Basin-3): A09g
+                            li (interneuron → crescent): A08s
+                            li (interneuron → GABAergic): dorsolateral, glycinergic, Spontaneously Active Bursty Interneuron (SABI)
+                            li (interneuron → glutamatergic): A02d, superficial tufted, vasopressinergic
+                            li (interneuron → Inhibitory): drunken-4
+                            li (interneuron → lateral neuron): LN1, LN2, LN4
+                            li (interneuron → lateral neuron): NC2, Non-clock
+                            li (interneuron → Local circuit neuron): AV4a, AV4a1, AV4a2, AV4a3, AV4a4, AV4a5, AV4b, AV4b5, AV4b8, AV4c, AV4c1, AV4c2, PD3a, PD3a1, PD3a2, PD3a3, PD3b, PD3b1, PV2a, PV2a1, PV2a2, PV2b, PV2b1, PV2c, PV2c1, PV2d, PV2d1, PV4a, PV4a1, PV4a10, PV4a12, PV4a2, PV4a3, PV4a4, PV4a5, PV4a6, PV4a7, PV4b, PV4b1, PV4b2, PV4c, PV4c2, PV4d, PV4d1, PV4d3, PV4f, PV4f1
+                            li (interneuron → Neuropeptide F (NPF)-positive): coaster
+                            li (interneuron → Parvalbumin (PV)-positive): inhibitory, tonic firing
+                            li (interneuron → pioneer): Cholinergic, pCC, projection
+                            li (interneuron → pre-motor): A01c1, A01x3, A02j, A02m, A03a4, A03a5, A03a6, A03d-e, A03g, A03x, A05a, A05k, A06l, A18b3, A18f, A27h, A27k, A31d, excitatory, glutamergic, Looper-10, Pseudolooper-3, Saaghi-1, T01d4, T03g2
+                            li (interneuron → projection): Type 1
+                            li (interneuron → T08v): Recliner
+                            li (interneuron → T1): ascending, contra, descending, local, PC-ascending
+                            li (interneuron → T10a): Chair-1
+                            li (principal cell → AF3): thermo
+                            li (principal cell → AF4): Large Spider Neuron
+                            li (principal cell → AF5): Short
+                            li (principal cell → bipolar): vbd
+                            li (principal cell → broad-spiking): intermediate-spiking, phasic-spiking, tonic-spiking
+                            li (principal cell → Columnar): LO tan Lo1-2 large, LO tan Lo1-2 medium 01, LO tan Lo1-2 T5a specific
+                            li (principal cell → CT1): CT1-pre home, CT1-pre-A, CT1-pre-A LO, CT1-pre-AG LO, CT1-pre-B, CT1-pre-B LO, CT1-pre-C, CT1-pre-C LO, CT1-pre-D LO, CT1-pre-D ME, CT1-pre-E, CT1-pre-E ME, CT1-pre-F LO, CT1-pre-F ME, CT1-pre-G LO, CT1-pre-H, CT1-pre-H ME, CT1-pre-I LO, CT1-pre-I ME, CT1-pre-J LO, CT1-pre-J ME, CT1-pre-P LO, CT1-pre-P ME, CT1-pre-Q LO, CT1-pre-R, CT1-pre-Wxout LO, LO, ME
+                            li (principal cell → hugin): protocerebrum-projecting, ring gland-projecting, ventral nerve cord-projecting
+                            li (principal cell → induced pluripotent stem cell-(iPSC)-derived): SH-SY5Y
+                            li (principal cell → L1): Short
+                            li (principal cell → Mi): Mi1-A, Mi1-B, Mi1-C, Mi1-D, Mi1-E, Mi1-F, Mi1-H, Mi1-I, Mi1-J, Mi1-P, Mi1-Q
+                            li (principal cell → Mi1): Mi1 Home
+                            li (principal cell → Mi4): Mi4 Home, Mi4-A, Mi4-B, Mi4-C, Mi4-D, Mi4-E, Mi4-F, Mi4-G, Mi4-H, Mi4-I, Mi4-J, Mi4-P
+                            li (principal cell → Mi9): Mi9-B, Mi9-C, Mi9-D, Mi9-F, Mi9-H, Mi9-I, Mi9-J, Mi9-P, Mi9-Q, Mi9-X
+                            li (principal cell → Motoneuron): aCC, C3 Home, C3-A, C3-B, C3-F, C3-H, C3-I, gastric-projecting, innervating longitudinal muscle 1, innervating transverse muscle 1, innervating transverse muscle 2, innervating transverse muscle 3, innervating transverse muscle 4, ISN, pharyngeal, RP1, RP2, RP3, RP4, RP5, SN, U1, U2, ventrolateral-2
+                            li (principal cell → neurosecretory): insulin producing, median
+                            li (principal cell → output neuron): a2sc, AD1a, AD1a1, AD1a2, AD1a4, AD1b, AD1b1, AD1b2, AD1c, AD1c1, AD1c2, AD1d, AD1d1, AD1e, AD1e1, AD1f, AD1f1, AD3b, AD3b1, AD3b2, AD3f, AD3f1, AV1a, AV1a1, AV1a2, AV1a3, AV2a, AV2a1, AV2a2, AV2a3, AV2a4, AV2b, AV2b1, AV2b2, AV3a, AV3a1, AV4b, AV4b3, AV4b4, AV4b6, AV4b7, AV4c, AV4c1, AV4c2, AV4c4, AV4f, AV4f1, AV5a, AV5a1, AV6a, AV6a1, AV6a2, AV6a3, AV6b, AV6b1, AV6c, AV6c1, AV7a, AV7a1, PD2a, PD2a1, PD2a2, PD2b, PD2b1, PD2e, PD2e2, PD2f, PD2f1, PD4a, PD4a4, PV12a, PV12a1, PV2b, PV2b1, PV2c, PV2c1, PV2d, PV2d1, PV4b, PV4b1, PV4b2, PV4b3, PV4c, PV4c1, PV4c3, PV4d, PV4d1, PV4d3, PV4d4, PV4f, PV4f1, PV5a, PV5a1, PV5a2, PV5a3, PV5b, PV5b1, PV5b2, PV5b3, PV5c, PV5c1, PV5c2, PV5c3, PV5g, PV5g1, PV5g2, PV5k, PV5k1, PV6a, PV6a1, PV6a3, PV6b, PV6b1, PV6c, PV6c1
+                            li (principal cell → Purkinje): projection
+                            li (principal cell → pyramidal): CTIP2+, giant cell
+                            li (principal cell → Shepherd's crook neuron): isthmic nuclei-projecting
+                            li (principal cell → T2): T2 Home, T2-T2a LO2-02, T2-T2a LO2-06
+                            li (principal cell → T4): Lobula plate-projecting
+                            li (principal cell → T4a): T4a edge-39, T4a-03, T4a-11, T4a-19, T4a-22, T4a-25, T4a-29, T4a-52, T4a-53, T4a-56, T4a-57
+                            li (principal cell → T4b): T4b-01, T4b-02, T4b-08, T4b-17, T4b-28, T4b-30, T4b-32, T4b-36, T4b-43, T4b-54
+                            li (principal cell → T4c): T4c-05, T4c-14, T4c-15, T4c-18, T4c-20, T4c-23, T4c-35, T4c-49, T4c-55
+                            li (principal cell → T4d): T4d-07, T4d-09, T4d-10, T4d-12, T4d-13, T4d-21, T4d-31, T4d-33, T4d-38
+                            li (principal cell → T5a): T5a-06, T5a-11, T5a-15, T5a-16, T5a-18, T5a-30, T5a-33, T5a-35, T5a-42, T5a-43, T5a-44, T5a-59, T5a-67, T5a-74
+                            li (principal cell → T5b): T5b-01, T5b-02, T5b-04, T5b-05, T5b-09, T5b-12, T5b-14, T5b-17, T5b-28, T5b-36, T5b-37, T5b-46, T5b-49
+                            li (principal cell → T5c): T5c-03, T5c-10, T5c-13, T5c-19, T5c-20, T5c-27, T5c-29, T5c-41, T5c-52, T5c-54
+                            li (principal cell → T5d): T5d-07, T5d-21, T5d-23, T5d-25, T5d-26, T5d-32, T5d-40, T5d-47, T5d-60, T5d-66, T5d-71, T5d-76
+                            li (principal cell → thalamocortical): auditory cortex projecting
+                            li (principal cell → Tm1): Tm1 Home, Tm1-A, Tm1-B, Tm1-C, Tm1-D, Tm1-E, Tm1-F, Tm1-H, Tm1-I, Tm1-J, Tm1-P, Tm1-Q, Tm1-R, Tm1-W
+                            li (principal cell → Tm2): Tm2 Home, Tm2-A, Tm2-B, Tm2-C, Tm2-D, Tm2-E, Tm2-F, Tm2-H, Tm2-I, Tm2-J, Tm2-P, Tm2-Q, Tm2-R, Tm2-Wxout
+                            li (principal cell → Tm3): Tm3 Home, Tm3-B, Tm3-C, Tm3-E, Tm3-F, Tm3-I, Tm3-O, Tm3-R, Tm3-W-ant
+                            li (principal cell → Tm4): Tm4 Home, Tm4-A, Tm4-B, Tm4-C, Tm4-E, Tm4-I, Tm4-J, Tm4-K, Tm4-L, Tm4-P
+                            li (principal cell → Tm9): Tm9 Home, Tm9-A, Tm9-B, Tm9-D, Tm9-E, Tm9-F, Tm9-G, Tm9-H, Tm9-I, Tm9-J, Tm9-P, Tm9-Q, Tm9-R
+                            li (principal cell → TmY): TmY Lop1, TmY Lop12, TmY-LO1, TmY-LO3-4, TmY-LO4
+                            li (principal cell → TmY15): TmY15-01 Home, TmY15-02, TmY15-03
+                            li (principal cell → transmedulla): TmY15-04
+                            li (sensory → B1): ACa, AVa
+                            li (sensory → B2): ACp, AVa
+                            li (sensory → Multidendritic-dendritic arborization (DA)): A08n, A09q, descending sog, projection, projection A, projection B, projection C, projection D, TePn05, TePn19
+                            li (sensory → nociceptive): induced pluripotent stem cell-(iPSC)-derived
+                            li (sensory → photoreceptor): Rhodopsin 5 expressing, Rhodopsin 6 expressing
+                    .blog-post
+                            p(align="justify") The following new stains have been added:
+                            ul
+                                li Biocytin, Streptavidin-Alexa 633
+                                li cyan fluorescent protein
+                                li Multi-Color Flip-Out (MCFO)
+                                li Osmium tetroxide, Potassium ferrocyanide, Uranyl acetate, Lead aspartate
+                                li uranyl acetate + Sato's lead
+                    .blog-post
+                            p(align="justify") Metadata revisions:
+                            ul
+                                li The primary brain region "dorsal thalamus" merged with "thalamus"
+                                li Neurons with secondary brain regions "posterior thalamic nucleus" and "ventral posteromedial nucleus" had these terms moved to tertiary brain regions under somatosensory thalamus as secondary
+                                li 87 cells in Jacobs archive with the secondary cell type "projection" and tertiary cell type "pyramidal" changed to secondary cell type "pyramidal" and tertiary cell type "projection"
+                                li 165 cells with secondary brain region "nucleus accumbens" under basal ganglia was moved to tertiary brain region under secondary brain region "ventral striatum" (also under basal ganglia). "Nucleus accumbens" was removed as secondary brain region.
+                    .blog-post
+                            p(align="justify") Others:
+                            ul
+                                li Novel interactive WebGL 3D visualization tool added under neuron detail information page.
+                                li Literature Coverage has been updated to include publications through November 2019.
+
+
+                    
+
+                        
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })                  
+
+append scripts    
+    script(src='js/whats-new.js')

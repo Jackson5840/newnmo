@@ -1,0 +1,117 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        form(id='searchform', action="neurons.html")     
+
+            .container
+                p(style={'text-align':'center', 'font-weight': 'bold'}) Search the database by Keywords
+                .row
+                    p(align="justify") Please enter keyword(s) or NeuroMorpho.Org ID(s) in the text area. Each keyword should be separated by commas (,) or ampersand symbols (&) and is NOT case sensitive. The asterisk (*) character operates as a wildcard for the search.
+                                    b  Example: principal cell & hippocampus
+
+                    input(type="text", class="form-control" id="inputValueKeyword" name="keyword"  placeholder="", style={'margin':'auto', 'width':'40%'})          
+                br
+                br
+                .row
+                    div(class="container", style = {'text-align' : 'center'})
+                        a(id='hitbutton',onclick='metasearch(true)',class="btn btn-primary", style = "color: white") Hits from current criteria
+                        br
+                        br
+                        h3(id='nneurons') 
+                        p Your search results can be arranged by:
+                .row
+                    .col
+                        button(class="btn btn-primary", type="submit", name="browse", value= "species_name") By Animal Species
+                    .col
+                        button(class="btn btn-primary", type="submit", name="browse", value= "region") By Brain Region
+                    .col
+                        button(class="btn btn-primary", type="submit", name="browse", value= "celltype") By Cell Type
+                    .col
+                        button(class="btn btn-primary", type="submit", name="browse", value= "archive_name") By Archive
+                        br
+                .row
+                    .col(style = {'text-align' : 'center'})
+                        br
+                        p Or
+                        button(class="btn btn-primary", type="submit") Show Summary
+                        br
+                .row
+                    .col(style = {'text-align' : 'center'})
+                        br
+                        input(class="btn btn-primary",onclick="location.reload()" ,type="reset", value="reset")  
+                .row 
+                    p More examples of some useful input queries:
+                        br
+                        br
+                        b NMO_00001
+                        br
+                        C Will return the reconstruction that is assigned the specific NeuroMorpho.Org ID in the database.
+                        br
+                        b motoneuron & cat, rat
+                        br
+                        C Will return all 'motoneurons' of 'cat' or 'rat' species.
+                        br
+                        b markram, jaffe, ascoli & neurolucida
+                        br
+                        C Will return all 'neurolucida' reconstructions from 'markram', 'jaffe' and 'ascoli' archives.
+                        br
+                        b ca1 & golgi
+                        br
+                        C Will return all hippocampal 'ca1' neurons that are traced with 'golgi' stain.
+                        br
+                        b sensory*
+                        br
+                        C Will return all the reconstructions with metadata categories containing the keyword 'sensory' preceded or followed by any other characters.
+                
+                .row 
+                    b Note: The string input is NOT case sensitive, but synonyms or plurals are not directly supported. For possible search keywords refer to the Metadata search page dropdown lists.
+
+                
+            
+
+
+                    
+
+                        
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })                  
+
+append scripts    
+    script(src='js/keywords.js')
+    script(src='js/base.js')

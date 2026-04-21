@@ -1,0 +1,81 @@
+{
+    "data": [
+        {
+            "lab_name": "Abrous Lab",
+            "lab_department": "Neurocenter Magendie, Neurogenesis & Pathophysiology group",
+            "lab_location": "Université de Bordeaux, France"
+        },
+        {
+            "lab_name": "Acsady Lab",
+            "lab_department": "Institute of Experimental Medicine",
+            "lab_location": "Hungarian Academy of Sciences, Budapest, Hungary"
+        },
+        {
+            "lab_name": "Allman Lab",
+            "lab_department": "Department of Biology",
+            "lab_location": "California Institute of Technology, Pasadena, California, USA"
+        },
+        {
+            "lab_name": "Almeida Lab",
+            "lab_department": "Center for Neuroscience and Cell Biology",
+            "lab_location": "University of Coimbra, Portugal"
+        },
+        {
+            "lab_name": "Alvarez Lab",
+            "lab_department": "Department of Physiology",
+            "lab_location": "Emory University, Atlanta, Georgia, USA"
+        },
+        {
+            "lab_name": "Alzheimer Lab",
+            "lab_department": "Institute of Physiology and Pathophysiology",
+            "lab_location": "Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany"
+        },
+        {
+            "lab_name": "Amaral Lab",
+            "lab_department": "Center for Neuroscience",
+            "lab_location": "University of California at Davis, California, USA"
+        },
+        {
+            "lab_name": "Anderson Lab",
+            "lab_department": "Neuroscience Graduate Group, Perelman School of Medicine",
+            "lab_location": "University of Pennsylvania, Philadelphia, USA"
+        },
+        {
+            "lab_name": "Andolina Lab",
+            "lab_department": "Neurobiology of behavior",
+            "lab_location": "Santa Lucia Foundation, Rome, Italy"
+        },
+        {
+            "lab_name": "Antic Lab",
+            "lab_department": "Neuroscience Department",
+            "lab_location": "University of Connecticut Health Center, Farmington CT, USA"
+        },
+        {
+            "lab_name": "Anton Lab",
+            "lab_department": "Centro Nacional de Biotecnologia (CNB-CSIC)",
+            "lab_location": "Madrid, Spain"
+        },
+        {
+            "lab_name": "Aoki Lab",
+            "lab_department": "Center for Neural Science",
+            "lab_location": "New York University, New York, USA"
+        },
+        {
+            "lab_name": "Aoki Lab",
+            "lab_department": "Center for Neural Science",
+            "lab_location": "New York University, New York, USA"
+        },
+        {
+            "lab_name": "Arenkiel Lab",
+            "lab_department": "Department of Molecular and Human Genetics",
+            "lab_location": "Baylor College of Medicine, Houston, Texas, USA"
+        },
+        {
+            "lab_name": "Ascoli Lab",
+            "lab_department": "Krasnow Institute for Advanced Study",
+            "lab_location": "George Mason University, Virginia, USA"
+        }
+
+    ]
+}
+

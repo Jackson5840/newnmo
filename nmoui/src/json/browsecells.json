@@ -1,0 +1,67 @@
+{
+    "data": [
+        {   
+            "archive_name": "Anstoetz",
+            "neuron_name": "18mar16_5-ascoli",
+            "brain_region": "hippocampus",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Anstoetz",
+            "neuron_name": "18mar16_8-ascoli",
+            "brain_region": "hippocampus",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Anstoetz",
+            "neuron_name": "18mar16_9-ascoli",
+            "brain_region": "hippocampus",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Anstoetz",
+            "neuron_name": "22mar16_1-ascoli",
+            "brain_region": "hippocampus",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Anstoetz",
+            "neuron_name": "Anstoetz_NC_CajalRetzius_1",
+            "brain_region": "neocortex",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Anstoetz",
+            "neuron_name": "Anstoetz_NC_CajalRetzius_10",
+            "brain_region": "neocortex",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Anstoetz",
+            "neuron_name": "Anstoetz_NC_CajalRetzius_11",
+            "brain_region": "neocortex",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Jacobs",
+            "neuron_name": "208-2-13LL",
+            "brain_region": "neocortex",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "elephant"
+        },
+        {   
+            "archive_name": "Jacobs",
+            "neuron_name": "208-2-1LL",
+            "brain_region": "neocortex",
+            "cell_type": "Cajal-Retzius",
+            "species_name": "elephant"
+        }
+    ]
+}

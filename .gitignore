@@ -1,0 +1,45 @@
+# --- Secrets / local config ---
+.env
+.env.*
+!.env.example
+
+# --- Large data files (distributed separately, see README) ---
+nmocore/pglocdump.sql
+*.dump
+*.bak
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Node / frontend ---
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Docker / runtime ---
+*.pid
+*.log
+*.sock
+
+# --- Editor / OS ---
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# --- Misc ---
+.cache/
+coverage/
+.nyc_output/

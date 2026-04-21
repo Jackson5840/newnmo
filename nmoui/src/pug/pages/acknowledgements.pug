@@ -1,0 +1,203 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .blog-post
+                        strong(align="justify") Data Contributors
+                        br
+                        br
+                        A The work done in creating neuronal reconstructions often involve multiple laboratories. NeuroMorpho.Org does its best to acknowledge all contributors involved, however we may not be able to list every individual and laboratory associated with each dataset. Hence, we are also grateful to the individuals and institutions thanked by the data owners in their publications.
+                        br
+                        br
+                        ul(id="acknowledgementList")
+                            
+
+                    br
+                    .blog-post
+                        strong(align="justify") Special Contributors
+                        br
+                        br
+                        ul
+                            li NeuroMorpho.Org thanks the MITRE Corporation for permission to use their technology in developing the project.
+                            br
+                            C We are particularly grateful to Dr. Ken Smith, Mr. Jeffrey Hoyt, and Ms. Gail Hamilton from MITRE for their patience, kindness, expert advice, contribution, and cooperation.
+                            li We greatly appreciate and thank Dr. Robert Cannon for permitting us to modify the CVAPP code and to make the 3D neuron viewer.
+                            li We are very thankful to Dr. Alexei V. Samsonovich for providing us the legacy Matlab script to generate our animations.
+                            li We are grateful to Allen Institute for Brain Science for granting us access to their Brain Explorer code with permission to customize it for use in the Neuron Atlas tool.
+                            li We are very thankful to Dr. Padraig Gleeson for providing the script to convert SWC files to NeuroML in the 3D Neuron Viewer.
+                            li We are very thankful to Dr. Ben Torben-Nielsen for providing the modified btmorph script to generate PNG images from SWC files.
+                            li We thank Mr. Hanbo Chen for providing the Neuron-Connector Vaa3D plugin to stitch fragmented trees.
+                            li We thank Mr. Benjamin Ascoli for providing the new Python code to generate the gif animations.
+                    
+                    br
+                    .blog-post
+                        strong(align="justify") NeuroMorpho.Org Team
+                        br
+                        br
+                        C Giorgio Ascoli, Ph.D. (Principal Investigator)
+                        br
+                        br
+                        strong Current members:
+                        br
+                        ul
+                            li Bengt Ljungquist, Ph.D. (Faculty & IT Manager)
+                            li Kayvan Bijari (Ph.D. student)
+                            li Masood Akram (Ph.D. Student)
+                            li Patricia Maraver (Ph.D. student)
+                            li Sumit Nanda (Ph.D. student)
+                            li Angie Chamberland (Master's student)
+                            li Isabella Lalena (Master's student)
+                            li Hari Narayana Batta (Master's student)
+                            li Navy Naveena Chandra Merianda (Master's student)
+                            li Praveen Menon Ambadath (Master's student)
+                            li Yasmeen Zoubi (Master's student)
+                            li Aydan Rasulova (Undergraduate student)
+                            li Brittany Stowers (Undergraduate student)
+                            li Daniel Plaxe (Undergraduate student)
+                            li Fatima Siddiqui (Undergraduate student)
+                            li Helen Wingate (Undergraduate student)
+                            li Mary Floyd (Undergraduate student)
+                            li Oznur Temel (Undergraduate student)
+                            li Schabnam Ahmad (Undergraduate student)
+                            li Zahra Saleem (Undergraduate student)
+                            li Zulfa Ghannouchi (Undergraduate student)
+                            li Yasmin Azam (Undergraduate student)
+                            li Matthew Kurapatti (High school student)
+                        br
+                        strong Former members:
+                        br
+                        ul
+                            li Rubén Armañanzas, Ph.D. (Faculty)
+                            li Maryam Halavi, M.D., Ph.D. (Project Lead)
+                            li Ruchi Parekh, Ph.D. (Project Lead)
+                            li Sridevi Polavaram, Ph.D. (Post-doc)
+                            li Todd Gillette, Ph.D. (Post-doc)
+                            li Duncan Donohue (Ph.D. student)
+                            li Kelly A. Hamilton (Ph.D. student)
+                            li Sriraman Damodaran (Ph.D. student)
+                            li Farishta Boura (Visiting scholar)
+                            li Maurizio Bergamino (Visiting scholar)
+                            li Mohsin Ali (Visiting scholar)
+                            li Praveen Mamillapalli (Research Assistant)
+                            li Rahul Narkar (Graduate Research Assistant)
+                            li Ankitha Prabhu (Master's student)
+                            li Ashutosh K. Singh (Master's student)
+                            li Gaurav Desai (Master's student)
+                            li Gopal Samant (Master's student)
+                            li Harsh Loomba (Master's student)
+                            li Jayasurya Kanukurthy (Master's student)
+                            li Jeffrey Zamanski (Master's student)
+                            li Julian Burke (Master's student)
+                            li Krishnan Subramanian (Master's student)
+                            li Moh Allaham (Master's student)
+                            li Onkar A. Kurkute (Master's student)
+                            li Piyush Mohan (Master's student)
+                            li Rashika Koul (Master's student)
+                            li Ratna Alekhya (Master's student)
+                            li Preetham Vemasani (Master's student)
+                            li Priya Rajanikant Shah (Master's student)
+                            li Pruthvik Narayan Narayanaswamy (Master's student)
+                            li Sean Mackesey (Master's student)
+                            li Suyameendra Vijay Kumar Wadki (Master's student)
+                            li Shanthi Sree Gudigopuram (Master's student)
+                            li Shazeb Shamsi, M.S. (Master's student)
+                            li Swaminathan P.V. (Master's student)
+                            li Varun Rajavelu (Master's student)
+                            li Alisa Lehr (Undergraduate student)
+                            li Amina Zafar (Undergraduate student)
+                            li Alyssa McFarland (Undergraduate student)
+                            li Apoorva Pendurthi (Undergraduate student)
+                            li Apoorva Veerareddy (Undergraduate student)
+                            li Arba Cecia (Undergraduate student)
+                            li Arta Seyedian (Undergraduate student)
+                            li Cynthia Hoang (Undergraduate student)
+                            li Daniel Colombani (Undergraduate student)
+                            li Deyra Carranco (Undergraduate student)
+                            li Emily Metz (Undergraduate student)
+                            li Hasana Baraya (Undergraduate student)
+                            li Hoang Nguyen (Undergraduate student)
+                            li Iris Greenspan (Undergraduate student)
+                            li Ishwarya Nagulapati (Undergraduate student)
+                            li Jarfa Ashrafi (Undergraduate student)
+                            li Jonathan Reed (Undergraduate student)
+                            li Juhi Saxena (Undergraduate student)
+                            li Kacie McIntyre (Undergraduate student)
+                            li Kaitlin Grainger (Undergraduate student)
+                            li Kaitlyn Power (Undergraduate student)
+                            li Keira Coy (Undergraduate student)
+                            li Krithika Ganesh (Undergraduate student)
+                            li Lauretta Wilkerson (Undergraduate student)
+                            li Louise Lines (Undergraduate student)
+                            li Mariah Rogers (Undergraduate student)
+                            li Meghan Eyerman (Undergraduate student)
+                            li Miranda Ayhan (Undergraduate student)
+                            li Namra Ansari (Undergraduate student)
+                            li Neha Simon (Undergraduate student)
+                            li Ranya Al-Rawi (Undergraduate student)
+                            li Sarah Anderson (Undergraduate student)
+                            li Shakuria Davis (Undergraduate student)
+                            li Sheena Heslop (Undergraduate student)
+                            li Sonja Jensen (Undergraduate student)
+                            li Stephanie Stryker (Undergraduate student)
+                            li Tehrem Abbas (Undergraduate student)
+                            li Uzma Javed (Undergraduate student)
+                            li Victoria Chappell (Undergraduate student)
+                            li Wendy Klein (Undergraduate student)
+                            li Whit Jacobs (Undergraduate student)
+                            li Zac Hardin (Undergraduate student)
+                        br
+                        strong Grant Support:
+                        br
+                        br
+                        C The NeuroMorpho.Org project is supported in part by the following grants:
+                        ul
+                            li NIH R01 NS39600
+                            li NIH U01 MH114829 (BICCN)
+                            li NIH R01 NS086082
+                            li NSF DBI 1546335 (BRAIN EAGER)
+                            li MURI ONR N00014-10-1-0198
+                            li Keck NAKFI
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 
+
+append scripts    
+    script(src='js/acknowledgement.js')

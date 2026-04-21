@@ -1,0 +1,21 @@
+mixin navbar(options)
+
+        .blog-header.py-2
+            .row.flex-nowrap
+                .col(align='right')
+                    img(src="./assets/img/nmo.png", alt="",style='height: auto; max-width: 100%;')
+                .col-sm            
+                    .row(class="row justify-content-center")
+                        h1(class="text-center", style='font-family: Georgia,Times,Times New Roman,serif; color:#006633; font-size:4vw') NeuroMorpho.Org
+                    .row(class="row justify-content-center")
+                        b(class="text-center" id='vheader') Version 8.4.17 - Released: 2022-12-08 - Content: 239264 cells
+                .col(align='left')
+                    img(src="./assets/img/krasnow.png", alt="",style='height: auto; max-width: 100%;')
+            .row(style='background-color: black; color:#e9ca39;') 
+                .col(align='right')
+                    |Total number of downloads:
+                    div(style='display:inline;font-family:digitfont;') 32583882
+                .col(align='left')
+                    |Total site hits since August 1, 2006:
+                    div(style='display:inline;font-family:digitfont;') 7280562
+

@@ -1,0 +1,73 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            .row
+                img.img-fluid(align="justify", src='assets/img/other/Atlas.png', style={'height':'450px', margin:'auto'})
+            br
+            .row
+                .blog-post
+                    p(align="justify") Neuron Atlas is a tool to visualize the spatial distribution of the rodent neurons available in NeuroMorpho.Org. Neuron Atlas enables interactive 3D browsing with "touch and feel" similar to the NeuroMorpho.Org Neuron Viewer available in each neuron page. The overall locations of rodent neurons in the Neuron Atlas are mapped onto the Allen Reference Atlas using relevant information from the studies associated with the reconstructions. Neuron Atlas is based on and was adapted from the Brain Explorer application of the Allen Brain Institute.
+                    br
+                    C Each rodent neuron in NeuroMorpho.Org is represented as a sphere in the Neuron Atlas. The sphere color identifies a general cell type: (i) Pyramidal neurons, (ii) Non-pyramidal principal neurons, and (iii) Interneurons. Pointing and clicking onto a sphere retrieves summary information and the appropriate neuron page from NeuroMorpho.Org.
+                    br
+                    br
+                    C Neuron Atlas does not require installation and is available for download in Windows and MacOS versions. Double click on the NeuroAtlas.exe after extracting the files from the compressed folder to access Neuron Atlas.
+                    br
+                    br
+                    C For MAC OSx users, path to access the executable: Neuron Atlas>Contents>MacOS
+                    br
+                    br
+                    A Note: Only the content through v.5.6 is currently browsable by the Neuron Atlas.
+
+
+
+                
+                                        
+
+
+
+
+
+
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 

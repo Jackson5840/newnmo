@@ -1,0 +1,108 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .blog-post
+                        h2(align="justify") Data used from NeuroMorpho.Org
+                        p
+                            a(rel="license" href="http://creativecommons.org/licenses/by/4.0/")
+                                img(alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png") 
+                            br
+                            | NeuroMorpho.Org is licensed under 
+                            a(rel="license" href="http://creativecommons.org/licenses/by/4.0/") Creative Commons Attribution 4.0 International License
+                        p 
+                            | When using any material found on or downloaded from NeuroMorpho.Org in your publication(s), please include 
+                            b each and all three citations 
+                            | listed below:
+                        ol
+                            li The original paper(s) that describe the reconstructions, which appear(s) as a Pubmed link in the detailed metadata page of each reconstruction;
+                            li The complete name: NeuroMorpho.Org and
+                            li Either: Ascoli GA (2006) Mobilizing the base of neuroscience data: the case of neuronal morphologies. Nature Rev. Neurosci., 7:318-324 
+                                br
+                                | or
+                                br
+                                | Ascoli GA, Donohue DE, Halavi M. (2007) NeuroMorpho.Org: a central resource for neuronal morphologies.J Neurosci., 27(35):9247-51
+                        p (Optional)
+                            br
+                            |To reference a specific reconstruction you may also use the 
+                            a(href="https://neuromorpho.org/beta/myfaq.jsp?id=qg5#QS1" target="blank") NeuroMorpho.Org ID 
+                            | of the neuron, 
+                            b in addition to the above three citations
+
+                        h2(align="justify") Data contributed to NeuroMorpho.Org
+                        p To cite NeuroMorpho.Org in a publication, as an online repository where your original data can be found, please choose from the following:
+                        ol
+                            li At the time of writing your manuscript, if data has 
+                                b already 
+                                | been contributed to NeuroMorpho.Org, then state that the data
+                                i "has been submitted to and will be available at NeuroMorpho.Org"
+                            li At the time of writing your manuscript, if data is 
+                                b not yet 
+                                | contributed to NeuroMorpho.Org but will be in the near future then state that the data 
+                                i "will be submitted to NeuroMorpho.Org"
+
+
+                        h2 Programmatic access and usage of NeuroMorpho.Org
+                        p Programmatic access and usage of NeuroMorpho.Org is 
+                            b required
+                            | to use the 
+                            a(href="https://neuromorpho.org/beta/api.jsp" target="_blank") API
+                            | for accessing meta data, and to use direct HTTP access of the .swc- or auxiliary files by accessing their direct URL. The URL to a data file may be deducted from archive and neuron name, as explained in the 
+                            a(href="https://neuromorpho.org/myfaq.jsp#qr12" target="_blank") FAQ under "How can I programmatically access NeuroMorpho.Org?"
+                            | Programmatic access not using the API and/or direct links to data files, for example by calling one of the .jsp-pages using a script, is 
+                            b forbidden
+                            | as it will result in degrading of the server performance, thereby affecting other users. Failure to comply will result in either automatic or manual permanent blocking. It is also highly recommended to identify the user agent of the program; you may be blocked for failure to do so, as we must block unnamed bots accessing NeuroMorpho.Org, in order to ensure the site availability. If you have been blocked unintentionally and want to be able to access NeuroMorpho.Org, please contact the administrator using the email below
+
+                        h2 Disclaimer
+                        p Browsing and using the data in NeuroMorpho.Org is at the user's own risk. George Mason University, the Krasnow Institute for Advanced Study, their leaders, and employees make no representations, warranties or guarantees of any kind or nature regarding the content or accuracy of the information accessible on NeuroMorpho.Org
+                        p To the fullest extent permissible pursuant to applicable federal, state and local laws, NeuroMorpho.Org, its developers, and any party involved in its creation, maintenance, or modification, disclaim and shall not be liable for any damages, including, but not limited to, direct, indirect, incidental, consequential, punitive damages, attorneys' fees or costs arising out of or related to access to or use of NeuroMorpho.Org. Links are provided as a convenience only, and NeuroMorpho.Org makes no representations, warranties or guarantees regarding their contents
+
+                        h2 Contact
+                        p Please email the NeuroMorpho.Org Administrator at 
+                            a(href="mailto:nmadmin@gmu.edu") nmadmin@gmu.edu 
+                            | or 
+                            a(href="mailto:neuromorpho@gmail.com") neuromorpho@gmail.com 
+                            | for any clarifications, questions, suggestions, and comments. Thank you for your support and cooperation.
+                        
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })  

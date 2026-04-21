@@ -1,0 +1,64 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            p(style={'text-align':'center', 'font-weight': 'bold'}) You can help NeuroMorpho.Org!
+            .row
+                p(align="justify") Our search to identify literature describing or utilizing digital reconstructions of neuronal morphology has been extensive however, not all publications have been identified. If you know of neuronal reconstructions that could be included in this inventory, please send us a reference to the relevant paper(s) and/or laboratory contact information.
+                br
+                br
+                p You can enter the PMID of a publication here to check whether it has been identified by us or not.
+                div(class="container", style={'margin':'auto', 'width' : 'auto'})
+                    C Enter PMID: 
+                    input(type="text", class="form-control" id="inputValueDirectHits"  placeholder="", style={'margin':'auto', 'width':'50%', 'display': 'inline-block', 'margin-left':'20px'})
+                    a(class="btn btn-sm btn-outline-secondary", style={'margin-left': '20px'}) Search        
+            br
+            br
+            .row
+                p If the publication has already been evaluated you will be notified of its status. If we have not identified this publication, we will include it in our list for evaluation and you can request an update of its status.
+                    br
+                    br
+                    C If you would like to directly send us a reference to the relevant publication(s) and/or laboratory contact information, please email us at nmadmin@gmu.edu or neuromorpho@gmail.com.
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })                  
+
+append scripts    
+    script(src='js/callfordata.js')

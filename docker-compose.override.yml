@@ -1,0 +1,66 @@
+# Development overrides - picked up automatically by `docker compose up`.
+#
+# Enables hot-reload for both backend and frontend without rebuilding images.
+#
+#   - nmocore : source is bind-mounted; uvicorn --reload restarts on .py changes
+#   - nmoui   : a separate Node watcher rebuilds dist/ on any src/ change;
+#               nginx serves that shared volume, so reload = just save + refresh
+#
+# To use production behaviour instead (no overrides), run:
+#   docker compose -f docker-compose.yml up -d --build
+
+services:
+  nmocore:
+    command: >
+      uvicorn app:app
+      --host 0.0.0.0 --port 8002 --reload
+      --h11-max-incomplete-event-size 16777216
+      --log-level info
+    # Mount the whole source tree (not individual files) so editors that
+    # atomically replace files via rename still trigger uvicorn --reload.
+    volumes:
+      - ./nmocore:/src:ro
+    working_dir: /src
+
+  # Node watcher: runs sb-watch.js, rebuilds dist/ on any src/ change.
+  nmoui-watcher:
+    image: node:16-bullseye
+    working_dir: /ui
+    restart: unless-stopped
+    # - HOME/CACHE in /tmp so we don't depend on /root perms
+    # - unsafe-perm keeps npm scripts running as root (default drops to nobody
+    #   and then can't clean/write files in the shared dist volume)
+    environment:
+      HOME: /tmp
+      NPM_CONFIG_CACHE: /tmp/.npm
+      NPM_CONFIG_UNSAFE_PERM: "true"
+    volumes:
+      - ./nmoui:/ui
+      - uidist:/ui/dist
+    # 1) install deps on first run (idempotent via node_modules cache volume)
+    # 2) rewrite apiurlbase to /api so same-origin nginx proxy works
+    # 3) full build once to populate /ui/dist
+    # 4) start the watcher for continuous rebuilds
+    command: >
+      bash -lc "
+        set -e &&
+        if [ ! -d node_modules ]; then npm ci --no-audit --no-fund --unsafe-perm; fi &&
+        sed -i \"s|^const apiurlbase = .*|const apiurlbase = '/api';|\" src/js/base.js &&
+        rm -rf /ui/dist/* /ui/dist/.[!.]* 2>/dev/null || true &&
+        node scripts/build-pug.js &&
+        node scripts/build-scss.js &&
+        node scripts/build-scripts.js &&
+        node scripts/build-assets.js &&
+        node scripts/sb-watch.js
+      "
+
+  nmoui:
+    # Serve the live-rebuilt dist instead of the image-baked copy.
+    depends_on:
+      - nmoui-watcher
+      - nmocore
+    volumes:
+      - uidist:/usr/share/nginx/html:ro
+
+volumes:
+  uidist:

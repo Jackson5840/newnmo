@@ -1,0 +1,281 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-6
+                    .card.mb-6.shadow-sm
+                        img.img-fluid(id='neuronimg',src='',height=480,width=640)
+                        .card-body
+                            table.table-striped.table-sm(style={margin:'auto'})
+                                tr
+                                    td NeuroMorpho.Org ID
+                                    td(id="id")
+                                tr
+                                    td Neuron Name
+                                    td(id="name")
+                                tr
+                                    td Archive Name
+                                    td(id="archive_name")
+                                tr
+                                    td Species Name
+                                    td(id="species_name")
+                                tr
+                                    td Strain
+                                    td(id="strain_name")
+                                tr
+                                    td Structural Domains
+                                    td(id="structdom")
+                                tr
+                                    td Physical Integrity
+                                    td(id="physint")
+                                tr
+                                    td Morphological Attributes
+                                    td(id="morph_attributes")
+                                tr
+                                    td Min Age
+                                    td(id="min_age")
+                                tr
+                                    td Max Age
+                                    td(id="max_age")
+                                tr
+                                    td Gender
+                                    td(id="gender")
+                                tr
+                                    td Min Weight
+                                    td(id="min_weight")
+                                tr
+                                    td Max Weight
+                                    td(id="max_weight")
+                                tr
+                                    td Development 
+                                    td(id="age")
+                                tr
+                                    td Primary Brain Region 
+                                    td(id="region1")
+                                tr
+                                    td Secondary Brain Region 
+                                    td(id="region2")
+                                tr
+                                    td Tertiary Brain Region 
+                                    td(id="region3")
+                                tr
+                                    td Primary Cell Class 
+                                    td(id="celltype1")
+                                tr
+                                    td Secondary Cell Class 
+                                    td(id="celltype2")
+                                tr
+                                    td Tertiary Cell Class 
+                                    td(id="celltype3")
+                                tr
+                                    td Original Format 
+                                    td(id="originalformat_name")
+                                tr
+                                    td Experiment Protocol
+                                    td(id="protocol")
+                                tr
+                                    td Experimental Condition
+                                    td(id="expcond_name")
+                                tr
+                                    td Staining Method
+                                    td(id="staining_name")
+                                tr
+                                    td Slicing Direction
+                                    td(id="slicing_direction")
+                                tr
+                                    td Slice Thickness
+                                    td(id="slicingthickness")
+                                tr
+                                    td Tissue Shrinkage
+                                    td(id="shrinkage")
+                                tr
+                                    td Objective Type
+                                    td(id="objective")
+                                tr
+                                    td Magnification
+                                    td(id="magnification")
+                                tr
+                                    td Reconstruction Method
+                                    td(id="reconstruction")
+                                tr
+                                    td Date of Deposition
+                                    td(id="depositiondate")
+                                tr
+                                    td Date of Upload
+                                    td(id="uploaddate")
+                                tr
+                                    td Persistence Vector
+                                    td(id="pvec")
+
+                .col-md-4
+                    .card.mb-4.shadow-sm
+                        .card-body(style={height:'385px'})
+                            a(id='file_morphstd', style={'margin-top':'10px'}, class="btn btn-success btn-sm", href='neuroninfo.html') Morphology File (Standardized)
+                            br
+                            a(id='file_morphorg',style={'margin-top':'10px'}, class="btn btn-success btn-sm", href='neuroninfo.html') Morphology File (Original)
+                            br
+                            a(id='file_logstd',style={'margin-top':'10px'}, class="btn btn-success btn-sm", href='neuroninfo.html') Log File (Standardized)
+                            br
+                            a(id='file_logorg',style={'margin-top':'10px'}, class="btn btn-success btn-sm", href='neuroninfo.html') Log File (Original)
+                            br
+                            a(id='file_zip',style={'margin-top':'10px'}, class="btn btn-success btn-sm", href='neuroninfo.html') Get Above Files Zipped
+                            br
+                            //a(id='download_button',style={'margin-top':'10px'}, class="btn btn-success btn-sm", href='neuroninfo.html') 3D Neuron Viewer - Java, legacy
+                            //br
+                            a(id='viewwebgl',style={'margin-top':'10px'}, class="btn btn-success btn-sm", href='javascript:void(0)') 3D Neuron Viewer - WebGL, novel
+                            br
+                            a(id='animation',style={'margin-top':'10px'}, class="btn btn-success btn-sm", href='javascript:void(0)') Animation
+
+            .row
+                .col-md-6
+                    .card.mb-6.shadow-sm(style={'text-align':'center'})
+                        p Reference Article
+                        .card-body(style={'margin-top':'-20px'})
+                            table.table-striped.table-sm
+                                tr
+                                    td Related Article Reference
+                                    td(id="name") The intrinsic electrophysiological characteristics of fly lobula plate tangential cells: I. Passive membrane properties
+                            .d-flex.justify-content-between.align-items-center
+                                .col.text-center
+                                    a(id='pubmedlink',style={'margin-right':'10px'}, class="btn btn-success btn-sm", href='neuroninfo.html') PubMed/Abstract Link
+                                    a(id='doilink',class="btn btn-success btn-sm", href='neuroninfo.html') DOI Link
+
+            .row
+                .col-md-6
+                    .card.mb-6.shadow-sm
+                        p(style={'text-align':'center'}) Measurements
+                        .card-body(style={'margin-top':'-20px'})
+                            table.table-striped.table-sm(style={margin:'auto'})
+                                tr
+                                    td Soma Surface
+                                    td(id="soma_surface")
+                                tr
+                                    td Number of Stems
+                                    td(id="n_stems")
+                                tr
+                                    td Number of Bifurcations
+                                    td(id="n_bifs")
+                                tr
+                                    td Number of Branches
+                                    td(id="n_branch")
+                                tr
+                                    td Overall Width
+                                    td(id="width")
+                                tr
+                                    td Overall Height
+                                    td(id="height")
+                                tr
+                                    td Overall Depth
+                                    td(id="depth")
+                                tr
+                                    td Average Diameter
+                                    td(id="diameter")
+                                tr
+                                    td Total Length
+                                    td(id="length")
+                                tr
+                                    td Total Surface
+                                    td(id="surface")
+                                tr
+                                    td Total Volume
+                                    td(id="volume")
+                                tr
+                                    td Max Euclidean Distance
+                                    td(id="eucdistance")
+                                tr
+                                    td Max Path Distance
+                                    td(id="pathdistance")
+                                tr
+                                    td Max Branch Order
+                                    td(id="branch_order")
+                                tr
+                                    td Average Contraction
+                                    td(id="contraction")
+                                tr
+                                    td Total Fragmentation
+                                    td(id="fragmentation")
+                                tr
+                                    td Partition Asymmetry
+                                    td(id="partition_asymmetry")
+                                tr
+                                    td Average Rall's Ratio
+                                    td(id="pk_classic")
+                                tr
+                                    td Average Bifurcation Angle Local
+                                    td(id="bif_ampl_local")
+                                tr
+                                    td Average Bifurcation Angle Remote
+                                    td(id="bif_ampl_remote")
+                                tr
+                                    td Fractal Dimension
+                                    td(id="fractal_dim")
+                                
+                                 
+                                
+                                
+                                
+                                
+                    
+            
+
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })  
+    script(src='js/base.js')
+    script(src='js/neuroninfo.js')
+    script updatevals(new URLSearchParams(window.location.search));
+    script. 
+        function winpop(path,name) {
+            var imgHeight;
+            var imgWidth;
+            var myImage = new Image();
+            myImage.src = path
+            myImage.onload = function() {
+                imgHeight=myImage.height;
+                imgWidth=myImage.width;
+                imgHeight=imgHeight+20;
+                imgWidth=imgWidth+20;
+                
+                
+                var newWindow=window.open(path,'linkname','height='+imgHeight+',width='+imgWidth+',scrollbars=no');        
+                newWindow.document.write("<head><meta name=\"viewport\" content=\"width=device-width, minimum-scale=0.1\"><title>"+name+"</title></head><body style=\"margin: 0px;background: black; \"><div align=\"center\" style=\"margin-top: 10px; margin-bottom: 10px;\"> <img src="+path+"></div></body>");
+            };
+        }

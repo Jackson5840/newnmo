@@ -1,0 +1,104 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            p(style={'text-align':'center', 'font-weight': 'bold'}) Search the database by Conceptual Hierarchies
+            .row
+                p(align="justify") Please enter a keyword in the text area. A keyword can have multiple words separated by spaces and is NOT case sensitive (example: 'macaca mulatta'). Queries are assisted by auto-complete suggestions.
+
+                input(type="text", class="form-control" id="inputValueKeyword"  placeholder="", style={'margin':'auto', 'width':'40%'})          
+            br
+            br
+            .row
+                div(class="container", style = {'text-align' : 'center'})
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-bottom' : '1rem'}) Hits from current criteria
+                    br
+                    C Direct Hits: 
+                    input(type="text", class="form-control" id="inputValueDirectHits"  placeholder="", style={'margin':'auto', 'width':'20%', 'display': 'inline-block', 'margin-left':'16px'})
+                    br
+                    br
+                    C Possible Hits: 
+                    input(type="text", class="form-control" id="inputValuePossibleHits"  placeholder="", style={'margin':'auto', 'width':'20%', 'display': 'inline-block'})
+                    br
+                    br
+                    p A tree view of ontological concepts (for species, brain regions, cell types & others) is available here.
+                    p Your search results can be arranged by:
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="byspeciesmetadata.html") By Animal Species
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="byregionmetadata.html") By Brain Region
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="bycelltypesmetadata.html") By Cell Type
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="bylabmetadata.html") By Archive
+                    br
+                    br
+                    p Or
+                    a(class="btn btn-sm btn-outline-secondary", href="neurons.html") Show Summary
+            
+            br
+            br
+            .row 
+                p This page allows searching NeuroMorpho.Org based on lineages derived from species taxonomy and several sources of neuroanatomical knowledge. (see FAQs). More examples of some useful input queries:
+                    br
+                    br
+                    b Masai Giraffe
+                    br
+                    C Will return all "Giraffa camelopardalis tippelskirchi" reconstructions, a subspecies of Giraffe family, by identifying the term as a synonym.
+                    br
+                    b Left
+                    br
+                    C Will return all the available (insect and vertebrate) reconstructions from the left hemisphere of the brain.
+                    br
+                    b Glomerular layer targeting
+                    br
+                    C Will return all Olfactory reconstructions that are known to project to Glomerular layer. If available, It also returns possible hits of the neurons that are not reported for its specific targeting layer.
+                    br
+                    b Fronto-insula
+                    br
+                    C Will return only human reconstructions as this concept is only found in Humans.
+
+            
+            
+
+
+                    
+
+                        
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })                  
+
+append scripts    
+    script(src='js/morphometry.js')

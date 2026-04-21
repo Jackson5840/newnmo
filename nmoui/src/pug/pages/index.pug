@@ -1,0 +1,96 @@
+extends ../layouts/default.pug
+
+
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+        
+                    
+    //- Section
+    .album.py-5.bg-light
+        .container(style='text-align:center')
+            .row
+                div(class="col-md-12")
+                    div(class="d-flex justify-content-between align-items-center")
+                        marquee(behavior="scroll", direction="left") 
+                            p. 
+                                238638 digital reconstructions. &nbsp;&nbsp;&nbsp;&nbsp;  
+                                Reconstructions from 929 laboratories. &nbsp;&nbsp;&nbsp;&nbsp; 
+                                Reconstructions from 1034 cell types. &nbsp;&nbsp;&nbsp;&nbsp; 
+                                Reconstructions from  404 brain regions. &nbsp;&nbsp;&nbsp;&nbsp; 
+                                &gt;3.57 million h of manual labour &nbsp;&nbsp;&nbsp;&nbsp; 
+                                479 meters reconstructed neuropil &nbsp;&nbsp;&nbsp;&nbsp; 
+                                13.25 million neuronal branches &nbsp;&nbsp;&nbsp;&nbsp; 
+                                Visitors from 194 countries &nbsp;&nbsp;&nbsp;&nbsp; 
+
+
+                //- div(id = 'imgCollection', class="col-12 d-flex justify-content-center" style="width: 930px; max-width: 100%;")
+            .row.no-gutters
+                .col
+                    div(class="carousel slide" data-ride="carousel")
+                        div(class="carousel-inner" id='carousel1')
+                .col
+                    div(class="carousel slide" data-ride="carousel")
+                        div(class="carousel-inner" id='carousel2')
+                .col
+                    div(class="carousel slide" data-ride="carousel")
+                        div(class="carousel-inner" id='carousel3')
+                    
+
+            .container()
+                .row
+                    div(class="col-md-7 blog-main")
+                        p(align="justify", style="margin-top:30px;") NeuroMorpho.Org is a centrally curated inventory of digitally reconstructed 
+                            b neurons and glia 
+                            |associated with peer-reviewed publications. It contains contributions from over 800 laboratories worldwide and is continuously updated as new morphological reconstructions are collected, published, and shared. To date, NeuroMorpho.Org is the largest collection of publicly accessible 3D neuronal reconstructions and associated metadata.
+
+                        p(align="justify", style="margin-top:10px;") The goal of NeuroMorpho.Org is to provide dense coverage of available reconstruction data for the neuroscience community. Data sharing through NeuroMorpho.Org enables the full and continuing research potential of existing digital reconstruction data.
+
+                        p(align="justify", style="margin-top:10px;") We encourage and welcome both new and old contributors as well as users to participate in 
+                            a(href=" https://forms.gle/6H2N6QobSqqjmbB97" target="_blank" name="NeuroMorpho.Org Online Survey " title="NeuroMorpho.Org Online Survey ") our online survey,
+                            | influencing the future direction of NeuroMorpho.Org.
+
+                    .aside(class="col-md-5 blog-sidebar", style="margin-top:30px;")
+                        a(class="twitter-timeline" href="https://twitter.com/NeuroMorphoOrg?ref_src=twsrc%5Etfw") Tweets by NeuroMorphoOrg
+                        script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })
+
+append scripts    
+    script(src='js/base.js')
+    script(src='js/index.js')

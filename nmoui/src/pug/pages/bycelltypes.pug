@@ -1,0 +1,79 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            .row
+                div(id="celltypescontainer", style={'height':'450px', margin:'auto'})
+            br
+            .row
+                form(class="col-md-4", style={margin:'auto', 'text-align':'center' })
+                    select(class="selectpicker", data-live-search="true", id = "selectcells",title ="Select cell type", data-dropup-auto="false")
+                        option Select
+
+
+                    br
+                    br
+            .row
+                button(type="button" class="btn btn-primary hideshow" onclick="$('#jstree_demo_div').jstree('close_all');") Collapse All
+                span &nbsp;
+                button(type="button" class="btn btn-primary hideshow" onclick="$('#jstree_demo_div').jstree('open_all');") Open All
+            .row
+                div(id="jstree_demo_div")
+        .container
+            .row
+                .col
+                    input(class="form-check-input" type="checkbox" value="" id="aux")
+                    label(class="form-check-label" for="flexCheckDefault") Include Auxiliary files
+                .col
+                    button(type="button" class="btn btn-dark" onclick="gettoggled()")  Download
+    #custom_image_content 
+        img(height=125, width=160, src="")
+                
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 
+
+append scripts
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js")
+    script(src='js/base.js')    
+    script(src='js/bycells.js')
+    script(src='js/cellschart.js')
+    script(src='js/jquery.tree-multiselect.min.js')
+    script(src='js/lodash.min.js')

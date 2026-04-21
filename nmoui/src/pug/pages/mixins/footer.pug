@@ -1,0 +1,38 @@
+mixin footer(options)
+
+    footer(class="footer")
+            div(class="text-center p-3", style="background:#d5d8b1")
+                Copyright &copy; Copyright 2006-2026 George Mason University All Rights Reserved.
+                    
+    .fab-container
+        .button.iconbutton
+            a(href="https://neuromorpho.org/")
+                i Exit Beta
+
+    style.
+        .fab-container{
+        position:fixed;
+        bottom:50px;
+        right:50px;
+        cursor:pointer;
+        }
+        .iconbutton{
+        width:70px;
+        height:70px;
+        border-radius: 100%;
+        background: #FF4F79;
+        box-shadow: 10px 10px 5px #aaaaaa;
+        }
+        .button{
+        width:80px;
+        height:80px;
+        background:#0000FF;
+        }
+        .iconbutton i{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        height: 100%;
+        color:white;
+        }
+s

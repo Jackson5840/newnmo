@@ -1,0 +1,109 @@
+{
+    "data": [
+        {   
+            "archive_name": "Glennon",
+            "neuron_name": "14Feb2019-exp-5_53-rpt-188-1003",
+            "brain_region": "cortex",
+            "cell_type": "interneuron",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Glennon",
+            "neuron_name": "14Feb2019-exp-5_53-rpt-188-1004",
+            "brain_region": "cortex",
+            "cell_type": "interneuron",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Glennon",
+            "neuron_name": "14Feb2019-exp-5_53-rpt-188-1005",
+            "brain_region": "cortex",
+            "cell_type": "interneuron",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Glennon",
+            "neuron_name": "14Feb2019-exp-5_53-rpt-188-1006",
+            "brain_region": "cortex",
+            "cell_type": "interneuron",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Glennon",
+            "neuron_name": "14Feb2019-exp-5_53-rpt-188-1007",
+            "brain_region": "cortex",
+            "cell_type": "interneuron",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Glennon",
+            "neuron_name": "14Feb2019-exp-5_53-rpt-188-1008",
+            "brain_region": "cortex",
+            "cell_type": "interneuron",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Glennon",
+            "neuron_name": "14Feb2019-exp-5_53-rpt-188-1009",
+            "brain_region": "cortex",
+            "cell_type": "interneuron",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Heppner",
+            "neuron_name": "FAT-42-d13-Pos2-1",
+            "brain_region": "cortex",
+            "cell_type": "microglia",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Heppner",
+            "neuron_name": "FAT-42-d13-Pos2-2",
+            "brain_region": "cortex",
+            "cell_type": "microglia",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Heppner",
+            "neuron_name": "FAT-42-d13-Pos2-3",
+            "brain_region": "cortex",
+            "cell_type": "microglia",
+            "species_name": "mouse"
+        },
+        {   
+            "archive_name": "Otto",
+            "neuron_name": "100579227",
+            "brain_region": "cortex",
+            "cell_type": "microglia",
+            "species_name":"drosophila melanogaster"
+        },
+        {   
+            "archive_name": "Otto",
+            "neuron_name": "10146430",
+            "brain_region": "cortex",
+            "cell_type": "microglia",
+            "species_name":"drosophila melanogaster"
+        },
+        {   
+            "archive_name": "Otto",
+            "neuron_name": "102349347",
+            "brain_region": "cortex",
+            "cell_type": "microglia",
+            "species_name":"drosophila melanogaster"
+        },
+        {   
+            "archive_name": "Robel",
+            "neuron_name": "0219_4-2_A1_",
+            "brain_region": "cortex",
+            "cell_type": "astrocyte",
+            "species_name":"mouse"
+        },
+        {   
+            "archive_name": "Robel",
+            "neuron_name": "0219_4-2_A2_Traces",
+            "brain_region": "cortex",
+            "cell_type": "astrocyte",
+            "species_name":"mouse"
+        }
+    ]
+}

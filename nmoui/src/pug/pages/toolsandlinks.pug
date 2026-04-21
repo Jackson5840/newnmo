@@ -1,0 +1,93 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .blog-post
+
+                        p The following public-domain tools can be useful for more detailed analysis, visualization, and modeling of neurons and their morphology.
+                        h2 Main Tools  
+                        ul
+                            li #[a(href="http://krasnow.gmu.edu/cn3/" target="blank") Center for Neural Informatics, Structure, and Plasticity]
+                            li #[a(href="http://cng.gmu.edu:8080/Lm/" target="blank") L-Measure] &nbsp;&nbsp;(online neuromorphometric analysis)
+                            li #[a(href="http://www.reading.ac.uk/neuromantic/body_index.php" target="blank") Neuromantic] &nbsp;&nbsp;(free neuron reconstruction software)
+                            li #[a(href="http://home.penglab.com/proj/vaa3d/home/index.html" target="blank") Vaa3D]
+                            li #[a(href="http://www.treestoolbox.org/" target="blank") Trees-Toolbox]
+                            li #[a(href="http://btmorph.readthedocs.org/en/latest/" target="blank") btmorph]
+                            li #[a(href="http://www.neuinfo.org/" target="blank") Neuroscience Information Framework]
+                            li #[a(href="toolsTable.jsp") Resources and tools for 3D reconstructions of neuron morphology] &nbsp;&nbsp;(updated version of Table 1 in  #[a(href="http://www.ncbi.nlm.nih.gov/pubmed/?term=23522039" target="_blank") Ecosystem of digital reconstructions])
+                                    
+                        h2 Repositories of neuronal reconstructions mirrored into NeuroMorpho.Org
+                        ul 
+                            li #[a(href="http://www.neuro.mpg.de/24306/borst" target="blank") Borst Cells]
+                            li #[a(href="http://ccdb.ucsd.edu/CCDBWebSite/index.html" target="blank") Cell-Centered Database]
+                            li #[a(href="http://cns.iaf.cnrs-gif.fr/alain_geometries.html" target="blank") Destexhe Cells]
+                            li #[a(href="http://www.flycircuit.tw/" target="blank") FlyCircuit]
+                            li #[a(href="http://www.koki.hu/~gulyas/ca1cells/" target="blank") Gulyas archive/Freund Lab              ]
+                            li #[a(href="http://dendrites.esam.northwestern.edu/" target="blank") Spruston cells]
+                            li #[a(href="http://research.mssm.edu/cnic/repository.html" target="blank") Wearne/Hof Cells]
+            
+                        h2 Other useful Links
+                        ul
+                            li #[a(href="https://github.com/pgleeson/Cvapp-NeuroMorpho.org" target="blank") 3D Neuron Viewer] &nbsp;&nbsp;(modified Cvapp code on GitHub)
+                            li #[a(href="http://www.brain-map.org/" target="blank") Allen Institute for Brain Science] 	
+                            li #[a(href="http://cng.gmu.edu:8080/ConferenceSite/" target="blank") NeuroMorpho.Org Conference] &nbsp;&nbsp;(recognizing the breakthroughs in neuroscience via digital reconstruction of neuronal morphology)
+                            li #[a(href="http://www.diademchallenge.org/" target="blank") Diadem Challenge] &nbsp;&nbsp;(to create algorithmic methods for automated neuronal tracing)
+                            li #[a(href="http://www.ncbi.nlm.nih.gov/pubmed/?term=23522039" target="blank") Ecosystem of digital reconstructions] &nbsp;&nbsp;(a review article and an annotated compilation of currently available resources of digital reconstructions. Updated version of this paper's Table 1 available on the above Main Tools list. Click  #[a(href="http://krasnow1.gmu.edu/cn3/")] here
+                                | for pdf of the article)
+                            li #[a(href="http://www.gmu.edu/" target="blank") George Mason University]
+                            li #[a(href="http://www.genesis-sim.org/GENESIS/" target="blank") Genesis] &nbsp;&nbsp;(general purpose simulation platform)
+                            li #[a(href="http://www.gmu.edu/departments/krasnow/" target="blank") Krasnow Institute for Advanced Study]
+                            li #[a(href="http://senselab.med.yale.edu/ModelDB/default.asp" target="blank") ModelDB]
+                            li #[a(href=" http://www.neuroml.org/" target="blank") Neuro ML]
+                            li #[a(href="http://www.mbfbioscience.com/neurolucida" target="blank") Neurolucida] &nbsp;&nbsp;(commercial neuron reconstruction software)
+                            li #[a(href="http://www.neuronland.net/" target="blank") Neuronland] &nbsp;&nbsp; (free software for morphology format conversions)
+                            
+                            li #[a(href="http://www.neuron.yale.edu/neuron/" target="blank") NEURON] &nbsp;&nbsp;(compartmental modeling and simulation)
+                            li #[a(href="http://www.personal.soton.ac.uk/dales/morpho/" target="blank") Neuron_morpho plugin] &nbsp;&nbsp;(3D reconstruction from image stacks)
+                            li #[a(href="http://research.mssm.edu/cnic/tools-ns.html" target="blank") NeuronStudio] &nbsp;&nbsp;(3D reconstruction from confocal and multi-photon images)
+                            li #[a(href="http://www.wormatlas.org/" target="blank") Worm Atlas] &nbsp;&nbsp;(A database of behavioral and structural anatomy of C. elegans)
+                            li #[a(href="http://cng.gmu.edu/brava" target="blank") BraVa] &nbsp;&nbsp;(A database of arterial reconstructions)
+                            li #[a(href="https://alleninstitute.org/bigneuron/about/" target="blank") BigNeuron.Org]
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 

@@ -1,0 +1,89 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            .row
+                p(align="justify") NeuroMorpho.Org has identified publications that describe or utilize digital reconstructions of neuronal morphology. To search these publications in NeuroMorpho.Org enter PMID (PubMed identifier) below
+                div(class="container", style={'margin':'auto', 'width' : 'auto'})
+                    C Enter PMID: 
+                    input(type="text", class="form-control" id="inputValueDirectHits"  placeholder="", style={'margin':'auto', 'width':'50%', 'display': 'inline-block', 'margin-left':'20px'})
+                    a(class="btn btn-sm btn-outline-secondary", style={'margin-left': '20px'}) Search        
+            br
+            br
+            .row
+                p Or view the publications by:
+                    br
+                    br
+                    C Availability Status: ordered by the availability of data in positively identified publications.
+                    br
+                    C Publication information: ordered by year of publication.
+                    br
+                    C Reconstruction information: ordered by species, brain region and cell type.
+                    br
+                    C Complete details: Complete information of every publication in the database (downloadable file).
+            
+            br
+            br
+            .row
+                div(class="container", style = {'text-align' : 'center', 'margin':'auto', 'width':'auto'}) 
+                    C Literature coverage - version 8.0.7 as of 31 December 2020
+                    br
+                    br
+                    .table(style={margin:'auto', width:'auto'})
+                        table
+                            tr
+                                th(style={'text-align':'center'}) Total Number of Mined Publications
+                                th(style={'text-align':'center'}) Number of Positively Identified Publications
+                            tbody
+                                tr
+                                    td 49470
+                                    td 4629
+
+            
+            
+
+
+                    
+
+                        
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })                  
+
+append scripts    
+    script(src='js/literaturesearch.js')

@@ -1,0 +1,23 @@
+mixin section(options)
+
+            .album.py-5.bg-light
+                h3(style={'text-align':'center'}) 
+                    div(style='display:inline', id='nneurons')
+                nav(aria-label="Page navigation example")
+                    ul(class="pagination justify-content-center")#pglist
+  
+
+                .container#neuronlist
+
+                .container
+                    .row
+                        .col
+                            button(type="button" class="btn btn-dark" onclick="toggleall(true);selectall()") Select all 
+                        .col
+                            button(type="button" class="btn btn-dark" onclick="toggleall(false);deselectall()")  Deselect all 
+                        .col
+                            input(class="form-check-input" type="checkbox" value="" id="aux")
+                            label(class="form-check-label" for="flexCheckDefault") Include Auxiliary files
+                        .col
+                            button(type="button" class="btn btn-dark" onclick="gettoggled();gettreesel()")  Download
+                        

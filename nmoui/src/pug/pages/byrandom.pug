@@ -1,0 +1,86 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    //.album.py-5.bg-light
+    .container
+        .row
+            p View
+                select(id="nrandom",onchange="updateneurons(new URLSearchParams('?random=' + this.value))")
+                    option(value="10") 10
+                    option(value="25") 25
+                    option(value="50") 50
+                //span cells | View as 
+                //select(id="viewtype")
+                    option(value="List") List
+                    option(value="Summary") Summary
+                //a(href="") Refresh 
+        br
+        //.container
+            .row
+                .col
+                    input(class="form-check-input" type="checkbox" value="" id="aux")
+                    label(class="form-check-label" for="flexCheckDefault") Include Auxiliary files
+                .col
+                    button(type="button" class="btn btn-dark" onclick="gettoggled()")  Download
+    //#custom_image_content 
+        img(height=125, width=160, src="")
+
+    //- Section
+
+    include mixins/section.pug
+    +section({
+        sectionBg: 'bg-white',
+        sectionPadding: 'py-10',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-light'
+    })
+                
+                
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 
+
+append scripts
+    script(src='js/base.js')
+    script(src="js/neurons.js")
+    script(src='js/lodash.min.js')
+    script updateneurons(new URLSearchParams("?random=10"));
+    

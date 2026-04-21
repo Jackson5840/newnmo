@@ -1,0 +1,96 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .blog-post(id="dlmap")
+
+                    br
+                    br
+                    .blog-post
+                        div(id="downloadsPerQuarter")
+                    br
+                    br
+                    ul
+                        li Total number of downloads (as listed on the homepage) reflects downloads of standardized Neuron files.
+                        li Total number of downloads by cell type, brain region, archives and species (as listed in tables below) reflects downloads of Neuron files and Auxiliary files.
+                    br
+                    br
+                    .blog-post
+                        div(id="hitsPerQuarter")
+                    br
+                    br
+                    .blog-post
+                        strong(align="justify") Access By Country
+                        div(id="countrytype")
+                    br
+                    br
+                    .blog-post
+                        strong(align="justify") Downloads By Cell Type
+                        div(id="celltype")
+                    br
+                    br
+                    .blog-post
+                        strong(align="justify") Downloads By Animal Species
+                        div(id="species")
+                    br
+                    br
+                    .blog-post
+                        strong(align="justify") Downloads By Archive
+                        div(id="archive")
+                    br
+                    br
+                    .blog-post
+                        strong(align="justify") Downloads By Brain Region
+                        div(id="brainregion")
+
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 
+
+append scripts    
+    script(src='js/world.topo.js')
+    script(src="https://code.highcharts.com/maps/highmaps.js")
+    script(src="https://code.highcharts.com/maps/modules/data.js")
+    script(src="https://code.highcharts.com/maps/modules/exporting.js")
+    script(src="https://code.highcharts.com/maps/modules/offline-exporting.js")
+    script(src="https://code.highcharts.com/maps/modules/accessibility.js")
+    script(src='js/statistics.js')

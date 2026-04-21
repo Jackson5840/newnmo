@@ -1,0 +1,143 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    link(rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css")
+    script(src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js")
+
+    link(href='assets/css/custom.css', rel='stylesheet')
+
+    .album.py-5.bg-light
+        .container
+            //div(class="position-absolute", style="top: 50%;left: 50%;transform: translate(-50%, -50%); z-index:2;")
+            //    div(class="spinner-border", style=" width: 5rem; height: 5rem;" role="status")
+            //        span(class="sr-only") Loading...
+            
+            .row 
+                .container
+                    h2 Filter by: 
+            .row
+                .container#filterlist 
+                    .row 
+                        b Animal
+                    .row
+                        button(class="btn btn-primary m-1",name="species_name", id="species_name_button",onclick="addfilter(this.name,'Species')") Species 
+                        button(class="btn btn-primary m-1",name="gender", id="gender_button",onclick="addfilter(this.name,'Gender')") Gender
+                        button(class="btn btn-primary m-1",name="age", id="age_button",onclick="addfilter(this.name,'Development')") Development 
+                        button(class="btn btn-primary m-1",name="max_age", id="max_age_button",onclick="addfilter(this.name,'Maximum age')") Maximum age
+                        button(class="btn btn-primary m-1",name="min_age", id="min_age_button",onclick="addfilter(this.name,'Minimum age')") Minimum age
+                        button(class="btn btn-primary m-1",name="max_weight", id="max_weight_button",onclick="addfilter(this.name,'Maximum weight')") Maximum weight
+                        button(class="btn btn-primary m-1",name="min_weight", id="min_weight_button",onclick="addfilter(this.name,'Minimum weight')") Minimum weight
+                    .row.pt-3 
+                        b Anatomy
+                    .row
+                        button(class="btn btn-primary m-1",name="region", id="region_button",onclick="addfilter(this.name,'Brain region')") Brain region
+                        button(class="btn btn-primary m-1",name="celltype", id="celltype_button",onclick="addfilter(this.name,'Cell type')") Cell type
+
+                    .row.pt-3 
+                        b Experiment
+                    .row.my-2
+                        button(class="btn btn-primary m-1",name="protocol", id="protocol_button",onclick="addfilter(this.name,'Protocol')") Protocol
+                        button(class="btn btn-primary m-1",name="expcond_name", id="expcond_name_button",onclick="addfilter(this.name,'Experimental condition')") Experimental condition
+                        button(class="btn btn-primary m-1",name="staining_name", id="staining_name_button",onclick="addfilter(this.name,'Stain')") Stain 
+                        button(class="btn btn-primary m-1",name="slicingthickness", id="slicingthickness_button",onclick="addfilter(this.name,'Slicing thickness')") Slicing thickness
+                        button(class="btn btn-primary m-1",name="shrinkage", id="shrinkage_button",onclick="addfilter(this.name,'Tissue shrinkage')") Tissue shrinkage
+                        button(class="btn btn-primary m-1",name="reconstruction", id="reconstruction_button",onclick="addfilter(this.name,'Reconstruction method')") Reconstruction method
+                        button(class="btn btn-primary m-1",name="objective", id="objective_button",onclick="addfilter(this.name,'Objective Type')") Objective Type 
+                        button(class="btn btn-primary m-1",name="magnification", id="magnification_button",onclick="addfilter(this.name,'Objective magnification')") Objective magnification
+                    
+                    .row.pt-3 
+                        b Completeness
+                    .row
+                        button(class="btn btn-primary m-1",name="struct_domain", id="struct_domain_button",onclick="addfilter(this.name,'Structural domain')") Structural domain
+                        button(class="btn btn-primary m-1",name="physint", id="physint_button",onclick="addfilter(this.name,'Physical integrity')") Physical integrity
+                        button(class="btn btn-primary m-1",name="morph_attributes", id="morph_attributes_button",onclick="addfilter(this.name,'Morphological attributes')") Morphological attributes
+                    .row.pt-3  
+                        b Source
+                    .row
+                        button(class="btn btn-primary m-1",name="archive_name", id="archive_name_button",onclick="addfilter(this.name,'Archive')") Archive
+                        span &nbsp;                    
+                        button(class="btn btn-primary m-1",name="publication_pmid", id="publication_pmid_button",onclick="addfilter(this.name,'PMID')") PMID
+                        button(class="btn btn-primary m-1",name="originalformat_name", id="originalformat_name_button",onclick="addfilter(this.name,'Original Format')") Original Format 
+                        button(class="btn btn-primary m-1",name="depositiondate", id="depositiondate_button",onclick="addfilter(this.name,'Date of Deposition')") Date of Deposition
+                        button(class="btn btn-primary m-1",name="uploaddate", id="uploaddate_button",onclick="addfilter(this.name,'Date of Upload')") Date of Upload
+                    
+            .row 
+                .container.pt-5
+                    h2 Select filter options:         
+            form(id='searchform', action="neurons.html")     
+                .row 
+                    .container#selectlist
+                        
+
+                .row
+                    div(class="container", style = {'text-align' : 'center'})
+                        a(id='hitbutton',onclick='metasearch(true)',class="btn btn-primary", style = "color: white") Hits from current criteria
+                        br
+                        br
+                        h3(id='nneurons') 
+                        p Your search results can be arranged by:
+                .row
+                    .col
+                        button(class="btn btn-primary", type="submit", name="browse", value= "species_name") By Animal Species
+                    .col
+                        button(class="btn btn-primary", type="submit", name="browse", value= "region") By Brain Region
+                    .col
+                        button(class="btn btn-primary", type="submit", name="browse", value= "celltype") By Cell Type
+                    .col
+                        button(class="btn btn-primary", type="submit", name="browse", value= "archive_name") By Archive
+                        br
+                .row
+                    .col(style = {'text-align' : 'center'})
+                        br
+                        p Or
+                        button(class="btn btn-primary", type="submit") Show Summary
+                        br
+                .row
+                    .col(style = {'text-align' : 'center'})
+                        br
+                        input(class="btn btn-primary",onclick="location.reload()" ,type="reset", value="reset")  
+                
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 
+
+append scripts    
+    script(src='js/lodash.min.js')
+    script(src='js/base.js')
+    script(src='js/metadata.js')
+    // script updatemenus(); 

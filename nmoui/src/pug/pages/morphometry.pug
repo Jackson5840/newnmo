@@ -1,0 +1,553 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            p(style={'text-align':'center', 'font-weight': 'bold'}) Search the database by Morphometry
+            .row
+                p(align="justify") Searching for neurons by morphological measurements can be done on all neuronal trees combined (whole neuron) or it can be done on specific tree type(s). For example, morphometrics from apical and axonal trees can be examined while those from basal trees are disregarded.
+                                C  To select the tree types you wish to include in your search criteria, click on one of the options below. The default selection is whole neuron.
+                    
+            
+            .row
+                .table(style={margin:'auto', width:'auto'})
+                        table
+                            tr
+                                th(style={'text-align':'center'}) Search specificity
+                                th(style={'text-align':'center'}) Search Criteria
+                                th Operator
+                                th(style={'text-align':'center'}) Values
+                                th Show Samples
+                            tbody
+                                tr
+                                    td 
+                                        select(class="selectpicker", id = "selectspecificityOne", data-dropup-auto="false", title="Whole Neuron", data-width = "100%")
+                                            option Whole Neuron
+                                            option Apical Only
+                                            option Apical and Axon
+                                            option Apical and Basal
+                                            option Axon only
+                                            option (Basal) dendrite only
+                                            option Basal and Axon
+                                            option Unspecified Neurites
+                                            option Processes/Glia Cells
+                                                
+                                    td 
+                                        select(class="selectpicker", id = "selectcriteriaOne", data-dropup-auto="false", title="NeuronID", data-width = "100%")
+                                            option NeuronID
+                                            option Some Surface
+                                            option Number of Stems
+                                            option Number of Bifurcations
+                                            option Number of Branches
+                                            option Width
+                                            option Height
+                                            option Depth
+                                            option Length
+                                            option Surface
+                                            option Volume
+                                            option EucDistance
+                                            option Path Distance
+                                            option Branch Order
+                                            option Contraction
+                                            option Fragmentation
+                                            option Partition Asymmetry 
+                                            option Rall's Ratio
+                                            option Bifurcation angle local
+                                            option Bifurcation angle remote
+                                            option Fractal Dimension
+                                    td 
+                                        select(class="selectpicker", id = "selectoperatorOne", data-dropup-auto="false", title="=", data-width = "100%")
+                                            option =
+                                            option Not Equal(!=)
+                                            option <
+                                            option >
+                                            option <=
+                                            option >=
+                                    td 
+                                        input(type="text", class="form-control" id="inputValuesOne"  placeholder="")
+                                    td 
+                                        div(style={'text-align':'center'})
+                                            button(type="button", data-toggle="modal", data-target="#modalOneCenter")
+                                                img.img-fluid(src='assets/img/other/mrald_sample.jpg', style={'height':'30px'})
+                                        
+                                        div(class="modal fade", id="modalOneCenter", tabindex="-1", role="dialog", aria-labelledby="modalCenterTitle", aria-hidden="true")
+                                            div(class="modal-dialog modal-dialog-centered", role="document")
+                                                div(class="modal-content")
+                                                    div(class="modal-header")
+                                                        h6(class="modal-title", id="modalOneCenterTitle", style={'text-align':'center'}) Sample Values
+                                                        button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                                                            span(aria-hidden="true") x
+                                                    div(class="modal-body")
+                                                        table
+                                                            tbody
+                                                                tr
+                                                                    td Min Value
+                                                                    td 1
+                                                                    td Set Value
+                                                                tr
+                                                                    td 1st Quartile
+                                                                    td 25455
+                                                                    td Set Value
+                                                                tr
+                                                                    td Median
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td 3rd Quartile
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td Max Value
+                                                                    td 102534
+                                                                    td Set Value
+                                                                        
+
+                                
+                                tr
+                                    td 
+                                        select(class="selectpicker", id = "selectspecificity", data-dropup-auto="false", title="Whole Neuron", data-width = "100%")
+                                            option Whole Neuron
+                                            option Apical Only
+                                            option Apical and Axon
+                                            option Apical and Basal
+                                            option Axon only
+                                            option (Basal) dendrite only
+                                            option Basal and Axon
+                                            option Unspecified Neurites
+                                            option Processes/Glia Cells
+                                                
+                                    td 
+                                        select(class="selectpicker", id = "selectcriteria", data-dropup-auto="false", title="NeuronID", data-width = "100%")
+                                            option NeuronID
+                                            option Some Surface
+                                            option Number of Stems
+                                            option Number of Bifurcations
+                                            option Number of Branches
+                                            option Width
+                                            option Height
+                                            option Depth
+                                            option Length
+                                            option Surface
+                                            option Volume
+                                            option EucDistance
+                                            option Path Distance
+                                            option Branch Order
+                                            option Contraction
+                                            option Fragmentation
+                                            option Partition Asymmetry 
+                                            option Rall's Ratio
+                                            option Bifurcation angle local
+                                            option Bifurcation angle remote
+                                            option Fractal Dimension
+                                    td 
+                                        select(class="selectpicker", id = "selectoperator", data-dropup-auto="false", title="=", data-width = "100%")
+                                            option =
+                                            option Not Equal(!=)
+                                            option <
+                                            option >
+                                            option <=
+                                            option >=
+                                    td 
+                                        input(type="text", class="form-control" id="inputValuesTwo"  placeholder="")
+                                    td 
+                                        div(style={'text-align':'center'})
+                                            button(type="button", data-toggle="modal", data-target="#modalTwoCenter")
+                                                img.img-fluid(src='assets/img/other/mrald_sample.jpg', style={'height':'30px'})
+                                        
+                                        div(class="modal fade", id="modalTwoCenter", tabindex="-1", role="dialog", aria-labelledby="modalCenterTitle", aria-hidden="true")
+                                            div(class="modal-dialog modal-dialog-centered", role="document")
+                                                div(class="modal-content")
+                                                    div(class="modal-header")
+                                                        h6(class="modal-title", id="modalTwoCenterTitle", style={'text-align':'center'}) Sample Values
+                                                        button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                                                            span(aria-hidden="true") x
+                                                    div(class="modal-body")
+                                                        table
+                                                            tbody
+                                                                tr
+                                                                    td Min Value
+                                                                    td 1
+                                                                    td Set Value
+                                                                tr
+                                                                    td 1st Quartile
+                                                                    td 25455
+                                                                    td Set Value
+                                                                tr
+                                                                    td Median
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td 3rd Quartile
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td Max Value
+                                                                    td 102534
+                                                                    td Set Value
+
+                                tr
+                                    td 
+                                        select(class="selectpicker", id = "selectspecificity", data-dropup-auto="false", title="Whole Neuron", data-width = "100%")
+                                            option Whole Neuron
+                                            option Apical Only
+                                            option Apical and Axon
+                                            option Apical and Basal
+                                            option Axon only
+                                            option (Basal) dendrite only
+                                            option Basal and Axon
+                                            option Unspecified Neurites
+                                            option Processes/Glia Cells
+                                                
+                                    td 
+                                        select(class="selectpicker", id = "selectcriteria", data-dropup-auto="false", title="NeuronID", data-width = "100%")
+                                            option NeuronID
+                                            option Some Surface
+                                            option Number of Stems
+                                            option Number of Bifurcations
+                                            option Number of Branches
+                                            option Width
+                                            option Height
+                                            option Depth
+                                            option Length
+                                            option Surface
+                                            option Volume
+                                            option EucDistance
+                                            option Path Distance
+                                            option Branch Order
+                                            option Contraction
+                                            option Fragmentation
+                                            option Partition Asymmetry 
+                                            option Rall's Ratio
+                                            option Bifurcation angle local
+                                            option Bifurcation angle remote
+                                            option Fractal Dimension
+                                    td 
+                                        select(class="selectpicker", id = "selectoperator", data-dropup-auto="false", title="=", data-width = "100%")
+                                            option =
+                                            option Not Equal(!=)
+                                            option <
+                                            option >
+                                            option <=
+                                            option >=
+                                    td 
+                                        input(type="text", class="form-control" id="inputValuesThree"  placeholder="")
+                                    td 
+                                        div(style={'text-align':'center'})
+                                            button(type="button", data-toggle="modal", data-target="#modalThreeCenter")
+                                                img.img-fluid(src='assets/img/other/mrald_sample.jpg', style={'height':'30px'})
+                                        
+                                        div(class="modal fade", id="modalThreeCenter", tabindex="-1", role="dialog", aria-labelledby="modalCenterTitle", aria-hidden="true")
+                                            div(class="modal-dialog modal-dialog-centered", role="document")
+                                                div(class="modal-content")
+                                                    div(class="modal-header")
+                                                        h6(class="modal-title", id="modalThreeCenterTitle", style={'text-align':'center'}) Sample Values
+                                                        button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                                                            span(aria-hidden="true") x
+                                                    div(class="modal-body")
+                                                        table
+                                                            tbody
+                                                                tr
+                                                                    td Min Value
+                                                                    td 1
+                                                                    td Set Value
+                                                                tr
+                                                                    td 1st Quartile
+                                                                    td 25455
+                                                                    td Set Value
+                                                                tr
+                                                                    td Median
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td 3rd Quartile
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td Max Value
+                                                                    td 102534
+                                                                    td Set Value
+                                
+                                tr
+                                    td 
+                                        select(class="selectpicker", id = "selectspecificity", data-dropup-auto="false", title="Whole Neuron", data-width = "100%")
+                                            option Whole Neuron
+                                            option Apical Only
+                                            option Apical and Axon
+                                            option Apical and Basal
+                                            option Axon only
+                                            option (Basal) dendrite only
+                                            option Basal and Axon
+                                            option Unspecified Neurites
+                                            option Processes/Glia Cells
+                                                
+                                    td 
+                                        select(class="selectpicker", id = "selectcriteria", data-dropup-auto="false", title="NeuronID", data-width = "100%")
+                                            option NeuronID
+                                            option Some Surface
+                                            option Number of Stems
+                                            option Number of Bifurcations
+                                            option Number of Branches
+                                            option Width
+                                            option Height
+                                            option Depth
+                                            option Length
+                                            option Surface
+                                            option Volume
+                                            option EucDistance
+                                            option Path Distance
+                                            option Branch Order
+                                            option Contraction
+                                            option Fragmentation
+                                            option Partition Asymmetry 
+                                            option Rall's Ratio
+                                            option Bifurcation angle local
+                                            option Bifurcation angle remote
+                                            option Fractal Dimension
+                                    td 
+                                        select(class="selectpicker", id = "selectoperator", data-dropup-auto="false", title="=", data-width = "100%")
+                                            option =
+                                            option Not Equal(!=)
+                                            option <
+                                            option >
+                                            option <=
+                                            option >=
+                                    td 
+                                        input(type="text", class="form-control" id="inputValuesFour"  placeholder="")
+                                    td 
+                                        div(style={'text-align':'center'})
+                                            button(type="button", data-toggle="modal", data-target="#modalFourCenter")
+                                                img.img-fluid(src='assets/img/other/mrald_sample.jpg', style={'height':'30px'})
+                                        
+                                        div(class="modal fade", id="modalFourCenter", tabindex="-1", role="dialog", aria-labelledby="modalCenterTitle", aria-hidden="true")
+                                            div(class="modal-dialog modal-dialog-centered", role="document")
+                                                div(class="modal-content")
+                                                    div(class="modal-header")
+                                                        h6(class="modal-title", id="modalFourCenterTitle", style={'text-align':'center'}) Sample Values
+                                                        button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                                                            span(aria-hidden="true") x
+                                                    div(class="modal-body")
+                                                        table
+                                                            tbody
+                                                                tr
+                                                                    td Min Value
+                                                                    td 1
+                                                                    td Set Value
+                                                                tr
+                                                                    td 1st Quartile
+                                                                    td 25455
+                                                                    td Set Value
+                                                                tr
+                                                                    td Median
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td 3rd Quartile
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td Max Value
+                                                                    td 102534
+                                                                    td Set Value
+                                
+                                tr
+                                    td 
+                                        select(class="selectpicker", id = "selectspecificity", data-dropup-auto="false", title="Whole Neuron", data-width = "100%")
+                                            option Whole Neuron
+                                            option Apical Only
+                                            option Apical and Axon
+                                            option Apical and Basal
+                                            option Axon only
+                                            option (Basal) dendrite only
+                                            option Basal and Axon
+                                            option Unspecified Neurites
+                                            option Processes/Glia Cells
+                                                
+                                    td 
+                                        select(class="selectpicker", id = "selectcriteria", data-dropup-auto="false", title="NeuronID", data-width = "100%")
+                                            option NeuronID
+                                            option Some Surface
+                                            option Number of Stems
+                                            option Number of Bifurcations
+                                            option Number of Branches
+                                            option Width
+                                            option Height
+                                            option Depth
+                                            option Length
+                                            option Surface
+                                            option Volume
+                                            option EucDistance
+                                            option Path Distance
+                                            option Branch Order
+                                            option Contraction
+                                            option Fragmentation
+                                            option Partition Asymmetry 
+                                            option Rall's Ratio
+                                            option Bifurcation angle local
+                                            option Bifurcation angle remote
+                                            option Fractal Dimension
+                                    td 
+                                        select(class="selectpicker", id = "selectoperator", data-dropup-auto="false", title="=", data-width = "100%")
+                                            option =
+                                            option Not Equal(!=)
+                                            option <
+                                            option >
+                                            option <=
+                                            option >=
+                                    td 
+                                        input(type="text", class="form-control" id="inputValuesFive"  placeholder="")
+                                    td 
+                                        div(style={'text-align':'center'})
+                                            button(type="button", data-toggle="modal", data-target="#modalFiveCenter")
+                                                img.img-fluid(src='assets/img/other/mrald_sample.jpg', style={'height':'30px'})
+                                        
+                                        div(class="modal fade", id="modalFiveCenter", tabindex="-1", role="dialog", aria-labelledby="modalCenterTitle", aria-hidden="true")
+                                            div(class="modal-dialog modal-dialog-centered", role="document")
+                                                div(class="modal-content")
+                                                    div(class="modal-header")
+                                                        h6(class="modal-title", id="modalFiveCenterTitle", style={'text-align':'center'}) Sample Values
+                                                        button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                                                            span(aria-hidden="true") x
+                                                    div(class="modal-body")
+                                                        table
+                                                            tbody
+                                                                tr
+                                                                    td Min Value
+                                                                    td 1
+                                                                    td Set Value
+                                                                tr
+                                                                    td 1st Quartile
+                                                                    td 25455
+                                                                    td Set Value
+                                                                tr
+                                                                    td Median
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td 3rd Quartile
+                                                                    td 50980
+                                                                    td Set Value
+                                                                tr
+                                                                    td Max Value
+                                                                    td 102534
+                                                                    td Set Value
+                                
+                                tr
+                                    td 
+                                        select(class="selectpicker", id = "selectspecificity", data-dropup-auto="false", title="Whole Neuron", data-width = "100%")
+                                            option Whole Neuron
+                                                
+                                    td 
+                                        select(class="selectpicker", id = "selectcriteria", data-dropup-auto="false", title="Neuron Name", data-width = "100%")
+                                            option Neuron Name
+                                            
+                                    td 
+                                        select(class="selectpicker", id = "selectoperator", data-dropup-auto="false", title="Contains", data-width = "100%")
+                                            option Contains
+                                            option Starts With
+
+                                    td 
+                                        input(type="text", class="form-control" id="inputValuesSix"  placeholder="")
+                                    td 
+                                        div(style={'text-align':'center'})
+                                            button(type="button", data-toggle="modal", data-target="#modalSixCenter")
+                                                img.img-fluid(src='assets/img/other/mrald_sample.jpg', style={'height':'30px'})
+                                        
+                                        div(class="modal fade", id="modalSixCenter", tabindex="-1", role="dialog", aria-labelledby="modalCenterTitle", aria-hidden="true")
+                                            div(class="modal-dialog modal-dialog-centered", role="document")
+                                                div(class="modal-content")
+                                                    div(class="modal-header")
+                                                        h6(class="modal-title", id="modalSixCenterTitle", style={'text-align':'center'}) Sample Values
+                                                        button(type="button",class="close",data-dismiss="modal",aria-label="Close")
+                                                            span(aria-hidden="true") x
+                                                    div(class="modal-body")
+                                                        table
+                                                            tbody
+                                                                tr
+                                                                    td Min Value
+                                                                    td 0-2
+                                                                    td Set Value
+                                                                tr
+                                                                    td 1st Quartile
+                                                                    td 7A-14-traced-9
+                                                                    td Set Value
+                                                                tr
+                                                                    td Median
+                                                                    td Fr-LY-Pyr-OM44-1-Slice-1
+                                                                    td Set Value
+                                                                tr
+                                                                    td 3rd Quartile
+                                                                    td npf-F-300006
+                                                                    td Set Value
+                                                                tr
+                                                                    td Max Value
+                                                                    td 102534
+                                                                    td ZS_172_E12
+                                
+                                
+                                        
+            br
+            br
+            .row
+                div(class="container", style = {'text-align' : 'center'})
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-bottom' : '1rem'}) Hits from current criteria
+                    br
+                    h3 1860
+                    p Your search results can be arranged by:
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="byspeciesmetadata.html") By Animal Species
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="byregionmetadata.html") By Brain Region
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="bycelltypesmetadata.html") By Cell Type
+                    a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="bylabmetadata.html") By Archive
+                    br
+                    br
+                    p Or
+                    a(class="btn btn-sm btn-outline-secondary", href="neurons.html") Show Summary
+                    br
+                    br
+                    a(class="btn btn-sm btn-outline-secondary", id="resetMetadata") Reset Selection
+            
+            
+
+
+                    
+
+                        
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })                  
+
+append scripts    
+    script(src='js/morphometry.js')

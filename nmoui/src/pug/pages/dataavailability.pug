@@ -1,0 +1,79 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .blog-post
+                        A The effort of NeuroMorpho.Org to provide dense coverage of all available digital neuronal reconstructions has prompted an extensive search of the past three decades of literature. We have identified hundreds of papers that describe or utilize digital reconstructions of neuronal morphology.
+                        br
+                        br
+                        A The following is the availability status of the publications positively identified by NeuroMorpho.Org as containing digital reconstructions of neuronal morphology:
+                        br
+                        br
+                        B Literature coverage - version 7.9.6 as of 1 June 2020
+                        br
+                        table(class="table table-bordered")
+                            thead
+                            tr
+                                th(col="scope") Data Status
+                                th(col="scope") Number of Publications
+                                th(col="scope") Number of Reconstructions
+                            tbody
+                                tr
+                                    td Available
+                                    td 1388
+                                    td 148967
+                                tr
+                                    td UnAvailable
+                                    td 2482
+                                    td 115936
+                                tr
+                                    td Determining availability	
+                                    td 451
+                                    td 19325
+                        A The result of the literature mining process highlights the fact that numerous painstakingly acquired reconstructions are lost due to the lack of a systematized method for sharing computerized 3D data. If you know of a neuronal reconstruction that could be included in this inventory you can enter the PMID here to check whether it has been identified by us or not. If a publication has already been evaluated its status will be provided. If the publication has not been identified it will be added to our list for evaluation and inclusion in the processing pipeline.
+                        br
+                        br
+                        A If you have any problems or questions regarding your search or would like to directly send us a reference to the relevant publication(s) and/or laboratory contact information, please email us at nmadmin@gmu.edu or neuromorpho@gmail.com.
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 

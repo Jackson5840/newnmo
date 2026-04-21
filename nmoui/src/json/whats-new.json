@@ -1,0 +1,60 @@
+{
+    "data": [
+        {
+            "archive_name": "Abdolhoseini_Kluge",
+            "archive_img": "assets/img/neurons/050712-2-KNB.png",
+            "archive_size": 1230,
+            "archive_release": "06/29/20",
+            "archive_link": "neurons.html"
+        },
+        {
+            "archive_name": "Anselmi_Travagli",
+            "archive_img": "assets/img/neurons/PD2.png",
+            "archive_size": 2112,
+            "archive_release": "02/21/20",
+            "archive_link": "neurons.html"
+        },
+        {
+            "archive_name": "Bailey",
+            "archive_img": "assets/img/neurons/2092-C3G-N2.png",
+            "archive_size": 3650,
+            "archive_release": "04/10/20",
+            "archive_link": "neurons.html"
+        },
+        {
+            "archive_name": "Banerjee",
+            "archive_img": "assets/img/neurons/050712-2-KNB.png",
+            "archive_size": 1015,
+            "archive_release": "03/12/20",
+            "archive_link": "neurons.html"
+        },
+        {
+            "archive_name": "Bareyre",
+            "archive_img": "assets/img/neurons/PD2.png",
+            "archive_size": 496,
+            "archive_release": "04/09/20",
+            "archive_link": "neurons.html"
+        },
+        {
+            "archive_name": "Bastian",
+            "archive_img": "assets/img/neurons/2092-C3G-N2.png",
+            "archive_size": 25,
+            "archive_release": "05/06/20",
+            "archive_link": "neurons.html"
+        },
+        {
+            "archive_name": "Bellemer",
+            "archive_img": "assets/img/neurons/050712-2-KNB.png",
+            "archive_size": 230,
+            "archive_release": "07/21/20",
+            "archive_link": "neurons.html"
+        },
+        {
+            "archive_name": "Buskila",
+            "archive_img": "assets/img/neurons/PD2.png",
+            "archive_size": 560,
+            "archive_release": "08/21/19",
+            "archive_link": "neurons.html"
+        }
+    ]
+}

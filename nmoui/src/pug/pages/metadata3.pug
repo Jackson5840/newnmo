@@ -1,0 +1,207 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    link(rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css")
+    script(src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js")
+
+    link(href='assets/css/custom.css', rel='stylesheet')
+
+    .album.py-5.bg-light
+        .container
+            //div(class="position-absolute", style="top: 50%;left: 50%;transform: translate(-50%, -50%); z-index:2;")
+            //    div(class="spinner-border", style=" width: 5rem; height: 5rem;" role="status")
+            //        span(class="sr-only") Loading...
+            form(action="neurons.html") 
+                .row
+                    .col(class="col-md-4")
+                    
+                        div(class="container", style = {'margin-bottom' : '0.5rem'}) 
+                            h3 Animal
+                        select(class="selectpicker",multiple, data-live-search="true", disabled, onhover="updatemenu('species_name');" name = "species_name", id = "species_name", title="Species", data-width = "100%")
+                        select(class="selectpicker", multiple, disabled, data-live-search="true", name = "gender", id = "gender", title="Gender", data-width = "100%" )
+
+                        
+                        select(class="selectpicker" multiple, disabled, name = "min_weightcond", id = "min_weightcond", title="Minimum Weight cond", data-width = "100%",onchange="document.getElementById('min_weight').parentElement.style='display:block'")
+                            option =
+                            option <
+                            option >
+                            option <=
+                            option >=
+                        
+                        select(class="selectpicker", data-live-search="true", multiple, disabled, name = "min_weight", id = "min_weight", title="Minimum Weight", data-width = "100%")
+
+                        select(class="selectpicker" multiple, disabled, name = "max_weightcond", id = "max_weightcond", title="Maximum Weight cond", data-width = "100%",onchange="document.getElementById('max_weight').parentElement.style='display:block'")
+                            option =
+                            option <
+                            option >
+                            option <=
+                            option >=
+
+                        select(class="selectpicker" multiple, disabled, data-live-search="true", name = "max_weight", id = "max_weight", title="Maximum Weight", data-width = "100%")
+
+                        select(class="selectpicker",multiple, disabled, data-live-search="true", name = "age", id = "age", title = "Development", data-width = "100%")
+
+                        select(class="selectpicker", id = "min_agecond", name = "min_agecond", title = "Minimum age cond", data-width = "100%",onchange="document.getElementById('min_age').parentElement.style='display:block'")
+                            option =
+                            option <
+                            option >
+                            option <=
+                            option >=
+
+                        select(class="selectpicker", data-live-search="true", id = "min_age", name = "min_age", title = "Minimum Age", data-width = "100%")
+
+                        select(class="selectpicker", id = "max_agecond", name = "max_agecond", title = "Maximum Age cond", data-width = "100%",onchange="document.getElementById('max_age').parentElement.style='display:block'")
+                            option =
+                            option <
+                            option >
+                            option <=
+                            option >=
+
+                        select(class="selectpicker", data-live-search="true", id = "max_age", name = "max_age", title = "Maximum Age", data-width = "100%")
+
+                    
+                    .col(class="col-md-4")
+                        div(class="container", style = {'margin-bottom' : '0.5rem'}) 
+                            h3 Experiment
+                        select(class="selectpicker", data-live-search="true", id = "protocol", name = "protocol", title="Protocol", data-width = "100%")
+
+                        select(class="selectpicker", data-live-search="true", id = "expcond_name", name = "expcond_name",  title="Experimental Condition", data-width = "100%" )
+
+                        select(class="selectpicker", data-live-search="true", id = "staining_name", name = "staining_name", title="Stain", data-width = "100%")
+
+                        select(class="selectpicker", data-live-search="true", id = "slicingthickness", name = "slicingthickness", title="Slice Thickness", data-width = "100%")
+
+                        select(class="selectpicker", data-live-search="true", id = "slicing_direction", name = "slicing_direction", title = "Slicing Direction", data-width = "100%")
+
+                        select(class="selectpicker", data-live-search="true", id = "shrinkage", name = "shrinkage", title = "Tissue Shrinkage", data-width = "100%")
+
+                        select(class="selectpicker", data-live-search="true", id = "reconstruction", name = "reconstruction", title = "Reconstruction Method", data-width = "100%")
+
+                        select(class="selectpicker", data-live-search="true", id = "objective", name = "objective", title = "Objective Type", data-width = "100%")
+
+                        select(class="selectpicker", data-live-search="true", id = "magnification", name= "magnification", title = "Objective Magnification", data-width = "100%")
+                    
+                    .col(class="col-md-4")
+                        div(class="container", style = {'margin-bottom' : '0.5rem'}) 
+                            h3 Anatomy
+                        select(class="selectpicker", id = "region1", name = "region1", title="Brain Region 1", data-width = "100%")
+                        select(class="selectpicker", id = "region2", name = "region2", title="Brain Region 2", data-width = "100%")
+                        select(class="selectpicker", id = "region3", name = "region3", title="Brain Region 3", data-width = "100%")
+
+
+                        select(class="selectpicker" multiple, disabled, id = "celltype1", name = "celltype1", title="Cell Type 1", data-width = "100%" )
+                        select(class="selectpicker" multiple, disabled, id = "celltype2", name = "celltype2", title="Cell Type 2", data-width = "100%" )
+                        select(class="selectpicker" multiple, disabled, id = "celltype3", name = "celltype3", title="Cell Type 3", data-width = "100%" )
+                        
+
+                    .col(class="col-md-4")
+                        div(class="container", style = {'margin-bottom' : '0.5rem'}) 
+                            h3 Source
+                        select(class="selectpicker", multiple, disabled, data-live-search="true", name="archive_name", id = "archive_name", title="Archive", data-width = "100%")
+
+                        select(class="selectpicker", data-live-search="true",id = "publication_pmid", name = "publication_pmid", title="PMID", data-width = "100%" )
+
+                        select(class="selectpicker", data-live-search="true", id = "originalformat_name", name= "originalformat_name", title="Original Format", data-width = "100%" )
+
+                        select(class="selectpicker", data-live-search="true", id = "depositiondate", name = "depositiondate", title="Date of Deposition", data-width = "100%" )
+
+                        select(class="selectpicker", data-live-search="true", id = "uploaddate", name = "uploaddate", title="Date of Upload", data-width = "100%" )
+
+                    .col(class="col-md-4")
+                        div(class="container", style = {'margin-bottom' : '0.5rem'}) 
+                            h3 Completeness
+                        select(class="selectpicker", data-live-search="true", name = "structural_domain",  id = "structural_domain", title="Structural Domain", data-width = "100%")
+                            option(value='1') Dendrites, No Soma, Axon
+                            option(value='2') Dendrites, No Soma, No Axon
+                            option(value='3') Dendrites, Soma, Axon
+                            option(value='4') Dendrites, Soma, No Axon
+                            option(value='5') No Dendrites, No Soma, Axon
+                            option(value='6') No Dendrites, Soma, Axon
+                            option(value='7') Neurites, No Soma
+                            option(value='8') Neurites, Soma
+                            option(value='9') Processes, No Soma
+                            option(value='10') Processes, Soma
+                        select(class="selectpicker", id = "domain", name = "domain", title="Physical Integrity domain", data-width = "100%" )
+                            option Dendrites
+                            option Axon
+                            option Dendrites & Axon
+                            option Neurites
+                            option Processes
+                        select(class="selectpicker", id = "completeness", name = "completeness", title="Completeness", data-width = "100%" )    
+                            option Complete  
+                            option Incomplete
+                            option Moderate
+                        select(class="selectpicker",id = "morph_attributes",name = "morph_attributes", title="Morphological Attributes", data-width = "100%" )
+                            option(value='1') Diameter, 2D, Angles
+                            option(value='2') Diameter, 2D, No Angles
+                            option(value='3') Diameter, 3D, Angles
+                            option(value='4') Diameter, 3D, No Angles
+                            option(value='5') No Diameter, 2D, Angles
+                            option(value='7') No Diameter, 3D, Angles
+                br
+                br
+                .row
+                    div(class="container", style = {'text-align' : 'center'})
+                        a(id='hitbutton',onclick='metasearch(true)',class="btn btn-sm btn-outline-secondary", style = {'margin-bottom' : '1rem'}) Hits from current criteria
+                        br
+                        h3(id='nneurons') 
+                        p Your search results can be arranged by:
+                        //a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="byspeciesmetadata.html") By Animal Species
+                        //a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="byregionmetadata.html") By Brain Region
+                        //a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="bycelltypesmetadata.html") By Cell Type
+                        //a(class="btn btn-sm btn-outline-secondary", style = {'margin-right' : '0.4rem'}, href="bylabmetadata.html") By Archive
+                        br
+                        br
+                        p Or
+                        button(class="btn btn-sm btn-outline-secondary", type="submit") Show Summary
+                        br
+                        br
+                        input(class="btn btn-sm btn-outline-secondary",onclick="resetinput()" ,type="reset", value="reset")
+                
+                
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 
+
+append scripts    
+    script(src='js/lodash.min.js')
+    script(src='js/base.js')
+    script(src='js/metadata.js')
+    script window.addEventListener("load",function(){
+    document.getElementById("species_name")
+    // script updatemenus(); 

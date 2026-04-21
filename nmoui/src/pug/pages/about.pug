@@ -1,0 +1,319 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .pb-3.mb-4.font-italic.border-bottom What is NeuroMorpho.Org?
+                    .blog-post
+                         p(align="justify") NeuroMorpho.Org is a centrally curated inventory of digitally reconstructed neurons. It contains contributions from hundreds of laboratories worldwide and is continuously 
+                           updated as new morphological reconstructions are collected, published, and shared. The goal of NeuroMorpho.Org is to provide free access to all available neuronal reconstruction 
+                           data in the neuroscience community.
+                    br
+                    .pb-3.mb-4.font-italic.border-bottom Why is NeuroMorpho.Org relevant?
+                    .blog-post
+                         p(align="justify") Morphological data are essential for understanding the cellular complexity of the nervous system and are used for analysis, visualization, and modeling. NeuroMorpho 
+                          was established to facilitate access to such data and to encourage data sharing within the neuroscience community. A centrally curated and annotated inventory provides the 
+                          opportunity to access accurate and verified data that is presented in a unified format. Deposition and distribution of reconstruction files ultimately prevents data loss and minimizes effort 
+                          required by data owners. It also provides a "one-stop" entry point for all available reconstructions, thus maximizing data visibility and impact.
+                    br
+                    .pb-3.mb-4.font-italic.border-bottom What is included in NeuroMorpho.Org?
+                    .blog-post
+                         p(align="justify") Each neuron in NeuroMorpho.Org is represented by a name, general information (metadata), the original and standardized ASCII files of the digital morphological reconstruction (see Details on Standardization Process), and a set of morphometric features (see Details on available measures). You can browse the website or search for specific cells (see QuickStart guide). For suggestions, questions not answered in the FAQs, or if you have or know of digital reconstructions of neuronal morphology that could be included in this inventory, please email us at nmadmin@gmu.edu or neuromorpho@gmail.com.
+
+                    canvas.my-4.chartjs-render-monitor(id="myChart1", width = "1020", height = "500")
+                    canvas.my-4.chartjs-render-monitor(id="myChart2", width = "1020", height = "500")
+                    canvas.my-4.chartjs-render-monitor(id="myChart3", width = "1020", height = "500")
+
+                    br
+                    .pb-3.mb-4.font-italic.border-bottom How to contribute data to NeuroMorpho.Org?
+                    .blog-post
+                         p(align="justify") The submission process is very straightforward:
+                            br
+                            A 1) Email the reconstruction files (zipped, if possible) to neuromorpho@gmail.com.
+                            br
+                            C 2) Fill in as much information possible in the Metadata Form and include it in your email. 
+                            br
+                            br
+                            C When we receive your files, the reconstructions will be added to the processing pipeline and you will receive a confirmation email from NeuroMorpho.Org. We will take care of all technical aspects of processing, annotating and uploading your data to the website. 
+                            br
+                            br
+                            C If you have additional questions about data submission, please email us at nmadmin@gmu.edu or neuromorpho@gmail.com.
+
+                aside.col-md-4.blog-sidebar
+                    .p-3.mb-3.bg-light.rounded
+                        .table-responsive
+                            table.table.table-bordered
+                                tr.table-warning
+                                    th Quick Facts
+                                    th v 7.9
+                                tbody
+                                    tr
+                                        td Reconstructions
+                                        td 121544
+                                    tr
+                                        td Contributing Labs
+                                        td 647
+                        .table-responsive
+                            table.table.table-bordered
+                                tr.table-warning
+                                    th Species(65)
+                                    th #Neurons
+                                tbody
+                                    tr
+                                        td rat
+                                        td 36704
+                                    tr
+                                        td mouse
+                                        td 36426
+                                    tr
+                                        td drosophila melanogaster
+                                        td 31711
+                                    tr
+                                        td human
+                                        td 4202
+                                    tr
+                                        td monkey
+                                        td 2855
+                                    tr
+                                        td zebrafish
+                                        td 2855
+                                    tr
+                                        td Xenopus laevis
+                                        td 636
+                                    tr
+                                        td chimpanzee
+                                        td 604
+                                    tr
+                                        td C. elegans
+                                        td 603
+                                    tr
+                                        td Semipalmated sandpiper
+                                        td 483
+                                    tr
+                                        td Clam worm
+                                        td 416
+                                    tr
+                                        td Baboon
+                                        td 396
+                                    tr
+                                        td giraffe
+                                        td 384
+                                    tr
+                                        td capuchin monkey
+                                        td 299
+                                    tr
+                                        td Hamster
+                                        td 227
+                                    tr
+                                        td domestic pig
+                                        td 212
+                                    tr
+                                        td sheep
+                                        td 199
+                                    tr
+                                        td rabbit
+                                        td 171
+                                    tr
+                                        td sheep
+                                        td 199
+                                    tr
+                                        td elephant
+                                        td 164
+                                    tr
+                                        td clouded leopard
+                                        td 154
+                                    tr
+                                        td zebra finch
+                                        td 153
+                                    tr
+                                        td cat
+                                        td 151
+                                    tr
+                                        td humpback whale
+                                        td 143
+                                    tr
+                                        td cricket
+                                        td 127
+                                    tr
+                                        td Steller's Sculpin
+                                        td 123
+                                    tr
+                                        td goldfish
+                                        td 118
+                                    tr
+                                        td Tiger
+                                        td 105
+                                    tr
+                                        td ferret
+                                        td 99
+                                    tr
+                                        td turtle
+                                        td 92
+                                    tr
+                                        td African wild dog	
+                                        td 82
+                                    tr
+                                        td agouti	
+                                        td 80
+                                    tr
+                                        td Calango lizard		
+                                        td 80
+                                    tr
+                                        td pouched lamprey		
+                                        td 75
+                                    tr
+                                        td chicken	
+                                        td 71
+                                    tr
+                                        td manatee	
+                                        td 70
+                                    tr
+                                        td Zebra	
+                                        td 70
+                        .table-responsive
+                            table.table.table-bordered
+                                tr.table-warning
+                                    th Brain Regions(65)
+                                    th #Neurons
+                                tbody
+                                    tr
+                                        td neocortex
+                                        td 45226
+                                    tr
+                                        td hippocampus
+                                        td 15851
+                                    tr
+                                        td protocerebrum
+                                        td 9357
+                                    tr
+                                        td optic lobe
+                                        td 7713
+                                    tr
+                                        td retina
+                                        td 4896
+                                    tr
+                                        td peripheral nervous system
+                                        td 4487
+                                    tr
+                                        td main olfactory bulb
+                                        td 3930
+                                    tr
+                                        td basal ganglia
+                                        td 3276
+                                    tr
+                                        td entorhinal cortex
+                                        td 2356
+                                    tr
+                                        td antennal lobe
+                                        td 2344
+                                    tr
+                                        td spinal cord
+                                        td 2310
+                                    tr
+                                        td ventrolateral neuropils
+                                        td 2166
+                                    tr
+                                        td Right Mushroom Body
+                                        td 1581
+                        .table-responsive
+                            table.table.table-bordered
+                                tr.table-warning
+                                    th Quick Stats
+                                    th v7.9
+                                tbody
+                                    tr
+                                        td Tracing downloaded
+                                        td 2819 person-centuries
+                                    tr
+                                        td Neuronal branches downloaded
+                                        td 1.9 Billion
+                                    tr
+                                        td Neuropil length downloaded
+                                        td 71.1 Kms
+                                    tr
+                                        td References to data in NeuroMorpho.Org
+                                        td >1900
+                                    tr
+                                        td Visiting countries
+                                        td 194
+                        .table-responsive
+                            table.table.table-bordered
+                                tr.table-warning
+                                    th Literature Coverage
+                                    th v7.9.5
+                                tbody
+                                    tr
+                                        td Articles Mined
+                                        td 42676
+                                    tr
+                                        td Identified positive
+                                        td 4171
+                                    tr
+                                        td -> Available
+                                        td 1350
+                                    tr
+                                        td -> Unavailable
+                                        td 2427
+                                    tr
+                                        td -> May Be Available
+                                        td 394
+                        .table-responsive
+                            table.table.table-bordered
+                                tr.table-warning
+                                    th Most Downloaded
+                                    th v7.8
+                                tbody
+                                    tr
+                                        td Cell Type
+                                        td Pyramid Cell
+                                    tr
+                                        td Species
+                                        td Rat
+                                    tr
+                                        td Brain Region
+                                        td neocortex
+                                    tr
+                                        td Archive
+                                        td Chiang
+                    
+                                    
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })                  
+                                    

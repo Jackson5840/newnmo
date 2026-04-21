@@ -1,0 +1,84 @@
+# Multi-container deployment for NMO.
+#
+# Usage (from this folder):
+#   cp .env.example .env       # optional, edit passwords
+#   docker compose up -d --build
+#
+# Exposed ports:
+#   - UI   :  http://localhost:${UI_PORT:-8080}
+#   - API  :  http://localhost:${UI_PORT:-8080}/api/  (via nginx)
+#   - DB   :  localhost:${DB_PORT:-5432}              (optional, for psql)
+
+name: nmo
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-nmo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nmo}
+      POSTGRES_DB: ${POSTGRES_DB:-nmo}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/data/pgdata
+      # First-run restore: the wrapper script runs the dump with ON_ERROR_STOP=0
+      # so benign errors (role/db already exist) don't abort initialisation.
+      - ./db-init/10-restore.sh:/docker-entrypoint-initdb.d/10-restore.sh:ro
+      - ./db-init/20-missing-views.sh:/docker-entrypoint-initdb.d/20-missing-views.sh:ro
+      - ./nmocore/pglocdump.sql:/docker-entrypoint-initdb.d/pglocdump.sql:ro
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nmo} -d ${POSTGRES_DB:-nmo}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  cache:
+    image: redis/redis-stack-server:latest
+    restart: unless-stopped
+    environment:
+      REDIS_ARGS: "--appendonly yes --protected-mode no --maxmemory-policy allkeys-lru --maxmemory 4294967296"
+      REDISEARCH_ARGS: "MAXSEARCHRESULTS -1"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  nmocore:
+    build:
+      context: ./nmocore
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USER: ${POSTGRES_USER:-nmo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nmo}
+      POSTGRES_DB: ${POSTGRES_DB:-nmo}
+      REDIS_HOST: cache
+      ROOT_PATH: /api
+
+  nmoui:
+    build:
+      context: ./nmoui
+      dockerfile: Dockerfile
+      args:
+        API_BASE_URL: /api
+    restart: unless-stopped
+    depends_on:
+      - nmocore
+    ports:
+      - "${UI_PORT:-8080}:80"
+
+volumes:
+  pgdata:
+  redisdata:

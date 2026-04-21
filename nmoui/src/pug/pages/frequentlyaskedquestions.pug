@@ -1,0 +1,737 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .blog-post
+                    strong(align="justify") General Questions
+                    div(id="accordion")
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionOne" aria-expanded = "true" aria-controls ="#generalQuestionOne")
+                                    A What is NeuroMorpho.Org?
+                        
+                            div(id="generalQuestionOne" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A NeuroMorpho.Org is a web-based inventory dedicated to densely archive and organize all publicly shared digital reconstructions of neuronal morphology. Digital reconstructions archived in NMO come from two sources:
+                                    ul
+                                        li mining and mirroring of available online archives
+                                        li direct peer-to-peer request from individual laboratories and investigators
+                                    A This data is collected and uploaded to the website by the NMO administrators.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionTwo" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A Why is NeuroMorpho.Org needed?
+                        
+                            div(id="generalQuestionTwo" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Digital reconstructions are a parsimonious and efficient representation of neuronal morphology. They allow extensive analysis and implementation of biophysical models of electrophysiology. However, reconstructing neurons is a very labor-intensive and time-consuming process. A collection of such data is an invaluable resource for the neuroscience community. This inventory is meant to encourage data sharing among neuroscientists, enabling further use of this data and to prevent data loss.
+
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionThree" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A Who started and maintains NeuroMorpho.Org?
+                        
+                            div(id="generalQuestionThree" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A NeuroMorpho.Org was started and is maintained by the Computational Neuroanatomy Group at the Krasnow Institute for Advanced Study, George Mason University, under the direction of Prof. Giorgio Ascoli, PhD. This project is part of a consortium for the creation of a "Neuroscience Information Framework," endorsed by the Society for Neuroscience, funded by the National Institutes of Health, led by Cornell University (Dr. Daniel Gardner), and including numerous academic institutions such as Yale University (Dr. Gordon Shepherd), Stanford University (Dr. Paul Sternberg), and University of California, San Diego (Dr. Maryann Martone).
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionFour" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A What are the criteria for data inclusion in NeuroMorpho.Org?
+                        
+                            div(id="generalQuestionFour" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A The criteria of inclusion in NeuroMorpho.Org are as follows:
+                                    ul
+                                        li The scope of the repository is specific to neuronal and glial morphology of any animal species, anatomical region (central or peripheral nervous system), developmental stages, experimental condition, and acquisition technique, but does not include other biological branching structures such as blood vessels, or neural tracts (unless individual axonal fibers can be identified).
+                                        li The data included in the repository are digital reconstructions in "vector" format, representing the centerline (and usually diameter) of individual compartmental modules and their explicit internal connectivity forming the branching arbor. Scanned pencil-on-paper (camera lucida) tracings, volumetric information (voxel lists), and surface contours or triangular meshes are not considered unless they are first converted in vector format.
+                                        li Each reconstruction file must contain one connected structure belonging to an individual neuron with at least one bifurcation or two stems (i.e., at least two topological terminations). Exceptions of the two-termination minimum are made if the soma is present and the single-branch reconstruction is believed to represent a complete neuron (as in some C. Elegans reconstructions or in early developmental stages). In all cases, and independent of the tree complexity, the main brain region corresponding to the soma location must be stated.
+                                        li Data in the repository is not restricted to three-dimensional reconstructions. Two- dimensional reconstructions are also archived in the database as long as they are available in digitized and vector format (see above).
+                                        li Not all reconstructions in the database are complete renderings of their biological counterparts. However, these are still valuable data and are welcome in the database (see FAQs: What is the Completeness category in the "Search By Metadata page"? for more details).
+                        
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionFive" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A What is the "NeuroMorpho.Org ID"?
+                        
+                            div(id="generalQuestionFive" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Each reconstruction in NeuroMorpho.Org is now identified by a unique number, for example NMO_00001. The NeuroMorpho.Org ID can be used to reference specific reconstructions downloaded from the website and used in your publication(s) (in addition to other requirements outlined in the Terms of Use).
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionSix" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A What kind of information is associated with each neuronal reconstruction?
+                        
+                            div(id="generalQuestionSix" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A NeuroMorpho.Org associates 3 types of information with each neuronal reconstruction:
+                                    ul
+                                        li General information (Metadata) of the reconstruction extracted from corresponding publications.
+                                            ul
+                                                li Name of researcher and laboratory providing the reconstructions
+                                                li Publications associated with each reconstruction
+                                                li Web URL of archives (if available) with any additional information about the reconstruction
+                                                li Subject-related information - species, strain, age, weight, gender
+                                                li Experiment-related information - protocol, experimental condition, staining method, slicing direction and thickness, objective type and magnification.
+                                                li Brain region at three levels: main region/structure, sub-region, detailed sub-region (example: Hippocampus, dentate gyrus, granule cell layer)
+                                                li Neuron type at three levels: main neuron class type, sub-class, detailed sub-class (example: Interneuron, basket cell, nested)
+                                                li Reconstruction method
+                                                li Format of original data
+                                        li Original and standardized versions of the data file, along with a log of changes before and after the Standardization process.
+                                        li A set of 21 pre-computed morphometric measurements. (See updates that affect morphometrics in NeuroMorpho.Org.)
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionSeven" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A How can NeuroMorpho.Org help my project?
+                        
+                            div(id="generalQuestionSeven" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Digital reconstruction of neuronal morphology can be used for comparative morphological and stereological analysis, compartmental simulations of neuronal electrophysiology, computational models of structure and development, scientific education, and anatomically realistic neural networks. For more information, please refer to this short review, or browse the Tools & Links page.
+                            
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionEight" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A What is new in this version?
+                        
+                            div(id="generalQuestionEight" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Please visit the What's new page for details.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionNine" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A What are the licensing details?
+                        
+                            div(id="generalQuestionNine" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Please refer to the Terms of Use, including the disclaimer, citation requirements, and note to developers.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionTen" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A Does NeuroMorpho.Org use cookies?
+                        
+                            div(id="generalQuestionTen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A NeuroMorpho.Org uses session cookies. Session cookies enable you to better navigate the website and download neuron related data. Without cookies, you can still browse the website but you will not be able to download the neuron related files.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionEleven" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A How is the number of Downloads counted?
+                        
+                            div(id="generalQuestionEleven" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A The number of downloads displayed on the Homepage represents only the number of neuron files downloaded from the website, while the number of downloads displayed in the Detailed Statistics page represents the number of neuron files + auxiliary downloaded.
+
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionTwenty" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A How is the number of Hits counted?
+                        
+                            div(id="generalQuestionTwenty" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A A distinct IP address that visits the website is counted as an individual hit. The hits counter displayed on the Homepage is not incremented if the currently visting IP address is the same as the previous one. Non-consecutive access to the website adds to the counter. Tables on the number of hits in the Detailed statistics page include visits to all pages of the website.
+
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionTwelve" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A What is the relationship between NeuroMorpho.Org and other reconstruction repositories (e.g. Duke-Southampton archive)?
+                        
+                            div(id="generalQuestionTwelve" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A While some existing repositories allow upload from external investigators, most available collections contain data from single-labs. NeuroMorpho.Org, on the other hand, is a curated inventory; a centralized resource pooling data from multiple sources.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionThirteen" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A Where can I find original microscopic images of neurons?
+                        
+                            div(id="generalQuestionThirteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A The Cell-Centered Database is an imaging resource. You can also contact the individual data owners of reconstructions you find in NeuroMorpho.Org.
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionFourteen" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A Can I receive an email notification when new reconstructions are added to the database?
+                        
+                            div(id="generalQuestionFourteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Yes, please register for the free email-based support group by sending your e-mail address to nmadmin@gmu.edu or neuromorpho@gmail.com.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionFifteen" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A I have digital reconstructions of neuronal morphology, which I am willing to share. What should I do?
+                        
+                            div(id="generalQuestionFifteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Please read the Data Submission Guide.
+
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionSixteen" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A During the submission process of my paper the journal required a data locator to my neuronal reconstructions. Can you help me?
+                        
+                            div(id="generalQuestionSixteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A NeuroMorpho.Org provides early access digital object identifiers (DOIs) upon request. Please follow the details explained here to acquire a dataset DOI hosted by NeuroMorpho.Org.
+                        
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionSeventeen" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A I need to download metadata information of a large set of reconstructions. Is there a way to access the repository through a web service?
+                        
+                            div(id="generalQuestionSeventeen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Yes, an application programming interface (API) is available to interact programmatically with the repository. Full details on how to use it can be found here.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionEighteen" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A Does NeuroMorpho.Org have a Research Resource Identifier (RRID), and if so what is it?
+                        
+                            div(id="generalQuestionEighteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Yes, it is SCR_002145.
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#generalQuestionNinteen" aria-expanded = "true" aria-controls ="#generalQuestionTwo")
+                                    A How do you compute the ticker tape statistics?
+                        
+                            div(id="generalQuestionNinteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A The number of brain regions listed in the QuickFacts on the About page as well as in the moving text ("ticker tape") on the front page corresponds to the count of distinct brain areas (or sub-regions) across all species in the repository. Similarly, the number of cell types comes from the count of cell sub-classes listed in the metadata. The length of reconstructed neuropil and the number of branches are both computed as the sum of the all neurites for each cell. The labor effort equivalent of database content and downloaded data is estimated based on an assessment of 27 hours of skilled work per average reconstructed cell (from our own lab experience) and a total of 2000 hours of working time per year. The rest of download figures, including neuronal branches, neuropil length, countries and cites, are tallied out of the morphometrics for the individual cells and their corresponding numbers of downloads.
+
+                br
+                .blog-post
+                    strong(align="justify") Browsing Specific
+                    div(id="accordion")
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionOne" aria-expanded = "true" aria-controls ="#specificQuestionOne")
+                                    A How do I obtain the number of hits matching my search criteria before running a search?
+                        
+                            div(id="specificQuestionOne" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A In both the Search by Metadata and Search by Morphometry pages, the "Hits from current criteria" button returns the number of hits matching the selected criteria. This may be useful to fine tune the search, narrowing down or expanding the results to the desired number before retrieval.
+       
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionTwo" aria-expanded = "true" aria-controls ="#specificQuestionTwo")
+                                    A Is there overlap between categories in Development? (Metadata>Animal>Development>Young, Adult, Old, Not reported)
+                        
+                            div(id="specificQuestionTwo" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A This categorization is species-specific and based on what has been reported in the publications. Usually, a specific age-range which is often also reported in the publications, is included in the Details page of each reconstruction.
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionThree" aria-expanded = "true" aria-controls ="#specificQuestionThree")
+                                    A How are "Cell Types" determined?
+                        
+                            div(id="specificQuestionThree" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A 	The topics of neuronal classification, and even neuronal nomenclature, are far from settled in the scientific community. While we await (and contribute to) consensus among researchers on these topics, we are simply adopting the descriptive terminology reported in the published paper associated with the reconstructions.
+
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionFour" aria-expanded = "true" aria-controls ="#specificQuestionFour")
+                                    A What does "Not reported" mean?
+                        
+                            div(id="specificQuestionFour" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A When certain information in the categories of Metadata are not included in the publications this is marked as "Not reported"
+                        
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionFive" aria-expanded = "true" aria-controls ="#specificQuestionFive")
+                                    A Why do some links to PubMed cause a browser problem in Linux?
+                        
+                            div(id="specificQuestionFive" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Due to recent changes in the PubMed website there may be certain incompatibilities between Firefox browsers and Pubmed links. This may cause a problem when you click on the Pubmed Link button in the neuron details page. You can find a list of browsers that work well with PubMed's recent changes in PubMed FAQs.
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionSix" aria-expanded = "true" aria-controls ="#specificQuestionSix")
+                                    A 	How can I use "Search by Keywords"?
+                        
+                            div(id="specificQuestionSix" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A "Search by Keywords" allows the user to input free text as a search criteria. You can type in several keywords at a time, but they must be separated either by a comma (,) or by an ampersand (&). The comma is interpreted as an OR, the ampersand as an AND. Thus "coronal, biocytin" returns all neurons from sections sliced in the coronal directions plus all neurons that are stained with biocytin, while "coronal & biocytin" will find all neurons from coronal slices stained with biocytin. Acceptable terms are those that you can see in drop-down menus in the Metadata page. The search is case-insensitive, and the wildcard (*) can be used anywhere in the search string.
+                        
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionSeven" aria-expanded = "true" aria-controls ="#specificQuestionSeven")
+                                    A 	What do the sample values in "Search by Morphometry" represent?
+                        
+                            div(id="specificQuestionSeven" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A "Search by Keywords" allows the user to input free text as a search criteria. You can type in several keywords at a time, but they must be separated either by a comma (,) or by an ampersand (&). The comma is interpreted as an OR, the ampersand as an AND. Thus "coronal, biocytin" returns all neurons from sections sliced in the coronal directions plus all neurons that are stained with biocytin, while "coronal & biocytin" will find all neurons from coronal slices stained with biocytin. Acceptable terms are those that you can see in drop-down menus in the Metadata page. The search is case-insensitive, and the wildcard (*) can be used anywhere in the search string.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionEight" aria-expanded = "true" aria-controls ="#specificQuestionEight")
+                                    A How can I use "Search by Keywords"?
+                        
+                            div(id="specificQuestionEight" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A The total available data for a given Search Criteria based on the selected Search Specificity is divided into the following statistical sample values: minimum value, 1st quartile, median, 3rd quartile, maximum value.
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionNine" aria-expanded = "true" aria-controls ="#specificQuestionNine")
+                                    A Can NeuroMorpho.Org be accessed directly by external queries?
+                        
+                            div(id="specificQuestionNine" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Yes, data can be retrieved from NeuroMorpho.Org automatically through external queries. This feature enables powerful searches through resources designed to mine and integrate neuroscience data. If you are interested in this function please email us at nmadmin@gmu.edu or neuromorpho@gmail.com.
+
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionTen" aria-expanded = "true" aria-controls ="#specificQuestionTen")
+                                    A What is the "Neuron Atlas"?
+                        
+                            div(id="specificQuestionTen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Based on and adapted from the Brain Explorer application of the Allen Brain Institute, Neuron Atlas is a visualizer of rodent neurons available in NeuroMorpho.Org. Neuron Atlas enables 3D browsing with interactive features that are similar to the Neuron Viewer available in the Details page of each neuron in NeuroMorpho.Org. For more details and to download the application, see Neuron Atlas
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionEleven" aria-expanded = "true" aria-controls ="#specificQuestionEleven")
+                                    A What does "Literature coverage" mean and why is it included?
+                        
+                            div(id="specificQuestionEleven" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A "Literature coverage" provides the detailed results of the extensive search undertaken by NMO to populate this database. The user can search for inclusion of a publication in our database through a PMID search. The user can also browse publications that were positively identified as containing digital reconstructions and check the data availability status for each publication.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionTwelve" aria-expanded = "true" aria-controls ="#specificQuestionTwelve")
+                                    A What is a PMID?
+                        
+                            div(id="specificQuestionTwelve" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A A PMID is a PubMed Identifier. It is a unique number assigned to each PubMed citation of life sciences and biomedical scientific journal articles.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionThirteen" aria-expanded = "true" aria-controls ="#specificQuestionThirteen")
+                                    A What is "Random neurons"?
+                        
+                            div(id="specificQuestionThirteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A "Random neurons" displays a random selection of neurons in the database. This option provides one-click access to representative samples of reconstructions.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionFourteen" aria-expanded = "true" aria-controls ="#specificQuestionFourteen")
+                                    A What is the Search functionality in the Detailed Statistics page?
+                        
+                            div(id="specificQuestionFourteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A To quickly retrieve the site unique visits from specific countries and the download activity of specific cell types, brain regions, species, and archives, enter the desired keyword (e.g. "Italy" or "Hippocampus") in the respective Search boxes. This will return the corresponding values for the specified entry.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionFifteen" aria-expanded = "true" aria-controls ="#specificQuestionFifteen")
+                                    A What is OntoSearch?
+                        
+                            div(id="specificQuestionFifteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A OntoSearch is a new functionality to search NeuroMorpho.Org data with powerful hierarchical logic (e.g. a search for "rodents" retrieves data from rats, mice, guinea pigs, proechimys, and agouti), seamless synonym translation (e.g. a search for "fruit fly" retrieves Drosophila data), and keyword auto-completion (e.g. typing "Spr" proposes a search for Sprague-Dawley rat data, but user has the option to disregard and override this suggestion). Click here to try this new functionality.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionSixteen" aria-expanded = "true" aria-controls ="#specificQuestionSixteen")
+                                    A Where can I download the ontologies from?
+                        
+                            div(id="specificQuestionSixteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A We made the ontologies publicly available on Bioportal.
+                                    ul
+                                        li Click here for human-readable hierarchies.
+                                        li Click here for the ontologies that are accessed by the OntoSearch algorithm.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionSeventeen" aria-expanded = "true" aria-controls ="#specificQuestionSeventeen")
+                                    A What species taxonomy does OntoSearch use?
+                        
+                            div(id="specificQuestionSeventeen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A The latest version (OntoSearch v2.0) is a major release for its new and upgraded functionality to perform "smart" searches across all the metadata parameters. The search-engine has been scaled up in content and functionality reflecting on the growth of shared knowledge in NeuroMorpho.Org over the last 10 years. The user can search for neurons using the concepts (suggested by auto-complete) that are unified from several resources into ontological hierarchies following the phylogenetic and taxonomial relationships of the tree of life. The hierarchies preserve the lineage (top-down relationship) in species, anatomical regions, and cell types while also maintaining the biological constraints across dimensions (horizontal dimension) whenever needed (e.g., cerebrum implies mammals and CA3 implies stratum lucidum). To match-up with the rich content the OntoSearch algorithm is expanded to multi-hierarchical search mode for providing direct and fuzzy matches to the keywords.
+                                    br
+                                    A The integrated single OWL ontology is downloadable from NCBO Bioportal. The older version with only the species dimension underlying OntoSearch v1.0 has been deprecated (NCBI_NMOsp_v1.0.obo). The general idea is NeuroMorpho.Org ontologies adopts and integrates relevant portions of available taxonomies (or lineages) "as needed" based on the existing knowledge that is openly accessible. For standardization purposes, cell types and other experimental metadata hierarchies are also added to OntoSearch v2.0. Concepts with insufficient knowledge are not classified as hierarchies, such as molecular, firing, and "other" unclassifiable properties of cell types.
+                        
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionEighteen" aria-expanded = "true" aria-controls ="#specificQuestionEighteen")
+                                    A What sources does OntoSearch use for Brain Regions, Cell types, & Other metadata?
+                        
+                            div(id="specificQuestionEighteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A OntoSearch is a new functionality to search NeuroMorpho.Org data with powerful hierarchical logic (e.g. a search for "rodents" retrieves data from rats, mice, guinea pigs, proechimys, and agouti), seamless synonym translation (e.g. a search for "fruit fly" retrieves Drosophila data), and keyword auto-completion (e.g. typing "Spr" proposes a search for Sprague-Dawley rat data, but user has the option to disregard and override this suggestion). Click here to try this new functionality.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionNinteen" aria-expanded = "true" aria-controls ="#specificQuestionNinteen")
+                                    A What are Direct Hits and Potential Hits in Ontosearch?
+                        
+                            div(id="specificQuestionNinteen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A The hierarchical logic used in OntoSearch 1.0 allows smart searches on NeuroMorpho.Org using single search terms. When the search term matches a taxonomical concept, all reconstructions corresponding to that exact concept or to any of its descendants are returned as "direct hits", while all reconstructions corresponding to any of the ancestors of the matched taxonomical concept are returned as " possible hits". In other words, results are returned as direct hits if the search term matches their corresponding concept in the taxonomy or any of its ancestors (see use cases below for examples). Results are returned as possible hits if the search term matches a descendant of their corresponding concept in the taxonomy (see use cases b, c & d below for examples of possible hits)
+                                    br
+                                    A Use Cases:
+                                    br
+                                    ul
+                                        li Examples of generic search terms: "Birds", "reptiles", "fishes", "lagomorpha", "amphibians", "primate", "elephant" etc. A search for common English names and/or Latin names of taxonomical families will retrieve specific results that are mapped as descendants, e.g., a search for "lagomorpha" will retrieve as direct hits all reconstructions of rabbit and hare, if present in the database.
+                                        li Examples of specific search terms: "Tiger salamanders", "black-rumped agouti", "golden-winged skimmer", "ray-finned fishes", etc. A search for a specific species or strain will retrieve direct hits, if there is a direct match. Moreover, the least generic concept in the ancestors with a mapping will be returned as a potential match, e.g., a search for "golden-winged skimmer" doesn't have direct hits, but will retrieve dragon fly reconstructions as possible hits.
+                                        li Examples of specific strains: "Sprague-Dawley rats", "C57BL/6J mouse", "FVB/N", "129X1/SvJ", etc. A search for "Sprague-Dawley rats" will return as direct hits all reconstructions from the database that report this strain. Additionally, any reconstructions that do not report a rat strain will be returned as possible hits.
+                                        li Examples of special mutant strain search terms: "Transgenic mice", "knockout mice", "knock-in mouse", "albino mice", etc. The logic explained above in c also applies for mutant strains. A search for "transgenic mice" will return as direct hits all reconstructions from mice strains that are generated through transgene technology. Examples include Gin-GFP mice, 5HT3-EGFP, B13, Calretinin-EGFP, C57Bl6/129SvEv, etc. Additionally, possible hits of this search query will include reconstructions from mice whose strains are not reported.
+                        
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionTwenty" aria-expanded = "true" aria-controls ="#specificQuestionTwenty")
+                                    A The 3D Neuron Viewer does not launch. What can I do?
+                        
+                            div(id="specificQuestionTwenty" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A 3D Neuron Viewer is a Java program which runs in the user's machine. The Viewer functionality allows the user to interact with a selected neuron reconstruction. Being a Java program, it is subject to constraints imposed by local security settings in the Java Control Panel of your machine. If the 3D Neuron Viewer fails to launch, please try the following to troubleshoot:
+                                    br
+                                    ul
+                                        li Update your Java Runtime Environment (JRE) to the latest version
+                                        li Locate and open the Java Control Panel in your system
+                                        li Go to the Security tab and click on the Edit Site List button
+                                        li Add a new entry with the following URL, http://neuromorpho.org
+                                        li Save the new preferences and close
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionTwentyOne" aria-expanded = "true" aria-controls ="#specificQuestionTwentyOne")
+                                    A What is the Completeness category in the "Search By Metadata page"?
+                        
+                            div(id="specificQuestionTwentyOne" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A At the v6.0 release in December 2014, NeuroMorpho.Org expanded the functionality to search the database for reconstructions. The new available criteria relate to the degree of "completeness" of the reconstructions. Specifically, we have defined three aspects of completeness in digital reconstructions of neuronal morphology: structural domain, physical integrity, and morphological attributes. Structural domain refers to the presence or absence of separate portions of the neuron, namely soma, axons, and dendrites. For example, users can now search for neurons containing (or not) the axon. Physical integrity refers to the proportion of the arbor that was included in the tracing (as opposed to lacking due to slicing, incomplete staining or limited optical resolution). For example, users can now search for neurons whose axonal tracing is at least moderately complete. Morphological attributes refer to whether the neuron was reconstructed in 3D or from a two-dimensional projection; recorded useful diameter information or only midline positions; and represented angle geometry or only dendrogram topology. All publications whose data are deposited in NeuroMorpho.Org have been annotated based on these three aspects. Neuron-level annotation was released in v6.2 and will continue in future releases.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#specificQuestionTwentyTwo" aria-expanded = "true" aria-controls ="#specificQuestionTwentyTwo")
+                                    A Why are certain metadata values hyperlinked in the results display pages?
+                        
+                            div(id="specificQuestionTwentyTwo" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A 	As of v6.1 NeuroMorpho.Org and BrainInfo.org are cross-linking metadata related to brain regions and neuronal reconstructions. Visitors to NeuroMorpho.Org can further explore details of the specific brain regions in BrainInfo.org, and similarly visitors to BrainInfo.org can explore neuronal reconstructions from a specific brain region in NeuroMorpho.Org. Hence, as the database grows and new metadata related to brain regions are added, the neuronal reconstructions and brain region entries between the two resources will be cross-linked.
+                        
+                        
+                br
+                .blog-post
+                    strong(align="justify") Reconstruction Specific
+                    div(id="accordion")
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionOne" aria-expanded = "true" aria-controls ="#reconstructQuestionOne")
+                                    A What is a digital reconstruction of neuronal morphology?
+                        
+                            div(id="reconstructQuestionOne" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Experimental and theoretical studies demonstrated that dendritic and axonal structures are crucial determinants of neuronal activity, plasticity, and connectivity in both normal and pathological states. The stunning heterogeneity of neuronal shape is possibly an essential feature of the functional complexity of the nervous system. In the course of various anatomical, electrophysiological, and pharmacological research projects, neuronal arborizations are visualized under a microscope. The three-dimensional digital reconstruction of these images is an important step in the quantitative investigation of cellular neuroanatomy. In this process, neurites are semi-manually traced through the use of specialized computer software and represented as binary trees of branching cylinders (or truncated cones). The process has several steps:
+                                    br
+                                    ul
+                                        li preparing biological samples
+                                        li preparing slides from the samples
+                                        li staining the slides
+                                        li imaging the slides
+                                        li tracing the neuronal arborizations
+                                        li editing and saving the reconstruction file
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionTwo" aria-expanded = "true" aria-controls ="#reconstructQuestionTwo")
+                                    A Are the original reconstructions processed before inclusion in NeuroMorpho.Org?
+                        
+                            div(id="reconstructQuestionTwo" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Please refer to the Standardization process.
+                        
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionThree" aria-expanded = "true" aria-controls ="#reconstructQuestionThree")
+                                    A What is SWC format?
+                        
+                            div(id="reconstructQuestionThree" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A The three dimensional structure of a neuron can be represented in a SWC format (Cannon et al., 1998). SWC is a simple Standardized format. Each line has 7 fields encoding data for a single neuronal compartment:
+                                    br
+                                    ul 
+                                        li an integer number as compartment identifier
+                                        li type of neuronal compartment
+                                        ul
+                                            li 0 - undefined
+                                            li 1 - soma
+                                            li 2 - axon
+                                            li 3 - basal dendrite
+                                            li 4 - apical dendrite
+                                            li 5 - custom (user-defined preferences)
+                                            li 6 - unspecified neurites
+                                            li 7 - glia processes
+                                        li x coordinate of the compartment
+                                        li y coordinate of the compartment
+                                        li z coordinate of the compartment
+                                        li radius of the compartment
+                                        li parent compartment
+                        
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionFour" aria-expanded = "true" aria-controls ="#reconstructQuestionFour")
+                                    A 	How can I programmatically access NeuroMorpho.Org?
+                        
+                            div(id="reconstructQuestionFour" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Programmatic access and usage of NeuroMorpho.Org is required to use the API for accessing meta data, and to use direct HTTP access of the .swc- or auxiliary files by accessing their direct URL. Please see the web site section for the API for more user guidance. The data files follows the following format for their URL (with http://neuromorpho.org as base):
+                                    br
+                                    ul
+                                        li Morphology File (Standardized):/dableFiles/[archive name in lower case]/CNG version/[neuron name].CNG.swc
+                                        li Morphology File (Original): /dableFiles/[archive name in lower case]/Source-Version/[neuron name].[file ending according to format]
+                                        li Log File (Standardized):b/dableFiles/[archive name in lower case]/Remaining issues/[neuron name].CNG.swc.std
+                                        li Log File (Original): /dableFiles/[archive name in lower case]/Standardization log/[neuron name].std
+                                    A Please note the required programmatic usage restrictions as defined in the Terms of Use.
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionFive" aria-expanded = "true" aria-controls ="#reconstructQuestionFive")
+                                    A What are the pre-computed morphometrics?
+                        
+                            div(id="reconstructQuestionFive" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Several morphological measurements have been extracted from each neuronal reconstruction and stored inNeuroMorpho.Org. These parameters can be used to "Search by Morphometry", and their values are reported in the detail pages for the individual cells.
+                                    br
+                                    br
+                                    ul
+                                        li Soma surface area
+                                        li Total number of trees
+                                        li Total number of bifurcations
+                                        li Total number of branches (bifurcations plus terminations)
+                                        li Neuronal height (95% of first principal component)
+                                        li Neuronal width (95% of second principal component)
+                                        li Neuronal depth (95% of third principal component)
+                                        li Average branch diameter
+                                        li Total arborization length
+                                        li Total arborization surface area
+                                        li Total internal volume of the arborization
+                                        li Maximum Euclidean (straight) distance from soma to tips
+                                        li Maximum Path (along the tree) distance from soma to tips
+                                        li Maximum Branch order (number of bifurcations from soma to tips)
+                                        li Average Contraction (the ratio between Euclidean and path length calculated on each branch)
+                                        li Total number of reconstruction points
+                                        li Topological asymmetry (average over all bifurcations of the absolute value of (n1-n2)/(n1+n2-2), where n1 and n2 are the numbers of tips in the two subtrees)
+                                        li Rall's Ratio (average over all bifurcations of the sum of the diameters of the two daughters, elevated to 1.5, divided by the diameter of the parent, elevated to 1.5)
+                                        li Local Bifurcation angle (average over all bifurcations of the angle between the first two daughter compartments)
+                                        li Remote Bifurcation angle (average over all bifurcations of the angle between the following bifurcations or tips)
+                                    A For exact definitions and/or more information about these measurements, please visit the L-Measure website. Note that each of these parameters is extracted from the whole neuron (axon plus dendrites). L-Measure allows the user to specify any sub-portion of the neuron to compute measurements and also contains a much larger number of morphometrics. See updates that affect morphometrics in NeuroMorpho.Org.
+                        
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionSix" aria-expanded = "true" aria-controls ="#reconstructQuestionSix")
+                                    A How are different parts of the neurons color coded in visualization?
+                        
+                            div(id="reconstructQuestionSix" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A NMO uses the Cvapp application for visualizing neurons. Cvapp associates a color to each compartment type. In the SWC format there is a non-enforced rule for types:
+                                    table(class="table table-bordered")
+                                        thead
+                                        tr
+                                            th(col="scope") Compartment
+                                            th(col="scope") Associated Type
+                                            th(col="scope") Associated Color
+                                        tbody
+                                            tr
+                                                td Soma
+                                                td 1
+                                                td red
+                                            tr
+                                                td axon
+                                                td 2
+                                                td gray
+                                            tr
+                                                td basal dendrite
+                                                td 3
+                                                td green
+                                            tr
+                                                td apical dendrite
+                                                td 4
+                                                td magenta
+                                            tr
+                                                td unspecified neurites
+                                                td 6
+                                                td pink
+                                            tr
+                                                td glia processes
+                                                td 7
+                                                td blue
+                        
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionSeven" aria-expanded = "true" aria-controls ="#reconstructQuestionSeven")
+                                    A How is Tissue shrinkage reported?
+                        
+                            div(id="reconstructQuestionSeven" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A 	Publications report tissue shrinkage in various formats. If available, these values are standardized and reported in NeuroMorpho.Org as percentages.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionEight" aria-expanded = "true" aria-controls ="#reconstructQuestionEight")
+                                    A How is the soma format represented in the standardized (CNG.swc) files?
+                        
+                            div(id="reconstructQuestionEight" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A See Soma Format for details.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionNine" aria-expanded = "true" aria-controls ="#reconstructQuestionNine")
+                                    A Why are certain reconstructions assigned to more than one Archive?
+                        
+                            div(id="reconstructQuestionNine" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Reconstructions resulting from collaborations between multiple laboratories can be assigned to more than one Archive.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionTen" aria-expanded = "true" aria-controls ="#reconstructQuestionTen")
+                                    A What is AutoNeuron?
+                        
+                            div(id="reconstructQuestionTen" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A AutoNeuron is an extension module of Neurolucida (MBF Biosciences, Inc), the tracing and reconstruction software system. AutoNeuron's tracing algorithm scans 3D image stacks and automatically traces the neuron and identifies soma and neurites.
+
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionEleven" aria-expanded = "true" aria-controls ="#reconstructQuestionEleven")
+                                    A How are neurons oriented in the images?
+                        
+                            div(id="reconstructQuestionEleven" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Since neurons are reconstructed from many different neural systems and species, there is no 'standard' orientation. Instead, the standardization process orients the morphologies by placing the soma in the origin of coordinates and aligning the first three principal components of all XYZ coordinates with heights, width, and depth. However, the original data, which are available for download and linked under "Morphology File (Original)" in each neuron page, maintain the exact orientation traced by the contributing labs.
+                        
+                        div(class="card" style={width:'70rem'})
+                            h5(class="mb-0")
+                                button(class="btn btn-link" data-toggle="collapse" data-target="#reconstructQuestionTwelve" aria-expanded = "true" aria-controls ="#reconstructQuestionTwelve")
+                                    A What is the "Persistence Vector" in the Detail section of each Neuron page?
+                        
+                            div(id="reconstructQuestionTwelve" class="collapse" data-parent="#accordion")
+                                div(class="card-body")
+                                    A Persistent homology is a methodology to characterize and summarize geometric shapes, as well as to describe meaningful features across scales. In this approach, a given shape is summarized using a mathematical construct called a "filtration", which consists of a nested sequence of subsets of the original shape. One can think of a filtration as a specific way to grow and generate the shape being examined. As we "filter" through the shape using this sequence, new topological features may be created and some older ones may be destroyed. In the case of neuronal morphologies, the standard swc format represents a tree embedded in three-dimensional physical space, and the observed features could be, for instance, neurite branches. Persistent homology tracks the creation ("birth") and destruction ("death") of these topological features during the filtration process. The resulting births and deaths of features are summarized in a so-called persistence diagram: a set of 2D points whose (x, y) coordinates represent the birth and death times of the features. The life-time of a feature (death time minus birth time) is called the persistence of this feature, encoding how long this feature exists during the filtration.
+                                    br
+                                    A In particular, for the persistence feature included here, the descriptor function is derived from a simplified representation of the neuron that only considers the roots, bifurcations, and terminations while ignoring all continuation points along the branches. In other words, we put a straight segment between any two tree nodes (with degree not equal to 2); the weight of this arc is its Euclidean length. The descriptor function is the total length of the unique path (i.e., the geodesic distance) from the tree root (as specified in the SWC file) to any point in the tree. We then filter the neuron tree by sweeping it in decreasing function values, and compute the induced persistence diagram. Intuitively, the set of points in the persistence diagram captures a nested branch decomposition of the neuron tree with respect to the chosen description.
+                                    br
+                                    A Finally, we convert the persistence diagram summary into a 1D persistence feature vector. The first two numbers in the persistence vector file represent the range (minimum and maximum values) of the descriptor function. The remaining entries represent the function values at 100 positions sampled uniformly in this range.
+                                    br
+                                    A Please refer to the following reference for more details: Li Y, Wang D, Ascoli GA, Mitra P, Wang Y (2017) Metrics for comparing neuronal tree shapes based on persistent homology. PLoS ONE 12(8): e0182184. DOI:10.1371/journal.pone.0182184. The original software code to compute Persistence Vectors from SWC files is available open source at the GitHub NeuronTools repository.
+                        br
+                        br
+                        A If your question is not listed here, please email us at nmadmin@gmu.edu or neuromorpho@gmail.com.
+
+
+                        
+
+                        
+
+                                
+                        
+
+
+                        
+                        
+                        
+                        
+                        
+
+                        
+                        
+
+
+                        
+                        
+
+
+
+                        
+                        
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    }) 

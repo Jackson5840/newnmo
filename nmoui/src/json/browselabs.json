@@ -1,0 +1,74 @@
+{
+    "data": [
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "BC131sdaxlay",
+            "brain_region": "neocortex",
+            "cell_type": "bipolar",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "TG073axEndLayers",
+            "brain_region": "neocortex",
+            "cell_type": "bipolar",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "AKO60sdax2lay",
+            "brain_region": "neocortex",
+            "cell_type": "Martinotti",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "AK160lay",
+            "brain_region": "neocortex",
+            "cell_type": "Neuropeptide Y (NPY)-positive",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "AK163lay",
+            "brain_region": "neocortex",
+            "cell_type": "Neuropeptide Y (NPY)-positive",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "BC143ax2",
+            "brain_region": "neocortex",
+            "cell_type": "Neuropeptide Y (NPY)-positive",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "AK146sd",
+            "brain_region": "neocortex",
+            "cell_type": "Parvalbumin (PV)-positive",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "AK123",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "BC126",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal",
+            "species_name": "rat"
+        },
+        {   
+            "archive_name": "Cauli",
+            "neuron_name": "AK137sdaxlay",
+            "brain_region": "neocortex",
+            "cell_type": "stellate",
+            "species_name": "rat"
+        }
+    ]
+}

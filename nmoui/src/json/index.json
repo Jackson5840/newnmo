@@ -1,0 +1,16 @@
+{
+    "data": [
+        {
+            "neuron_name": "050712-2-KNB",
+            "neuron_link": "assets/img/neurons/050712-2-KNB.png"
+        },
+        {
+            "neuron_name": "PD2",
+            "neuron_link": "assets/img/neurons/PD2.png"
+        },
+        {
+            "neuron_name": "2092-C3G-N2",
+            "neuron_link": "assets/img/neurons/2092-C3G-N2.png"
+        }
+    ]
+}

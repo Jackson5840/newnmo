@@ -1,0 +1,112 @@
+{
+    "data": [
+        {   
+            "archive_name": "Briggs",
+            "neuron_name": "Bub_1-17_c4",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "Bub_10-10_c1",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "Bub_10-12_c1",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "Bub_11-16_c1",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "Bub_12-10_c1",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "Bub_4-16_c1_V2",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "bubbles-R-LGN-153-3",
+            "brain_region": "ventral thalamus",
+            "cell_type": "dLGN-projecting"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "bubbles-R-LGN-153-2",
+            "brain_region": "ventral thalamus",
+            "cell_type": "dLGN-projecting"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "bubbles-R-LGN-153-1",
+            "brain_region": "ventral thalamus",
+            "cell_type": "dLGN-projecting"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "Bub_10-5_c1",
+            "brain_region": "neocortex",
+            "cell_type": "tilted"
+        },
+        {
+            "archive_name": "Briggs",
+            "neuron_name": "Bub_10-7_c1",
+            "brain_region": "neocortex",
+            "cell_type": "tilted"
+        },
+        {
+            "archive_name": "Chklovskii",
+            "neuron_name": "VM2_100001",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Chklovskii",
+            "neuron_name": "VM2_100009",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Chklovskii",
+            "neuron_name": "VM2_100010",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "Chklovskii",
+            "neuron_name": "VM2_100012",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "DeMoya_Morrison",
+            "neuron_name": "18414_slide1_cell3",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "DeMoya_Morrison",
+            "neuron_name": "18414_slide2_cell8",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        },
+        {
+            "archive_name": "DeMoya_Morrison",
+            "neuron_name": "18414_slide2_cell4",
+            "brain_region": "neocortex",
+            "cell_type": "pyramidal"
+        }
+    ]
+}
