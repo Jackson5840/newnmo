@@ -72,6 +72,67 @@ function gettoggled() {
     }
 }
 
+async function getDownloadCartToken() {
+    const tokenKey = 'nmo_cart_token';
+    let token = localStorage.getItem(tokenKey);
+    if (token) {
+        return token;
+    }
+    const response = await fetch(apiurlbase + '/cart/', {
+        method: 'POST'
+    });
+    if (!response.ok) {
+        throw new Error('Could not create download cart');
+    }
+    const data = await response.json();
+    localStorage.setItem(tokenKey, data.cart_token);
+    return data.cart_token;
+}
+
+function getToggledNeuronNames() {
+    const names = [];
+    const checkboxes = document.getElementsByClassName('dlcheck');
+    for (var checkbox of checkboxes) {
+        if (checkbox.checked) {
+            names.push(checkbox.id);
+        }
+    }
+    return names;
+}
+
+async function addToggledToDownloadCart() {
+    const names = getToggledNeuronNames();
+    if (names.length === 0) {
+        alert('Please select at least one neuron to add to the download cart.');
+        return;
+    }
+
+    try {
+        const token = await getDownloadCartToken();
+        const response = await fetch(apiurlbase + '/cart/' + encodeURIComponent(token) + '/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ names: names })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.detail || 'Could not add neurons to download cart');
+        }
+        if (data.invalid_names && data.invalid_names.length) {
+            alert('Added valid neurons. Not found: ' + data.invalid_names.join(', '));
+        } else if (data.warning) {
+            alert(data.warning);
+        } else {
+            alert(names.length + ' selected neuron(s) added to the download cart.');
+        }
+        if (typeof updateDownloadCartBadge === 'function') {
+            updateDownloadCartBadge();
+        }
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
 function genlielem(ulelem,htext,newparams,pagetarget=htext) {
     var lielem = document.createElement("li");
     lielem.setAttribute('class','page-item');
@@ -150,6 +211,7 @@ function updateneurons(params) {
         }
         else {
             parseneuronlist(neurons.data,'neuronlist');
+            addDownloadCartControls();
 
 
             var index = currentpage;
@@ -173,6 +235,26 @@ function updateneurons(params) {
         }            
     
     })
+}
+
+function addDownloadCartControls() {
+    const neuronlist = document.getElementById('neuronlist');
+    if (!neuronlist || document.getElementById('download-cart-actions')) {
+        return;
+    }
+
+    const actionRow = document.createElement('div');
+    actionRow.setAttribute('id', 'download-cart-actions');
+    actionRow.setAttribute('class', 'row justify-content-center my-4');
+
+    const button = document.createElement('button');
+    button.setAttribute('type', 'button');
+    button.setAttribute('class', 'btn btn-primary');
+    button.innerText = 'Add selected to Download cart';
+    button.addEventListener('click', addToggledToDownloadCart);
+
+    actionRow.appendChild(button);
+    neuronlist.appendChild(actionRow);
 }
 
 

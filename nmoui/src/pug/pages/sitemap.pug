@@ -1,0 +1,140 @@
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-md-8.blog-main
+                    .pb-3.mb-4.font-italic.border-bottom Help &gt; Site Map
+                    .blog-post
+                        ul.ulClass3
+                            li
+                                font HOME
+                                ul
+                                    li
+                                        a(href='index.html') Homepage
+                                    li
+                                        a(href='about.html') About
+                                    li
+                                        a(href='whats-new.html') What's New
+                                    li
+                                        a(href='terms-of-use.html') Terms of Use
+                                    li
+                                        a(href='statistics.html') Detailed Statistics
+                                    li
+                                        a(href='acknowledgements.html') Acknowledgement
+
+                        ul.ulClass3
+                            li
+                                font BROWSE
+                                ul
+                                    li
+                                        a(href='byspecies.html') By animal species
+                                    li
+                                        a(href='byregion.html') By brain region
+                                    li
+                                        a(href='bycelltypes.html') By cell types
+                                    li
+                                        a(href='bylab.html') By archive
+                                    li
+                                        a(href='byrandom.html') Random neurons
+                                    li
+                                        a(href='neuronatlas.html') Neuron Atlas
+                                    li
+                                        a(href='downloadcart.html') Download cart
+
+                        ul.ulClass3
+                            li
+                                font SEARCH
+                                ul
+                                    li
+                                        a(href='metadata.html') Metadata
+                                    li
+                                        a(href='morphometry.html') Morphometry
+                                    li
+                                        a(href='keywords.html') Keywords
+                                    li
+                                        a(href='ontosearch.html') OntoSearch
+                                    li
+                                        a(href='api.html') API
+                                    li
+                                        a(href='downloadcart.html') Download cart
+                                    li
+                                        a(href='https://neuromorpho.org/summaryreporting/') Summary reporting
+
+                        ul.ulClass3
+                            li
+                                font LITERATURE COVERAGE
+                                ul
+                                    li
+                                        a(href='literaturesearch.html') Literature search
+                                    li
+                                        a(href='dataavailability.html') Data availability
+                                    li
+                                        a(href='callfordata.html') Call for data
+                                    li
+                                        a(href='datausage.html') Data usage
+                                    li
+                                        a(href='https://bibliometrics.computational-neuromorpho.org/' target='_blank') Bibliometric reporting
+
+                        ul.ulClass3
+                            li
+                                a(href='terms-of-use.html')
+                                    font TERMS OF USE
+
+                        ul.ulClass3
+                            li
+                                font HELP
+                                ul
+                                    li
+                                        a(href='quickstart.html') Quickstart
+                                    li
+                                        a(href='frequentlyaskedquestions.html') FAQs
+                                    li
+                                        a(href='toolsandlinks.html') Tools & Links
+                                    li
+                                        a(href='knownissues.html') Known Issues
+                                    li
+                                        a(href='contactus.html') Contact Us
+                                    li
+                                        a(href='sitemap.html') Site Map
+
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })

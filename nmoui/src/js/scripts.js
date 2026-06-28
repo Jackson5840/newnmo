@@ -59,6 +59,34 @@
 
 })(jQuery);
 
+async function updateDownloadCartBadge() {
+    var badge = document.getElementById('download-cart-count');
+    if (!badge) {
+        return;
+    }
+
+    var token = localStorage.getItem('nmo_cart_token');
+    if (!token) {
+        badge.textContent = '0';
+        return;
+    }
+
+    try {
+        var response = await fetch('/api/cart/' + encodeURIComponent(token));
+        if (!response.ok) {
+            localStorage.removeItem('nmo_cart_token');
+            badge.textContent = '0';
+            return;
+        }
+        var data = await response.json();
+        badge.textContent = String(data.count || 0);
+    } catch (error) {
+        badge.textContent = '0';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateDownloadCartBadge);
+
 
 
 

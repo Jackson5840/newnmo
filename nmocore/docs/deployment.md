@@ -34,6 +34,8 @@ These are used by `import_mysql.py` to migrate data from an existing NeuroMorpho
 |----------|---------|-------------|
 | `POSTGRES_HOST` | `db` | PostgreSQL hostname (set by Docker networking) |
 | `REDIS_HOST` | `cache` | Redis hostname (set by Docker networking) |
+| `CART_SOFT_LIMIT` | `1000` | Shopping cart warning threshold (number of neurons) |
+| `CART_HARD_LIMIT` | `5000` | Shopping cart maximum size (add requests rejected above this) |
 
 ### Example .env
 

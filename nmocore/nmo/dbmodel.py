@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy_utils import LtreeType, Ltree
 import datetime
-from typing import Any, List, Union
+from typing import Any, List, Optional, Union
 
 Base = declarative_base()
 metadata = Base.metadata
@@ -216,4 +216,24 @@ class Fieldcountvals(BaseModel):
     field: str
     totalcount: int
     fieldcounts: List[Fieldcount] = []
+
+class CartAddRequest(BaseModel):
+    names: Optional[List[str]] = None
+    idlistkey: Optional[str] = None
+
+class CartRemoveRequest(BaseModel):
+    names: List[str]
+
+class CartResponse(BaseModel):
+    status: str = "success"
+    cart_token: str
+    count: int
+    warning: Optional[str] = None
+    invalid_names: Optional[List[str]] = None
+
+class CartContents(BaseModel):
+    status: str = "success"
+    cart_token: str
+    count: int
+    names: List[str]
     

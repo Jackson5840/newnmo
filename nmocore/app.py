@@ -18,7 +18,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.sql.expression import func
 from sqlalchemy.sql import select
 from sqlalchemy.ext.declarative import declarative_base
-import time,random,io,zipfile,os,string,requests,shutil
+import time,random,io,zipfile,os,string,requests,shutil,uuid,tempfile
 from datetime import datetime
 
 from fastapi_pagination import add_pagination
@@ -54,6 +54,7 @@ app.add_middleware(
 )
 
 r = redis.Redis(host=cfg.redishost, port=6379,db=0)
+CART_TTL = 86400  # 24 hours
 
 requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += 'HIGH:!DH:!aNULL'
 
@@ -704,63 +705,55 @@ async def getneuronrnd(afield: str,detail:bool = True, db: Session = Depends(get
         }
     ])
 
+def download_neurons_as_zip(names_archives, aux=False):
+    """Download SWC files for neuron/archive rows and return a ZIP response."""
+    foldername = tempfile.mkdtemp(prefix="nmo-download-")
+    try:
+        for item in names_archives:
+            archive = item[1].lower()
+            neuronname = item[0]
+            ending = item[2]
+            fileurl = 'https://neuromorpho.org/dableFiles/{}/CNG%20version/{}.CNG.swc'.format(archive, neuronname)
+            resp = requests.get(fileurl, verify=False)
+            archivepath = os.path.join(foldername, item[1])
+            os.makedirs(archivepath, exist_ok=True)
+            swcpath = os.path.join(archivepath, 'CNG version')
+            os.makedirs(swcpath, exist_ok=True)
+            fp = os.path.join(swcpath, '{}.CNG.swc'.format(neuronname))
+            with open(fp, 'wb') as f:
+                f.write(resp.content)
+            if aux:
+                srcurl = 'https://neuromorpho.org/dableFiles/{}/Source-Version/{}.{}'.format(archive, neuronname, ending)
+                stdurl = 'https://neuromorpho.org/dableFiles/{}/Remaining%20issues/{}.CNG.swc.std'.format(archive, neuronname)
+                stdorgurl = 'https://neuromorpho.org/dableFiles/{}/Standardization%20log/{}.std'.format(archive, neuronname)
+                resp = requests.get(srcurl, verify=False)
+                srcpath = os.path.join(archivepath, 'Source-Version')
+                os.makedirs(srcpath, exist_ok=True)
+                fp = os.path.join(srcpath, '{}.{}'.format(neuronname, ending))
+                with open(fp, 'wb') as f:
+                    f.write(resp.content)
+                resp = requests.get(stdurl, verify=False)
+                stdpath = os.path.join(archivepath, 'Remaining issues')
+                os.makedirs(stdpath, exist_ok=True)
+                fp = os.path.join(stdpath, '{}.CNG.swc.std'.format(neuronname))
+                with open(fp, 'wb') as f:
+                    f.write(resp.content)
+                resp = requests.get(stdorgurl, verify=False)
+                stdorgpath = os.path.join(archivepath, 'Standardization log')
+                os.makedirs(stdorgpath, exist_ok=True)
+                fp = os.path.join(stdorgpath, '{}.std'.format(neuronname))
+                with open(fp, 'wb') as f:
+                    f.write(resp.content)
+        return zipfolder(foldername)
+    finally:
+        shutil.rmtree(foldername, ignore_errors=True)
+
+
 @app.get("/getzipped/")
-def getzipped(names: List[str] = Query(None),aux: bool=0, db: Session = Depends(get_db)) -> Any:
+def getzipped(names: List[str] = Query(None), aux: bool = 0, db: Session = Depends(get_db)) -> Any:
     mdl = dbmodel.t_neuronview
-    names_archives = db.query(mdl.c.name, mdl.c.archive_name,mdl.c.originalformat_name).filter(mdl.c.name.in_(tuple(names))).all()
-    N=10
-    foldername = ''.join(random.choices(string.ascii_letters + string.digits, k=N))
-    if not os.path.exists(foldername):
-        os.mkdir(foldername)
-    for item in names_archives:
-        archive = item[1].lower()
-        neuronname = item[0]
-        ending = item[2]
-        fileurl = 'https://neuromorpho.org/dableFiles/{}/CNG%20version/{}.CNG.swc'.format(archive,neuronname)
-        r = requests.get(fileurl,verify=False)
-        archivepath = os.path.join(foldername,item[1])
-        if not os.path.exists(archivepath):
-            os.mkdir(archivepath)
-        swcpath = os.path.join(archivepath,'CNG version')
-        if not os.path.exists(swcpath):
-            os.mkdir(swcpath)
-        fp = os.path.join(swcpath,'{}.CNG.swc'.format(neuronname))
-        with open(fp,'wb') as f:
-            f.write(r.content)
-        if aux:
-            srcurl = 'https://neuromorpho.org/dableFiles/{}/Source-Version/{}.{}'.format(archive,neuronname,ending)
-            stdurl = 'https://neuromorpho.org/dableFiles/{}/Remaining%20issues/{}.CNG.swc.std'.format(archive,neuronname)
-            stdorgurl = 'https://neuromorpho.org/dableFiles/{}/Standardization%20log/{}.std'.format(archive,neuronname)
-            r = requests.get(srcurl,verify=False)
-            srcpath = os.path.join(archivepath,'Source-Version')
-            if not os.path.exists(srcpath):
-                os.mkdir(srcpath)
-            fp = os.path.join(srcpath,'{}.{}'.format(neuronname,ending))
-            with open(fp,'wb') as f:
-                f.write(r.content)
-            
-            r = requests.get(stdurl,verify=False)
-            stdpath = os.path.join(archivepath,'Remaining issues')
-            if not os.path.exists(stdpath):
-                os.mkdir(stdpath)
-            fp = os.path.join(stdpath,'{}.CNG.swc.std'.format(neuronname))
-            with open(fp,'wb') as f:
-                f.write(r.content)
-            
-            r = requests.get(stdorgurl,verify=False)
-            stdorgpath = os.path.join(archivepath,'Standardization log')
-            if not os.path.exists(stdorgpath):
-                os.mkdir(stdorgpath)
-            fp = os.path.join(stdorgpath,'{}.std'.format(neuronname))
-            with open(fp,'wb') as f:
-                f.write(r.content)
-            
-
-            
-    res = zipfolder(foldername)
-    shutil.rmtree(foldername)
-
-    return res
+    names_archives = db.query(mdl.c.name, mdl.c.archive_name, mdl.c.originalformat_name).filter(mdl.c.name.in_(tuple(names))).all()
+    return download_neurons_as_zip(names_archives, aux)
 
 """@app.get("/neuron/{neuronid}",response_model=dbmodel.Neurondata)
 async def getneuron(neuronid: int, db: Session = Depends(get_db)) -> Any:
@@ -770,6 +763,157 @@ async def getneuron(neuronid: int, db: Session = Depends(get_db)) -> Any:
         'status': 'success' 
     }
 """
+
+# --- Cart endpoints ---
+
+@app.post("/cart/")
+async def create_cart():
+    cart_token = str(uuid.uuid4())
+    r.set(f"cart:{cart_token}:meta", "1", ex=CART_TTL)
+    return JSONResponse(jsonable_encoder({
+        "status": "success",
+        "cart_token": cart_token,
+        "count": 0
+    }))
+
+@app.get("/cart/{cart_token}")
+async def get_cart(cart_token: str):
+    if not r.exists(f"cart:{cart_token}:meta"):
+        return JSONResponse(
+            status_code=404,
+            content={"status": "error", "detail": "Cart not found or expired"}
+        )
+    r.expire(f"cart:{cart_token}:meta", CART_TTL)
+    names = []
+    if r.exists(f"cart:{cart_token}"):
+        r.expire(f"cart:{cart_token}", CART_TTL)
+        names = [n.decode() for n in r.smembers(f"cart:{cart_token}")]
+    return JSONResponse(jsonable_encoder({
+        "status": "success",
+        "cart_token": cart_token,
+        "count": len(names),
+        "names": sorted(names)
+    }))
+
+@app.post("/cart/{cart_token}/add")
+async def add_to_cart(cart_token: str, req: dbmodel.CartAddRequest, db: Session = Depends(get_db)):
+    if not r.exists(f"cart:{cart_token}:meta"):
+        return JSONResponse(
+            status_code=404,
+            content={"status": "error", "detail": "Cart not found or expired"}
+        )
+
+    if not req.names and not req.idlistkey:
+        return JSONResponse(
+            status_code=400,
+            content={"status": "error", "detail": "Must provide names or idlistkey"}
+        )
+
+    names_to_add = set()
+
+    if req.idlistkey:
+        raw = r.get(str(req.idlistkey))
+        if raw is None:
+            return JSONResponse(
+                status_code=404,
+                content={"status": "error", "detail": "idlistkey not found or expired"}
+            )
+        ids = pickle.loads(raw)
+        mdl = dbmodel.t_neuronview
+        rows = db.query(mdl.c.name).filter(mdl.c.id.in_(ids)).all()
+        names_to_add.update(row[0] for row in rows)
+
+    invalid_names = []
+    if req.names:
+        mdl = dbmodel.t_neuronview
+        valid_rows = db.query(mdl.c.name).filter(mdl.c.name.in_(req.names)).all()
+        valid_names = {row[0] for row in valid_rows}
+        invalid_names = [n for n in req.names if n not in valid_names]
+        names_to_add.update(valid_names)
+
+    if not names_to_add:
+        result = {"status": "success", "cart_token": cart_token, "count": r.scard(f"cart:{cart_token}")}
+        if invalid_names:
+            result["invalid_names"] = invalid_names
+        return JSONResponse(jsonable_encoder(result))
+
+    current_count = r.scard(f"cart:{cart_token}")
+    new_total = current_count + len(names_to_add)
+    if r.exists(f"cart:{cart_token}"):
+        already_in = sum(1 for n in names_to_add if r.sismember(f"cart:{cart_token}", n))
+        new_total = current_count + len(names_to_add) - already_in
+
+    if new_total > cfg.cart_hard_limit:
+        return JSONResponse(
+            status_code=400,
+            content={
+                "status": "error",
+                "detail": f"Cart would exceed maximum of {cfg.cart_hard_limit} neurons",
+                "count": current_count
+            }
+        )
+
+    r.sadd(f"cart:{cart_token}", *names_to_add)
+    r.expire(f"cart:{cart_token}", CART_TTL)
+    r.expire(f"cart:{cart_token}:meta", CART_TTL)
+
+    final_count = r.scard(f"cart:{cart_token}")
+    result = {"status": "success", "cart_token": cart_token, "count": final_count}
+
+    if invalid_names:
+        result["invalid_names"] = invalid_names
+    if final_count > cfg.cart_soft_limit:
+        result["warning"] = f"Cart has {final_count} neurons, which exceeds the recommended limit of {cfg.cart_soft_limit}"
+
+    return JSONResponse(jsonable_encoder(result))
+
+@app.post("/cart/{cart_token}/remove")
+async def remove_from_cart(cart_token: str, req: dbmodel.CartRemoveRequest):
+    if not r.exists(f"cart:{cart_token}:meta"):
+        return JSONResponse(
+            status_code=404,
+            content={"status": "error", "detail": "Cart not found or expired"}
+        )
+    if r.exists(f"cart:{cart_token}"):
+        r.srem(f"cart:{cart_token}", *req.names)
+    r.expire(f"cart:{cart_token}:meta", CART_TTL)
+    if r.exists(f"cart:{cart_token}"):
+        r.expire(f"cart:{cart_token}", CART_TTL)
+    count = r.scard(f"cart:{cart_token}")
+    return JSONResponse(jsonable_encoder({
+        "status": "success",
+        "cart_token": cart_token,
+        "count": count
+    }))
+
+@app.delete("/cart/{cart_token}")
+async def clear_cart(cart_token: str):
+    if not r.exists(f"cart:{cart_token}:meta"):
+        return JSONResponse(
+            status_code=404,
+            content={"status": "error", "detail": "Cart not found or expired"}
+        )
+    r.delete(f"cart:{cart_token}", f"cart:{cart_token}:meta")
+    return JSONResponse(jsonable_encoder({"status": "success"}))
+
+@app.get("/cart/{cart_token}/download")
+def download_cart(cart_token: str, aux: bool = 0, db: Session = Depends(get_db)):
+    if not r.exists(f"cart:{cart_token}:meta"):
+        return JSONResponse(
+            status_code=404,
+            content={"status": "error", "detail": "Cart not found or expired"}
+        )
+    if not r.exists(f"cart:{cart_token}") or r.scard(f"cart:{cart_token}") == 0:
+        return JSONResponse(
+            status_code=400,
+            content={"status": "error", "detail": "Cart is empty"}
+        )
+    r.expire(f"cart:{cart_token}:meta", CART_TTL)
+    r.expire(f"cart:{cart_token}", CART_TTL)
+    names = [n.decode() for n in r.smembers(f"cart:{cart_token}")]
+    mdl = dbmodel.t_neuronview
+    names_archives = db.query(mdl.c.name, mdl.c.archive_name, mdl.c.originalformat_name).filter(mdl.c.name.in_(tuple(names))).all()
+    return download_neurons_as_zip(names_archives, aux)
 
 add_pagination(app)
 
@@ -782,4 +926,3 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
             "status": 'error'
         }),
     )
-

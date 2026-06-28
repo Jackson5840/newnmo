@@ -1,1 +1,261 @@
-Constructing
+extends ../layouts/default.pug
+
+block config
+
+    //- Global Page Configuration
+    - var pageTitle = 'NeuroMorpho.Org - Download Cart'
+
+block content
+
+    //- Navbar
+
+    include mixins/navbar.pug
+    +navbar({
+        navbarBg: 'bg-white',
+        navbarStyle: 'navbar-light',
+        navbarBrandColor: 'text-dark',
+        navbarBtnColor: 'btn-primary',
+        navbarContainer: 'container',
+    })
+
+
+    //- Page Header
+
+    include mixins/header.pug
+    +header({
+        pageHeaderBg: 'bg-gradient-primary-to-secondary',
+        pageHeaderStyle: 'page-header-dark',
+        svgBorderAngled: false,
+        svgBorderRounded: true,
+        svgBorderWaves: false,
+        svgBorderFill: 'text-white'
+    })
+
+
+    .album.py-5.bg-light
+        .container
+            h3(style='text-align:center;') Download Cart
+            p#cart-count(style='text-align:center;')
+            .alert.alert-secondary#cart-status(style='display:none;')
+
+            #cart-empty(style='display:none')
+                .text-center.py-5
+                    p(style='font-size:1.25rem;') Your download cart is empty.
+                    p
+                        | Add neurons from the&nbsp;
+                        a(href='neurons.html') search
+                        | &nbsp;or&nbsp;
+                        a(href='byspecies.html') browse
+                        | &nbsp;pages.
+
+            #cart-actions(style='display:none')
+                .row.mb-3
+                    .col-auto
+                        button.btn.btn-dark.btn-sm(type='button', onclick='cartPageToggleAll(true)') Select all
+                    .col-auto
+                        button.btn.btn-dark.btn-sm(type='button', onclick='cartPageToggleAll(false)') Deselect all
+                    .col-auto
+                        .form-check
+                            input.form-check-input(type='checkbox', id='cartaux')
+                            label.form-check-label(for='cartaux') Include Auxiliary files
+
+                #cart-table-container
+
+                .row.mt-3
+                    .col-auto
+                        button.btn.btn-success(type='button', onclick='cartPageDownloadSelected()') Download Selected
+                    .col-auto
+                        button.btn.btn-success(type='button', onclick='cartPageDownloadAll()') Download All
+                    .col-auto
+                        button.btn.btn-warning(type='button', onclick='cartPageRemoveSelected()') Remove Selected
+                    .col-auto
+                        button.btn.btn-danger(type='button', onclick='cartPageClear()') Clear Cart
+
+            style.
+                #cart-table-container {
+                    margin-top: 1rem;
+                    overflow-x: auto;
+                }
+                #cart-table-container table {
+                    width: 100%;
+                    background: white;
+                }
+                #cart-table-container th,
+                #cart-table-container td {
+                    padding: 0.5rem;
+                    border-bottom: 1px solid #dee2e6;
+                }
+                #cart-table-container th:first-child,
+                #cart-table-container td:first-child {
+                    width: 48px;
+                    text-align: center;
+                }
+
+block footer
+
+    include mixins/footer.pug
+    +footer({
+        footerBg: 'bg-light',
+        footerStyle: 'footer-light'
+    })
+
+    script.
+        const cartApiBase = '/api';
+        const cartTokenKey = 'nmo_cart_token';
+        let cartPageNames = [];
+
+        function cartPageStatus(message, type) {
+            const el = document.getElementById('cart-status');
+            if (!message) {
+                el.style.display = 'none';
+                el.textContent = '';
+                return;
+            }
+            el.style.display = 'block';
+            el.className = 'alert alert-' + (type || 'secondary');
+            el.textContent = message;
+        }
+
+        async function cartPageRequest(path, options) {
+            const response = await fetch(cartApiBase + path, options || {});
+            const contentType = response.headers.get('content-type') || '';
+            const data = contentType.indexOf('application/json') >= 0 ? await response.json() : null;
+            if (!response.ok) {
+                throw new Error((data && (data.detail || data.status)) || 'Request failed');
+            }
+            return data;
+        }
+
+        async function cartPageEnsureToken() {
+            let token = localStorage.getItem(cartTokenKey);
+            if (token) {
+                return token;
+            }
+            const data = await cartPageRequest('/cart/', { method: 'POST' });
+            localStorage.setItem(cartTokenKey, data.cart_token);
+            return data.cart_token;
+        }
+
+        function cartPageRender(names) {
+            cartPageNames = names || [];
+            const count = cartPageNames.length;
+            document.getElementById('cart-count').textContent = count + (count === 1 ? ' neuron in cart' : ' neurons in cart');
+            document.getElementById('cart-empty').style.display = count ? 'none' : 'block';
+            document.getElementById('cart-actions').style.display = count ? 'block' : 'none';
+
+            const container = document.getElementById('cart-table-container');
+            container.innerHTML = '';
+            if (!count) {
+                return;
+            }
+
+            const table = document.createElement('table');
+            table.className = 'table table-sm table-striped';
+            table.innerHTML = '<thead><tr><th></th><th>Neuron Name</th></tr></thead><tbody></tbody>';
+            const tbody = table.querySelector('tbody');
+            cartPageNames.forEach(function (name) {
+                const row = document.createElement('tr');
+                const selectCell = document.createElement('td');
+                const nameCell = document.createElement('td');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'cart-row-check';
+                checkbox.value = name;
+                checkbox.checked = true;
+                selectCell.appendChild(checkbox);
+                nameCell.textContent = name;
+                row.appendChild(selectCell);
+                row.appendChild(nameCell);
+                tbody.appendChild(row);
+            });
+            container.appendChild(table);
+        }
+
+            async function cartPageLoad() {
+                const token = await cartPageEnsureToken();
+                try {
+                    const data = await cartPageRequest('/cart/' + encodeURIComponent(token));
+                    cartPageRender(data.names || []);
+                    cartPageStatus('');
+                    if (typeof updateDownloadCartBadge === 'function') {
+                        updateDownloadCartBadge();
+                    }
+                } catch (error) {
+                    localStorage.removeItem(cartTokenKey);
+                    const newToken = await cartPageEnsureToken();
+                    const data = await cartPageRequest('/cart/' + encodeURIComponent(newToken));
+                    cartPageRender(data.names || []);
+                    cartPageStatus('Previous cart expired. A new cart was created.', 'warning');
+                    if (typeof updateDownloadCartBadge === 'function') {
+                        updateDownloadCartBadge();
+                    }
+                }
+            }
+
+        function cartPageSelectedNames() {
+            return Array.prototype.slice.call(document.querySelectorAll('.cart-row-check:checked')).map(function (el) {
+                return el.value;
+            });
+        }
+
+        function cartPageToggleAll(checked) {
+            document.querySelectorAll('.cart-row-check').forEach(function (el) {
+                el.checked = checked;
+            });
+        }
+
+        function cartPageAuxQuery(prefix) {
+            return document.getElementById('cartaux').checked ? prefix + 'aux=true' : '';
+        }
+
+        function cartPageDownloadSelected() {
+            const names = cartPageSelectedNames();
+            if (!names.length) {
+                cartPageStatus('Select at least one neuron to download.', 'warning');
+                return;
+            }
+            const params = new URLSearchParams();
+            names.forEach(function (name) {
+                params.append('names', name);
+            });
+            if (document.getElementById('cartaux').checked) {
+                params.append('aux', 'true');
+            }
+            window.location.href = cartApiBase + '/getzipped/?' + params.toString();
+        }
+
+        async function cartPageDownloadAll() {
+            const token = await cartPageEnsureToken();
+            const aux = cartPageAuxQuery('?');
+            window.location.href = cartApiBase + '/cart/' + encodeURIComponent(token) + '/download' + aux;
+        }
+
+        async function cartPageRemoveSelected() {
+            const names = cartPageSelectedNames();
+            if (!names.length) {
+                cartPageStatus('Select at least one neuron to remove.', 'warning');
+                return;
+            }
+            const token = await cartPageEnsureToken();
+            await cartPageRequest('/cart/' + encodeURIComponent(token) + '/remove', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ names: names })
+            });
+            await cartPageLoad();
+        }
+
+            async function cartPageClear() {
+                const token = await cartPageEnsureToken();
+                await cartPageRequest('/cart/' + encodeURIComponent(token), { method: 'DELETE' });
+                localStorage.removeItem(cartTokenKey);
+                await cartPageLoad();
+                cartPageStatus('Download cart cleared.', 'success');
+                if (typeof updateDownloadCartBadge === 'function') {
+                    updateDownloadCartBadge();
+                }
+            }
+
+        cartPageLoad().catch(function (error) {
+            cartPageStatus(error.message, 'danger');
+        });

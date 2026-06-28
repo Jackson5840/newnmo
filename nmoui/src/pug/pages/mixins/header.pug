@@ -42,7 +42,7 @@ mixin header(options)
                         a.dropdown-item(href='literaturesearch.html') Literature Search
                         a.dropdown-item(href='dataavailability.html') Data availability
                         a.dropdown-item(href='callfordata.html') Call for data
-                        a.dropdown-item(href='https://neuromorpho.org') Data usage
+                        a.dropdown-item(href='datausage.html') Data usage
                         a.dropdown-item(href='https://bibliometrics.computational-neuromorpho.org/') Bibliometric reporting
                 li(class="nav-item")
                     a(class="nav-link", href="terms-of-use.html", id="navbarDropdownMenuLink", role="button" , style={color:'black'}) TERMS OF USE
@@ -54,10 +54,11 @@ mixin header(options)
                         a.dropdown-item(href='toolsandlinks.html') Tools & Links
                         a.dropdown-item(href='knownissues.html') Known Issues
                         a.dropdown-item(href='contactus.html') Contact Us
-                        a.dropdown-item(href='index.html') Site Map
+                        a.dropdown-item(href='sitemap.html') Site Map
                         //- a.dropdown-item(href='https://neuromorpho.org/beta/sitemap.jsp') Site Map
                 li(class="nav-item")
-                    a(class="nav-link", href="https://neuromorpho.org/beta/DownloadNeuronRelatedFiles.jsp", id="navbarDropdownMenuLink", role="button", style={color:'black'}) DOWNLOAD CART
+                    a(class="nav-link", href="downloadcart.html", id="navbarDropdownMenuLink", role="button", style={color:'black'})
+                        | DOWNLOAD CART
+                        span.badge.badge-pill.badge-dark.ml-1#download-cart-count 0
                 
             
-

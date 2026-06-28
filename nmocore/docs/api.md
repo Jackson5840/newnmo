@@ -298,6 +298,167 @@ Flush all keys from the Redis cache.
 
 ---
 
+## Shopping Cart
+
+The cart allows users to accumulate neurons across multiple browsing/search sessions, then download them as a ZIP archive. Cart state is stored in Redis with a 24-hour TTL. See [Redis documentation](redis.md) for details on the underlying data model.
+
+### POST /cart/
+
+Create a new empty cart. Returns a `cart_token` (UUID) that must be passed to all subsequent cart operations.
+
+**Response:**
+
+```json
+{
+  "status": "success",
+  "cart_token": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "count": 0
+}
+```
+
+---
+
+### GET /cart/{cart_token}
+
+View the contents of a cart.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `cart_token` | string (path) | Cart token from `POST /cart/` |
+
+**Response:**
+
+```json
+{
+  "status": "success",
+  "cart_token": "a1b2c3d4-...",
+  "count": 3,
+  "names": ["cnic_001", "cnic_002", "cnic_003"]
+}
+```
+
+**Errors:** 404 if cart not found or expired.
+
+---
+
+### POST /cart/{cart_token}/add
+
+Add neurons to the cart. Neurons can be specified by name or by an `idlistkey` from a previous search/filter operation. Both can be provided simultaneously.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `cart_token` | string (path) | Cart token |
+
+**Request body (JSON):**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `names` | list[string] (optional) | Neuron names to add (validated against DB) |
+| `idlistkey` | string (optional) | Redis key from a previous `/neuron/` or `/search/` result |
+
+At least one of `names` or `idlistkey` must be provided.
+
+**Response:**
+
+```json
+{
+  "status": "success",
+  "cart_token": "a1b2c3d4-...",
+  "count": 150,
+  "warning": "Cart has 1050 neurons, which exceeds the recommended limit of 1000",
+  "invalid_names": ["nonexistent_neuron"]
+}
+```
+
+- `warning` is included when the cart exceeds the soft limit (default 1000, configurable via `CART_SOFT_LIMIT`).
+- `invalid_names` lists any requested names not found in the database.
+- Duplicate names are silently deduplicated (Redis Sets).
+
+**Errors:**
+- 400 if neither `names` nor `idlistkey` provided
+- 400 if adding would exceed the hard limit (default 5000, configurable via `CART_HARD_LIMIT`)
+- 404 if cart not found or expired
+- 404 if `idlistkey` not found or expired
+
+---
+
+### POST /cart/{cart_token}/remove
+
+Remove neurons from the cart by name.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `cart_token` | string (path) | Cart token |
+
+**Request body (JSON):**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `names` | list[string] | Neuron names to remove |
+
+**Response:**
+
+```json
+{
+  "status": "success",
+  "cart_token": "a1b2c3d4-...",
+  "count": 2
+}
+```
+
+**Errors:** 404 if cart not found or expired.
+
+---
+
+### DELETE /cart/{cart_token}
+
+Delete a cart and all its contents.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `cart_token` | string (path) | Cart token |
+
+**Response:**
+
+```json
+{
+  "status": "success"
+}
+```
+
+**Errors:** 404 if cart not found or expired.
+
+---
+
+### GET /cart/{cart_token}/download
+
+Download all neurons in the cart as a ZIP archive of SWC files.
+
+**Parameters:**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `cart_token` | string (path) | Cart token |
+| `aux` | bool (query, optional) | Include auxiliary files (source version, standardization logs). Default: false |
+
+**Response:** Streaming ZIP file with `Content-Disposition` header.
+
+The ZIP contains one folder per archive, with a `CNG version` subfolder containing the `.CNG.swc` files. If `aux=true`, additional subfolders contain source files, remaining issues, and standardization logs.
+
+**Errors:**
+- 400 if cart is empty
+- 404 if cart not found or expired
+
+---
+
 ## Data Models
 
 ### Neuron

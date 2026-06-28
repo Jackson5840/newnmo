@@ -16,6 +16,10 @@ dbsel = os.environ.get("POSTGRES_DB", "nmo")
 dbuser = os.environ.get("POSTGRES_USER", "nmo")
 dbpass = os.environ.get("POSTGRES_PASSWORD", "")
 
+# Cart limits
+cart_soft_limit = int(os.environ.get("CART_SOFT_LIMIT", "1000"))
+cart_hard_limit = int(os.environ.get("CART_HARD_LIMIT", "5000"))
+
 mysql_host = os.environ.get("MYSQL_HOST", "localhost")
 mysql_user = os.environ.get("MYSQL_USER", "root")
 mysql_password = os.environ.get("MYSQL_PASSWORD", "")

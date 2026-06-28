@@ -63,7 +63,7 @@ The `@pgconnect` decorator manages connections automatically.
 
 ## Caching Strategy
 
-Redis serves two purposes: response caching and full-text search.
+Redis serves three purposes: response caching, full-text search, and shopping cart state. See [Redis documentation](redis.md) for full details.
 
 ### Response Cache
 
@@ -110,6 +110,10 @@ Brain regions and cell types use PostgreSQL's ltree extension for tree-structure
 - Descendant queries use the `<@` operator
 - The browse endpoint walks the hierarchy to build nested tree responses
 - Stored procedures (`ingest_region`, `ingest_celltype`) automatically create ancestor nodes
+
+### Shopping Cart
+
+Session-based anonymous cart stored in Redis Sets. Users create a cart (UUID token), add/remove neurons, and download as a ZIP. Cart data expires after 24 hours of inactivity. Configurable soft warning (1000) and hard cap (5000) on cart size. See [Redis documentation](redis.md#shopping-cart) for implementation details.
 
 ## Error Handling
 
